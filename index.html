@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anonaconda Code Lab</title>
+<meta name="description" content="Small, free, open-source web apps that keep your data on your device.">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#22362B">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:"Instrument Sans";font-style:normal;font-display:swap;font-weight:400 700;font-stretch:75% 100%;
+  src:url(fonts/InstrumentSans-latin-variable.woff2) format("woff2-variations")}
+:root{
+  --paper:#ECEFE7; --ink:#22362B; --line:#6E7F3A; --muted:#5E6B61; --rule:#CBD2C4; --head:#8FA048;
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#141A16; --ink:#E3E8DE; --line:#A9B865; --muted:#94A096; --rule:#2C362F; --head:#B9C97A}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.55 "Instrument Sans",system-ui,sans-serif;font-stretch:100%}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--line);outline-offset:3px;border-radius:4px}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+
+/* hero: the studio's one line, drawn once */
+header{padding:56px 0 8px}
+.mark{display:flex;align-items:center;gap:12px;font-weight:600;font-size:15px;color:var(--muted);text-decoration:none}
+.mark img{width:36px;height:36px}
+.snake{display:block;width:100%;height:auto;margin:40px 0 0;overflow:visible}
+.snake path{fill:none;stroke:var(--line);stroke-width:3;stroke-linecap:round;stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 1.8s cubic-bezier(.6,.05,.25,1) .2s forwards}
+.snake circle{fill:var(--head);opacity:0;animation:appear .3s ease-out 1.9s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes appear{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.snake path{animation:none;stroke-dashoffset:0}.snake circle{animation:none;opacity:1}}
+h1{font-size:clamp(46px,11vw,92px);line-height:.92;font-stretch:75%;font-weight:650;letter-spacing:-.01em;margin:18px 0 0}
+.lede{font-size:clamp(18px,2.6vw,21px);line-height:1.45;max-width:30em;margin:22px 0 0}
+
+/* apps hang off a spine, newest first; the date is information: when it was released */
+.apps{list-style:none;margin:56px 0 0;padding:0 0 0 30px;position:relative}
+.apps::before{content:"";position:absolute;left:6px;top:10px;bottom:6px;border-left:3px solid var(--line);border-radius:3px}
+.app{position:relative;padding:0 0 44px}
+.app::before{content:"";position:absolute;left:-30px;top:7px;width:15px;height:15px;border-radius:50%;background:var(--line);border:3px solid var(--line)}
+.app time{display:block;font-size:14px;color:var(--muted)}
+.app h2{display:flex;align-items:center;gap:12px;font-size:30px;line-height:1.1;font-stretch:85%;font-weight:600;margin:6px 0 10px}
+.app h2 img{width:34px;height:34px;flex:none}
+.app p{margin:0 0 6px;max-width:34em}
+.app .needs{font-size:15px;color:var(--muted)}
+.links{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-top:14px}
+.open{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600;padding:10px 18px;border-radius:999px}
+.open:hover{background:var(--line);color:#fff}
+.links a:not(.open){font-weight:500;text-underline-offset:3px}
+.next{padding-bottom:6px;color:var(--muted)}
+.next::before{background:var(--paper)}
+
+footer{border-top:1px solid var(--rule);margin-top:40px;padding:26px 0 48px;font-size:15px;color:var(--muted)}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:14px}
+footer nav a{color:var(--ink);font-weight:500;text-underline-offset:3px}
+footer p{margin:6px 0;max-width:40em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="mark" href="/"><img src="logo.svg" alt="">Anonaconda Code Lab</a>
+    <svg class="snake" viewBox="0 0 680 90" aria-hidden="true" preserveAspectRatio="xMinYMid meet">
+      <path d="M3 62c40 0 50-44 96-44s52 52 100 52 54-52 102-52 52 52 100 52 54-48 100-48 60 36 98 38"/>
+      <circle cx="604" cy="60" r="8"/>
+    </svg>
+    <h1>Anonaconda Code&nbsp;Lab</h1>
+    <p class="lede">Small web apps that each do one job well. Free to use, open source, and built so your data never leaves your device.</p>
+  </header>
+
+  <main>
+    <!-- To add an app: copy one <li class="app"> block, newest at the top. -->
+    <ol class="apps" reversed aria-label="Apps, newest first">
+      <li class="app">
+        <time datetime="2026-10">Released October 2026</time>
+        <h2><img src="icons/lead-one.svg" alt="">Lead One ECG</h2>
+        <p>Record the ECG from a Polar H10 chest strap and get a clear, multi-page report you can save as a PDF: rhythm, heart rate variability, breathing, and recovery after training.</p>
+        <p class="needs">Needs a Polar H10 and Google Chrome on Android. For wellness and education only; not a medical device.</p>
+        <div class="links">
+          <a class="open" href="https://leadone.anonacondacodelab.com">Open Lead One ECG</a>
+          <a href="https://leadone.anonacondacodelab.com/#manual">User manual</a>
+          <!-- add when the repository is public: <a href="https://github.com/Anonaconda-CodeLab/lead-one-ecg">Source code</a> -->
+        </div>
+      </li>
+      <li class="app next">
+        <p>The next app is in the workshop.</p>
+      </li>
+    </ol>
+  </main>
+
+  <footer>
+    <nav aria-label="Studio links">
+      <a href="https://ko-fi.com/anonacondacodelab">Support on Ko-fi</a>
+      <a href="https://github.com/Anonaconda-CodeLab">GitHub</a>
+      <!-- add when ready: <a href="https://x.com/HANDLE">X</a> <a href="https://fosstodon.org/@HANDLE" rel="me">Mastodon</a> -->
+    </nav>
+    <p>No cookies, no analytics, no tracking, on this page or in the apps.</p>
+    <p>© 2026 Anonaconda Code Lab. Apps are free software under the GNU GPL v3.</p>
+  </footer>
+</div>
+</body>
+</html>
