@@ -40,12 +40,18 @@ h1{font-size:clamp(46px,11vw,92px);line-height:.92;font-stretch:75%;font-weight:
 
 /* apps hang off a spine, newest first; the date is information: when it was released */
 .apps{list-style:none;margin:56px 0 0;padding:0 0 0 38px;position:relative}
-/* the snake winds down from each release to the next; spine.svg is used as a mask so it takes the theme colour */
-.app::after{content:"";position:absolute;left:-40px;top:14px;bottom:-14px;width:28px;background:var(--line);
-  -webkit-mask:url(spine.svg) center top/28px 2400px no-repeat;mask:url(spine.svg) center top/28px 2400px no-repeat}
-.app:last-child::after{display:none}
-.app{position:relative;padding:0 0 44px}
-.app::before{content:"";position:absolute;left:-33px;top:7px;width:14px;height:14px;border-radius:50%;background:var(--line);z-index:1}
+/* each release is held in a curly brace drawn as a snake; a small snake leads on to the next release */
+.app{position:relative;padding:0 0 64px}
+.brace{position:absolute;left:-40px;top:0;bottom:64px;width:28px;display:flex;flex-direction:column}
+.brace i{display:block;background:var(--line);flex:none;width:28px}
+.brace .bt{height:30px;-webkit-mask:url(shapes/brace-top.svg) 0 0/28px 30px;mask:url(shapes/brace-top.svg) 0 0/28px 30px}
+.brace .bm{height:24px;-webkit-mask:url(shapes/brace-mid.svg) 0 0/28px 24px;mask:url(shapes/brace-mid.svg) 0 0/28px 24px}
+.brace .bb{height:24px;-webkit-mask:url(shapes/brace-bot.svg) 0 0/28px 24px;mask:url(shapes/brace-bot.svg) 0 0/28px 24px}
+.brace .bs{flex:1;background:none;position:relative}
+.brace .bs::before{content:"";position:absolute;left:10.3px;top:0;bottom:0;width:3.4px;background:var(--line)}
+.app::after{content:"";position:absolute;left:-40px;bottom:2px;width:28px;height:40px;background:var(--line);
+  -webkit-mask:url(shapes/snake-small.svg) 0 0/28px 40px;mask:url(shapes/snake-small.svg) 0 0/28px 40px}
+.next::after{display:none}
 .app time{display:block;font-size:14px;color:var(--muted)}
 .app h2{display:flex;align-items:center;gap:12px;font-size:30px;line-height:1.1;font-stretch:85%;font-weight:600;margin:6px 0 10px}
 .app h2 img{width:34px;height:34px;flex:none}
@@ -55,8 +61,7 @@ h1{font-size:clamp(46px,11vw,92px);line-height:.92;font-stretch:75%;font-weight:
 .open{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600;padding:10px 18px;border-radius:999px}
 .open:hover{background:var(--line);color:#fff}
 .links a:not(.open){font-weight:500;text-underline-offset:3px}
-.next{padding-bottom:6px;color:var(--muted)}
-.next::before{left:-36px;top:5px;width:20px;height:18px;border-radius:50% 50% 50% 50% / 55% 55% 45% 45%;background:var(--head)}
+.next{padding:0 0 6px;color:var(--muted)}
 
 footer{border-top:1px solid var(--rule);margin-top:40px;padding:26px 0 48px;font-size:15px;color:var(--muted)}
 footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:14px}
@@ -77,9 +82,10 @@ footer p{margin:6px 0;max-width:40em}
   </header>
 
   <main>
-    <!-- To add an app: copy one <li class="app"> block, newest at the top. -->
+    <!-- To add an app: copy one <li class="app"> block (including its brace), newest at the top. -->
     <ol class="apps" reversed aria-label="Apps, newest first">
       <li class="app">
+        <span class="brace" aria-hidden="true"><i class="bt"></i><i class="bs"></i><i class="bm"></i><i class="bs"></i><i class="bb"></i></span>
         <time datetime="2026-10">Released October 2026</time>
         <h2><img src="icons/lead-one.svg" alt="">Lead One ECG</h2>
         <p>Record the ECG from a Polar H10 chest strap and get a clear, multi-page report you can save as a PDF: rhythm, heart rate variability, breathing, and recovery after training.</p>
