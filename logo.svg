@@ -1,6 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Anonaconda Code Lab">
-  <title>Anonaconda Code Lab</title>
-  <rect width="64" height="64" rx="16" fill="#22362B"/>
-  <path d="M11 41c5 0 6-14 12-14s7 14 13 14 6-12 11-14" fill="none" stroke="#ECEFE7" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="49" cy="26" r="5.6" fill="#B9C97A"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Anonaconda Code Lab" viewBox="0 0 200 200"><title>Anonaconda Code Lab</title><rect width="200" height="200" rx="44" fill="#0D1210"/><g transform="translate(100 100) scale(0.92) translate(-62 -100)"><path d="M 84 22 C 52 22, 50 40, 50 68 L 50 78 C 50 94, 42 100, 22 100 C 42 100, 50 106, 50 122 L 50 132 C 50 160, 52 178, 84 178" fill="none" stroke="#B8F25C" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="90" cy="22" rx="18" ry="14" fill="#B8F25C"/></g></svg>
