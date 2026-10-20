@@ -64,6 +64,8 @@ footer{border-top:1px solid var(--rule);margin-top:40px;padding:26px 0 48px;font
 footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:14px}
 footer nav a{color:var(--ink);font-weight:500;text-underline-offset:3px}
 footer p{margin:6px 0;max-width:40em}
+footer .thanks{color:var(--ink);margin-bottom:16px}
+footer .thanks a{font-weight:500;text-underline-offset:3px}
 </style>
 </head>
 <body>
@@ -81,6 +83,16 @@ footer p{margin:6px 0;max-width:40em}
   <main>
     <!-- To add an app: copy one <li class="app"> block, newest at the top. -->
     <ol class="apps" reversed aria-label="Apps, newest first">
+      <li class="app">
+        <time datetime="2026-10">Released October 2026</time>
+        <h2><img src="icons/rounds.svg" alt="">Rounds</h2>
+        <p>A loud, clear interval timer. Pick from 16 presets, from Tabata and EMOM to boxing rounds, sorted by goal or hardest first, or build your own. Three beeps count you into and out of every work round, with full-screen colour so you can read it from across the room.</p>
+        <p class="needs">Works in any modern browser, offline once added to your home screen. Optional live heart rate from any standard Bluetooth strap or watch, with Chrome or Chromium on Android or Bluefy on iPhone; readings are shown only, never saved or sent.</p>
+        <div class="links">
+          <a class="open" href="https://rounds.anonacondacodelab.com">Open Rounds</a>
+          <!-- add when the repository is public: <a href="https://github.com/Anonaconda-CodeLab/rounds">Source code</a> -->
+        </div>
+      </li>
       <li class="app">
         <time datetime="2026-10">Released October 2026</time>
         <h2><img src="icons/still-point.svg" alt="">Still Point</h2>
@@ -117,6 +129,7 @@ footer p{margin:6px 0;max-width:40em}
       <a href="https://mastodon.social/@anonacondacodelab" rel="me">Mastodon</a>
       <!-- add when ready: <a href="https://x.com/HANDLE">X</a> -->
     </nav>
+    <p class="thanks">If you find these free apps useful, please consider <a href="https://ko-fi.com/anonacondacodelab">a small donation</a>. This is a one-man show, and your support encourages me to keep going. Thank you!</p>
     <p>No cookies, no analytics, no tracking, on this page or in the apps.</p>
     <p>© 2026 Anonaconda Code Lab. Apps are free software under the GNU GPL v3.</p>
   </footer>
