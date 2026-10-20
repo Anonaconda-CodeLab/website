@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Lead One ECG user manual</title>
+<meta name="description" content="How to use Lead One ECG: recording an ECG, training tests, reading your report and keeping your data safe.">
+<link rel="canonical" href="https://anonacondacodelab.com/lead-one/manual/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Anonaconda Code Lab">
+<meta property="og:title" content="Lead One ECG user manual">
+<meta property="og:description" content="How to use Lead One ECG: recording an ECG, training tests, reading your report and keeping your data safe.">
+<meta property="og:url" content="https://anonacondacodelab.com/lead-one/manual/">
+<meta property="og:image" content="https://anonacondacodelab.com/social/og-lead-one.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#22362B">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:"Instrument Sans";font-style:normal;font-display:swap;font-weight:400 700;font-stretch:75% 100%;
+  src:url(/fonts/InstrumentSans-latin-variable.woff2) format("woff2-variations")}
+:root{--paper:#ECEFE7;--ink:#22362B;--line:#6E7F3A;--muted:#5E6B61;--rule:#CBD2C4;--head:#8FA048;--card:#F6F8F3;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#141A16;--ink:#E3E8DE;--line:#A9B865;--muted:#94A096;--rule:#2C362F;--head:#B9C97A;--card:#1A221D}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 "Instrument Sans",system-ui,sans-serif}
+a{color:inherit}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--line);outline-offset:3px;border-radius:4px}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.crumbs{display:flex;align-items:center;gap:10px;padding-top:28px;font-size:15px;color:var(--muted)}
+.crumbs a{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
+.crumbs img{width:30px;height:30px}
+header.hero{padding:40px 0 8px}
+.hero .icon{width:64px;height:64px;display:block}
+h1{font-size:clamp(44px,10vw,80px);line-height:.95;font-stretch:75%;font-weight:650;letter-spacing:-.01em;margin:18px 0 0;text-wrap:balance}
+.lede{font-size:clamp(19px,2.6vw,22px);line-height:1.45;max-width:32em;margin:18px 0 0}
+.needs{font-size:15px;color:var(--muted);max-width:40em;margin:10px 0 0}
+.links{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-top:20px}
+.open{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600;padding:11px 20px;border-radius:999px}
+.open:hover{background:var(--line);color:#fff}
+.links a:not(.open){font-weight:500;text-underline-offset:3px}
+.soon{font-size:15px;margin-top:12px}
+.soon span{display:inline-block;font-size:11.5px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;background:var(--line);color:var(--paper);padding:2px 9px;border-radius:999px;margin-right:9px;vertical-align:1px}
+.shots{display:flex;gap:14px;overflow-x:auto;padding:28px 2px 18px;margin:20px 0 0;scroll-snap-type:x mandatory}
+.shots figure{margin:0;flex:none;width:210px;scroll-snap-align:start}
+.shots img{width:100%;height:auto;display:block;border-radius:18px;border:1px solid var(--rule);background:var(--card)}
+.shots.wide figure{width:280px}
+.shots figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.35}
+h2{font-size:30px;font-stretch:85%;font-weight:600;line-height:1.1;margin:44px 0 6px;text-wrap:balance}
+h3{font-size:18.5px;font-weight:600;margin:0}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px 28px;margin-top:18px}
+.features p{margin:4px 0 0;font-size:16px}
+.needlist{margin:10px 0 0;padding-left:20px}
+.needlist li{margin:4px 0}
+details{border-top:1px solid var(--rule);padding:14px 0}
+details:last-of-type{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer;font-weight:600;font-size:17.5px}
+details p{margin:8px 0 0;max-width:40em}
+.note{font-size:15px;color:var(--muted);margin-top:26px;max-width:40em}
+.manual{max-width:42em}
+.manual h2{font-size:26px;margin-top:36px}
+.manual h3{margin-top:22px;font-size:18px}
+.manual ul,.manual ol{padding-left:22px}
+.manual li{margin:4px 0}
+.manual code{font-size:14px;background:var(--card);border:1px solid var(--rule);border-radius:5px;padding:0 4px;overflow-wrap:anywhere}
+.manual .callout{border:2px solid var(--head);border-radius:14px;padding:4px 18px;margin:18px 0;background:var(--card)}
+.manual hr{border:0;border-top:1px solid var(--rule);margin:28px 0}
+footer{border-top:1px solid var(--rule);margin-top:48px;padding:26px 0 48px;font-size:15px;color:var(--muted)}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:14px}
+footer nav a{color:var(--ink);font-weight:500;text-underline-offset:3px}
+footer p{margin:6px 0;max-width:40em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumbs"><a href="/"><img src="/logo.svg" alt="">Anonaconda Code Lab</a></div>
+  <header class="hero">
+    <img class="icon" src="/icons/lead-one.svg" alt="">
+    <h1>Lead One ECG user manual</h1>
+    <div class="links"><a class="open" href="https://leadone.anonacondacodelab.com">Open Lead One ECG</a><a href="/lead-one/">About Lead One ECG</a></div>
+  </header>
+  <main><article class="manual">
+<p>Lead One ECG turns a Polar H10 chest strap into a single-lead ECG recorder. It records your heart's electrical signal, analyses it on your phone and produces a clear A4 report you can save as a PDF. It is free, needs no account, and nothing you record ever leaves your device.</p>
+<div class="callout"><p><b>Important: for general wellness and education only. Lead One ECG is not a medical device.</b></p>
+<p>If you feel unwell, with chest pain or pressure, fainting, severe shortness of breath, or a racing or very irregular heartbeat, <b>call your local emergency number now. Do not stop to record it.</b></p></div>
+<h2>Wellness use only: please read</h2>
+<p>Lead One ECG is designed for <b>general wellness, fitness training and education</b>: understanding your own heart-rate patterns, recovery and heart rate variability over time. It is <b>not</b> a medical device and has <b>not</b> been tested, evaluated, cleared or approved by any medical regulator.</p>
+<p><b>Do not use Lead One ECG to:</b></p>
+<ul><li>diagnose, or rule out, any illness or heart condition (for example an arrhythmia, atrial fibrillation, heart attack or heart disease);</li><li>monitor a heart condition you already have, or check whether a treatment is working;</li><li>decide whether to take, change or stop any medicine or treatment;</li><li>decide whether you need to see a doctor, or to put off seeing one;</li><li>check on someone else's health, including children; the reference ranges are for adults.</li></ul>
+<p><b>Why:</b> the Polar H10 records one view of the heart (one &quot;lead&quot;), while a clinical ECG uses twelve and is read by a trained professional. Many heart problems cannot be seen with a chest strap at all, the strap can produce misleading signals, and automated analysis can be wrong. <b>A normal-looking report does not mean your heart is healthy</b>, and an unusual-looking one is most often caused by the strap, a dry electrode or movement rather than by your heart.</p>
+<p>Words such as &quot;normal range&quot;, &quot;borderline&quot; or &quot;outside normal range&quot; in the app describe how a measurement compares with published values for healthy adults. They are <b>not</b> medical findings. For any health concern, see a doctor, and do not rely on this app.</p>
+<p>The first time you open the app, it asks you to confirm that you have read and understood this.</p>
+<h2>What you need</h2>
+<ul><li>A <b>Polar H10</b> chest strap.</li><li>A browser that supports Bluetooth for web apps (called &quot;Web Bluetooth&quot;):<ul><li><b>On a phone, use Google Chrome or Chromium on Android.</b> This is the browser the app is built and tested for. Other phone browsers such as Firefox, Brave or Samsung Internet either cannot use Bluetooth in web apps or are not tested.</li><li><b>On a computer</b> (Windows, macOS or ChromeOS), use <b>Chrome or Microsoft Edge</b>. Other Chromium-based browsers such as Opera usually work too. Brave and Linux need a setting switched on first (see <i>Troubleshooting</i>), and recording on Linux can be unreliable.</li><li><b>On iPhone and iPad, use the free Bluefy browser</b> (from the App Store). Safari, Chrome and the other iPhone and iPad browsers do not offer Web Bluetooth and cannot connect to the strap. <b>Firefox and Safari</b> do not support it on any device.</li></ul></li><li>The app's web address: <b><a href="https://leadone.anonacondacodelab.com" target="_blank" rel="noopener noreferrer">leadone.anonacondacodelab.com</a></b></li></ul>
+<p>There is nothing to install from an app store. To open the app from an icon like a normal app, tap <b>Add to home screen</b> under <b>More</b> on the home screen and confirm. If Chrome doesn't offer it there, tap Chrome's <b>⋮</b> menu and choose <b>Add to Home screen</b> (or <b>Install app</b>). The icon opens the same web address, so your recordings and history are all there. It opens full screen, without the address bar.</p>
+<h2>First-time setup</h2>
+<p>The first time you open the app it shows a short <b>Before you start</b> notice about wellness use. Tick the box to confirm you understand it, then tap <b>Continue</b>.</p>
+<p>Next it asks for your <b>date of birth</b> and <b>sex</b>. These choose the right reference ranges and heart-rate zones; your age is worked out for the date of each recording, so you never need to update it. A name for the reports is optional. You can change all of this later with the <b>settings icon</b> (top right).</p>
+<h2>Putting on the strap</h2>
+<ol><li>Moisten the two electrode areas on the inside of the strap with water.</li><li>Clip the sensor on and fasten the strap snugly just below the chest muscles, with the Polar logo upright.</li><li><b>Close every other app that uses the strap</b> (Polar Beat, Polar Flow, Elite HRV, ECG Logger and so on). The H10 sends its ECG to only one app at a time.</li></ol>
+<h2>Making a recording</h2>
+<ol><li>Tap <b>Connect H10</b> and choose your strap from the list. The dot turns green when it is connected.</li><li>Optionally choose a <b>recording context</b> (Morning baseline, Training, Evening, Meditation, Sleep, General rest) and a <b>body position</b> (Lying, Seated, Standing, Walking / moving). These matter more than they look: see <i>Your personal baseline</i> below.</li><li>Optionally add <b>session notes</b> (up to 200 characters), such as &quot;after lunch&quot; or &quot;slept 5 hours&quot;.</li><li>Optionally turn on <b>Auto-stop</b> and choose a duration (1, 2 or 2.5 minutes, then in 5-minute steps). With Auto-stop off, the recording runs until you stop it, up to 8 hours.</li><li>Tap <b>Start</b>.</li></ol>
+<p>While recording you will see the elapsed time, heart rate, signal quality, strap battery, breathing rate (after about 30 seconds) and a live ECG trace.</p>
+<ul><li><b>Pause</b> stops counting without ending the recording. Paused time is left out of the analysis.</li><li><b>Dim screen</b> darkens the screen for long recordings; tap to wake it. Keep the app open in the foreground.</li><li><b>Hold to stop</b>: press and hold the button until it fills. Holding prevents accidental stops.</li><li>If Bluetooth drops, the app reconnects by itself and marks the gap in the report.</li><li>Data is saved every minute. If the phone or browser closes unexpectedly, the next time you open the app it offers to <b>Analyze recording</b> for the part that was saved.</li></ul>
+<p>When the recording ends, tap <b>View report</b>. You can also <b>Save recording file</b> to keep the raw ECG.</p>
+<h2>Training sessions</h2>
+<p>Choose the <b>Training</b> context to measure your exercise heart rate, recovery and zones. Two more choices appear:</p>
+<p><b>Training type</b></p>
+<ul><li><b>Session</b>: any steady or mixed workout (runs, rides, gym).</li><li><b>Intervals</b>: repeated hard efforts with easier recoveries between them (for example 4 × 4 minutes). The report finds each effort automatically and shows its peak and average heart rate and how far your heart rate fell before the next one. With short rests (Tabata, 30/30) heart rate has no time to fall, so the efforts run together. Pick an <b>Interval plan</b> (Tabata 20/10 × 8, 30/30, 10 × 1 min, 4 × 4 min, or your own work, rest and rounds) before you start, or later under <b>Details</b>. The report then lines the rounds up so the last one ends when you tapped <b>Start recovery</b>, and shows every round's average, peak and end-of-work heart rate. Tap <b>Start recovery</b> right as your last round ends.</li><li><b>Tempo</b>: a sustained, comfortably hard effort of at least 10 minutes. The report shows how steadily you held it and your cardiac drift: how much your heart rate crept up in the second half at the same effort.</li><li><b>DFA-α1 test</b>: finds your <b>aerobic threshold</b> (the top of truly easy training) without a lab, from how orderly your beat-to-beat variation is. This measure, DFA α1, is about 1.0 when you are relaxed and falls as effort rises: it crosses <b>0.75 at the aerobic threshold</b> and <b>0.5 at the anaerobic threshold</b>. Best on a bike or treadmill, where effort can rise smoothly. Start <b>very easy for the first 6 minutes</b>, then raise the effort a little at each beep (every 3 minutes). Keep pedalling or running smoothly; talking, stopping and coasting disturb the reading. The recording screen shows a <b>live α1</b> after the first 2 minutes. Keep going until it is below 0.5 or you are near your limit, then tap <b>Start recovery</b>. The report plots α1 against heart rate and gives both thresholds. A good, snug strap contact matters: if more than 5 % of beats in a stretch are irregular or missed, that stretch is left out. A Max HR ramp test also shows these thresholds when α1 falls clearly enough.</li><li><b>Max HR ramp test</b>: start easy; the app beeps and vibrates every 3 minutes (with a 10-second warning) to tell you to increase the effort, until you cannot continue. Turn the phone's media volume up; the beeps are high-pitched so they carry over traffic. This finds your true maximum heart rate.</li><li><b>LTHR test</b>: warm up first <b>without recording</b>. Press <b>Start</b> at the moment you begin the 30-minute effort, then go as hard as you can sustain. The app tells you when 30 minutes are up; tap <b>Start recovery</b> then and keep recording for 2 minutes. Your lactate threshold heart rate (LTHR) is the average of the last 20 minutes before you tapped Start recovery, and sets your training zones. (If you do record the warm-up, the 30-minute cue comes early: time the effort yourself and tap Start recovery exactly when it ends.)</li></ul>
+<p><b>Recovery after exercise</b></p>
+<ul><li><b>Active</b>: you keep moving gently after stopping (walking, easy pedalling).</li><li><b>Passive</b>: you stand, sit or lie still.</li></ul>
+<p>Heart rate falls faster when you stand still, so the app judges active recovery against a more relaxed limit.</p>
+<p><b>When you finish exercising, tap Start recovery and keep recording for at least 2 minutes.</b> Recovery is measured from that moment, not from a peak in the middle of the session. If you forget, the app tries to find the end of exercise by itself.</p>
+<p>Your <b>working maximum heart rate</b> comes from your own data: the highest heart rate you have held for 20 seconds in any training recording, plus 2 %, or the plateau of a ramp test. Age formulas (Fox, Tanaka, Nes, and Gulati for women) are shown for comparison and are used only until you have training data.</p>
+<h2>Reading your report</h2>
+<p>The report has these parts:</p>
+<ol><li><b>Summary</b>, with an overall verdict and the key numbers.</li><li><b>What this means for you</b>: each result in plain language, with what it is, how yours compares and what to do.</li><li><b>Training pages</b> (training recordings only): maximum heart rate, recovery and zones.</li><li><b>Measurements, heart rate and rhythm, heart rate variability, waveform</b> and <b>ECG strips</b>, the detailed pages.</li><li><b>Event log and methods</b>.</li></ol>
+<p>Each result gets a grade:</p>
+<ul><li><b>Favourable</b>: better than typical for your age and sex.</li><li><b>Within normal range</b>.</li><li><b>Borderline</b>: just outside the usual range. Common in a single reading; watch the trend.</li><li><b>Outside normal range</b>: repeat the reading first, since the strap is the most common cause. If you have any health concern, see a doctor; do not wait for the app to confirm it.</li><li><b>Not assessed</b>: could not be measured reliably, or does not apply (for example, average heart rate during exercise).</li></ul>
+<p>One borderline value does not make the whole report borderline; the overall verdict looks at all results together.</p>
+<p><b>About chest-strap ECGs.</b> The H10 records one view of the heart (one &quot;lead&quot;), while a hospital ECG uses twelve. Waveform measurements such as QTc can read differently from a clinical ECG, and many conditions cannot be seen at all. A single unusual result is most often caused by strap position, movement or a dry electrode, so repeat the reading. The grades are for wellness tracking only and are not a diagnosis; see <i>Wellness use only</i> above.</p>
+<h3>Saving and changing a report</h3>
+<ul><li><b>Save as PDF</b> opens the print screen. Choose <b>Save as PDF</b> as the printer.</li><li><b>On iPhone and iPad:</b> Save recording and Export history open the share sheet; choose <b>Save to Files</b>. Bluefy has no print screen, so for a PDF: save the recording, open the app's address in <b>Safari</b>, tap <b>Open a recording file</b>, choose the saved file, and use <b>Save as PDF</b> there (Safari can open recordings; it just can't connect to the strap).</li><li><b>Save recording</b> keeps the raw ECG file, so the report can be regenerated later or opened on another device with <b>Open a recording file</b>.</li><li><b>Details</b> lets you correct the context, position, training type, recovery type or notes afterwards. Tap <b>Update report</b> to redo the analysis.</li></ul>
+<h2>Your personal baseline</h2>
+<p>After a few readings, the report compares each new reading with <b>your own usual values</b>, not just population averages. This is often more useful: a drop in your heart rate variability compared with your usual range says more than how you compare with other people.</p>
+<ul><li>A reading is compared with readings of the <b>same context and position</b> from the <b>previous 30 days</b>. Comparisons start once there are <b>5</b> of them.</li><li>Training sessions are compared by <b>training type and recovery type</b> instead of position.</li><li><b>Tag your readings consistently.</b> A morning reading tagged &quot;Morning baseline · Lying&quot; is only compared with other &quot;Morning baseline · Lying&quot; readings. If you forget a tag, fix it with <b>Details</b> on the report.</li></ul>
+<h3>A good morning-baseline routine</h3>
+<p>Record on waking, before caffeine, after using the toilet if needed, in the same position every day (lying or seated), for the same duration (5 minutes is ideal; use Auto-stop). Breathe normally and stay still. Choose <b>Morning baseline</b> and your position each time.</p>
+<h2>Your data</h2>
+<p>Everything is stored <b>only in Chrome on the device you record with</b>, at this app's web address. There is no account and no cloud copy.</p>
+<ul><li><b>Reading history</b> (the summary of each reading, used for your baseline and trends) is small and kept indefinitely.</li><li><b>Recordings</b> (the raw ECG) are kept on the device until you delete them from the list on the home screen.</li></ul>
+<p><b>Back up regularly.</b> Clearing Chrome's browsing data (&quot;Cookies and site data&quot;), uninstalling Chrome, resetting or replacing your phone, or using an Incognito tab would lose them. The app shows a reminder when a backup is due.</p>
+<ul><li><b>Settings → Export history</b> saves a backup file of your reading history. Keep it somewhere safe, such as Google Drive.</li><li><b>Settings → Import history</b> restores it, on the same phone or a new one. Readings already present are not duplicated.</li><li><b>Moving to a new phone:</b> send yourself the backup file (e-mail, Google Drive or a chat app), and <b>save it to the new phone first</b> (Download, or Save to Files). Then open the app; on the setup screen tap <b>Import your history file</b>, or later use <b>Settings → Import history</b>. Your profile comes across too.</li><li>To keep a particular recording in full, use <b>Save recording</b> or <b>Save as PDF</b> on its report. Imported history brings back your baseline and trends, but not the raw recordings.</li></ul>
+<h2>Troubleshooting</h2>
+<h3>&quot;Bluetooth isn't available&quot;</h3>
+<p>On a phone, open the app in <b>Google Chrome or Chromium on Android</b>, from its https address. On a computer, use Chrome or Edge. On iPhone and iPad, use the <b>Bluefy</b> browser. Safari and Firefox are not supported. On Linux, enable <code>chrome://flags/#enable-experimental-web-platform-features</code>; in Brave, enable <code>brave://flags/#brave-web-bluetooth-api</code>.</p>
+<h3>The strap connects, but the timer stays at 00:00:00 or &quot;No ECG from the strap&quot; appears</h3>
+<p>Another app is holding the strap's ECG stream. Force-close other heart-rate apps, unclip the sensor from the strap for 30 seconds, clip it back on, switch the phone's Bluetooth off and on, then reload the app and connect again.</p>
+<h3>The strap is not in the list or will not connect</h3>
+<p>Moisten the electrodes and wear the strap (the H10 sleeps when it is not touching skin). Close other apps connected to it, and try again after toggling Bluetooth.</p>
+<h3>&quot;Weak&quot; or &quot;Noisy&quot; signal</h3>
+<p>Moisten the electrodes again, tighten the strap, and keep still. A worn strap or an old battery also weakens the signal.</p>
+<h3>Breathing shows &quot;…&quot; or &quot;n/a&quot;</h3>
+<p>Breathing appears after about 30 seconds of still recording. It is measured from chest movement when available, otherwise estimated from the ECG.</p>
+<h3>The report says recovery was not measured</h3>
+<p>The recording ended while you were still exercising. Tap <b>Start recovery</b> when you stop, and keep recording for at least 2 minutes.</p>
+<h2>Privacy</h2>
+<p>Lead One ECG makes no network requests at all while you use it: no analytics, no tracking, no cookies, no account. Your recordings, history and profile never leave your device unless you export them yourself. The app's source code is open, so anyone can check this.</p>
+<h2>Support and feedback</h2>
+<p>Lead One ECG is free and open-source software from Anonaconda Code Lab, released under the GNU General Public License v3. If it is useful to you, you can support its development at <b><a href="https://ko-fi.com/anonacondacodelab" target="_blank" rel="noopener noreferrer">ko-fi.com/anonacondacodelab</a></b>.</p>
+<p>Polar and H10 are trademarks of Polar Electro Oy. Lead One ECG is independent and not affiliated with or endorsed by Polar Electro.</p>
+<hr>
+<p><i>Lead One ECG is provided &quot;as is&quot;, without warranty of any kind, under the GNU General Public License v3. It is for general wellness and education only and is not a medical device.</i></p>
+  </article></main>
+  <footer>
+    <nav aria-label="Studio links">
+      <a href="/">All apps</a>
+      <a href="https://ko-fi.com/anonacondacodelab">Support on Ko-fi</a>
+      <a href="https://github.com/Anonaconda-CodeLab">GitHub</a>
+      <a href="https://mastodon.social/@anonacondacodelab" rel="me">Mastodon</a>
+    </nav>
+    <p>No cookies, no analytics, no tracking, on this page or in the apps.</p>
+    <p>© 2026 Anonaconda Code Lab. Apps are free software under the GNU GPL v3. Polar and H10 are trademarks of Polar Electro Oy; these apps are independent and not affiliated with Polar.</p>
+  </footer>
+</div>
+</body>
+</html>

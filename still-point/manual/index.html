@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Still Point user manual</title>
+<meta name="description" content="How to use Still Point: morning HRV readings, the standing test, breathing, trends and importing from Elite HRV.">
+<link rel="canonical" href="https://anonacondacodelab.com/still-point/manual/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Anonaconda Code Lab">
+<meta property="og:title" content="Still Point user manual">
+<meta property="og:description" content="How to use Still Point: morning HRV readings, the standing test, breathing, trends and importing from Elite HRV.">
+<meta property="og:url" content="https://anonacondacodelab.com/still-point/manual/">
+<meta property="og:image" content="https://anonacondacodelab.com/social/og-still-point.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#22362B">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:"Instrument Sans";font-style:normal;font-display:swap;font-weight:400 700;font-stretch:75% 100%;
+  src:url(/fonts/InstrumentSans-latin-variable.woff2) format("woff2-variations")}
+:root{--paper:#ECEFE7;--ink:#22362B;--line:#6E7F3A;--muted:#5E6B61;--rule:#CBD2C4;--head:#8FA048;--card:#F6F8F3;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#141A16;--ink:#E3E8DE;--line:#A9B865;--muted:#94A096;--rule:#2C362F;--head:#B9C97A;--card:#1A221D}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 "Instrument Sans",system-ui,sans-serif}
+a{color:inherit}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--line);outline-offset:3px;border-radius:4px}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.crumbs{display:flex;align-items:center;gap:10px;padding-top:28px;font-size:15px;color:var(--muted)}
+.crumbs a{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
+.crumbs img{width:30px;height:30px}
+header.hero{padding:40px 0 8px}
+.hero .icon{width:64px;height:64px;display:block}
+h1{font-size:clamp(44px,10vw,80px);line-height:.95;font-stretch:75%;font-weight:650;letter-spacing:-.01em;margin:18px 0 0;text-wrap:balance}
+.lede{font-size:clamp(19px,2.6vw,22px);line-height:1.45;max-width:32em;margin:18px 0 0}
+.needs{font-size:15px;color:var(--muted);max-width:40em;margin:10px 0 0}
+.links{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-top:20px}
+.open{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600;padding:11px 20px;border-radius:999px}
+.open:hover{background:var(--line);color:#fff}
+.links a:not(.open){font-weight:500;text-underline-offset:3px}
+.soon{font-size:15px;margin-top:12px}
+.soon span{display:inline-block;font-size:11.5px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;background:var(--line);color:var(--paper);padding:2px 9px;border-radius:999px;margin-right:9px;vertical-align:1px}
+.shots{display:flex;gap:14px;overflow-x:auto;padding:28px 2px 18px;margin:20px 0 0;scroll-snap-type:x mandatory}
+.shots figure{margin:0;flex:none;width:210px;scroll-snap-align:start}
+.shots img{width:100%;height:auto;display:block;border-radius:18px;border:1px solid var(--rule);background:var(--card)}
+.shots.wide figure{width:280px}
+.shots figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.35}
+h2{font-size:30px;font-stretch:85%;font-weight:600;line-height:1.1;margin:44px 0 6px;text-wrap:balance}
+h3{font-size:18.5px;font-weight:600;margin:0}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px 28px;margin-top:18px}
+.features p{margin:4px 0 0;font-size:16px}
+.needlist{margin:10px 0 0;padding-left:20px}
+.needlist li{margin:4px 0}
+details{border-top:1px solid var(--rule);padding:14px 0}
+details:last-of-type{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer;font-weight:600;font-size:17.5px}
+details p{margin:8px 0 0;max-width:40em}
+.note{font-size:15px;color:var(--muted);margin-top:26px;max-width:40em}
+.manual{max-width:42em}
+.manual h2{font-size:26px;margin-top:36px}
+.manual h3{margin-top:22px;font-size:18px}
+.manual ul,.manual ol{padding-left:22px}
+.manual li{margin:4px 0}
+.manual code{font-size:14px;background:var(--card);border:1px solid var(--rule);border-radius:5px;padding:0 4px;overflow-wrap:anywhere}
+.manual .callout{border:2px solid var(--head);border-radius:14px;padding:4px 18px;margin:18px 0;background:var(--card)}
+.manual hr{border:0;border-top:1px solid var(--rule);margin:28px 0}
+footer{border-top:1px solid var(--rule);margin-top:48px;padding:26px 0 48px;font-size:15px;color:var(--muted)}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:14px}
+footer nav a{color:var(--ink);font-weight:500;text-underline-offset:3px}
+footer p{margin:6px 0;max-width:40em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumbs"><a href="/"><img src="/logo.svg" alt="">Anonaconda Code Lab</a></div>
+  <header class="hero">
+    <img class="icon" src="/icons/still-point.svg" alt="">
+    <h1>Still Point user manual</h1>
+    <div class="links"><a class="open" href="https://stillpoint.anonacondacodelab.com">Open Still Point</a><a href="/still-point/">About Still Point</a></div>
+  </header>
+  <main><article class="manual">
+<p>Still Point turns a Polar H10 chest strap into a calm morning check-in. A short reading each day tracks your heart rate variability (HRV) against your own usual range, an optional standing test adds how your heart rate responds to getting up, and a breathing guide helps you slow down. It is free, needs no account, and nothing leaves your device.</p>
+<div class="callout"><p><b>For general wellness only. Still Point is not a medical device.</b></p>
+<p>If you feel unwell, with chest pain or pressure, fainting, severe shortness of breath, or a racing or very irregular heartbeat, <b>call your local emergency number now.</b></p></div>
+<h2>Wellness use only</h2>
+<p>Still Point is for <b>general wellness, training and relaxation</b>. It has not been tested, cleared or approved by any medical regulator. Do not use it to diagnose, rule out or monitor any illness, or to make decisions about medicines or treatment. Words such as &quot;usual range&quot; describe how a reading compares with <b>your own</b> earlier readings. They are not medical findings.</p>
+<p>Slow breathing can make some people light-headed. If that happens, stop and breathe normally. If you are pregnant or have a heart, lung or blood-pressure condition, check with your doctor before slow-breathing practice. Do the standing test only where you can sit down straight away.</p>
+<h2>What you need</h2>
+<ul><li>A <b>Polar H10</b> chest strap (a Polar H9 also works).</li><li><b>Google Chrome or Chromium on Android.</b> On a computer, Chrome or Edge. iPhone, iPad, Safari and Firefox cannot connect to the strap.</li><li>The app opened from its https address: <a href="https://stillpoint.anonacondacodelab.com" target="_blank" rel="noopener noreferrer">stillpoint.anonacondacodelab.com</a></li></ul>
+<p>No strap to hand? Choose any reading and, where it asks you to connect your strap, tap <b>try a simulated strap</b>. It produces made-up heart beats so you can explore the app. At the end of a reading, tap <b>Discard</b> so made-up readings stay out of your history.</p>
+<h2>Choosing what to do</h2>
+<p>The <b>HRV</b> tab (the first tab) asks what you'd like to do:</p>
+<ul><li><b>Morning reading</b>: the daily check-in that builds your baseline.</li><li><b>Morning reading + standing test</b>: the same reading, then you stand up for 2 minutes (see below).</li><li><b>Spot check</b>: a reading at any other time. It is saved and charted but never changes your baseline, because HRV naturally runs lower later in the day.</li><li><b>Breathe</b>: the breathing guide.</li></ul>
+<h2>The morning reading</h2>
+<ol><li>Moisten the electrodes, put the strap on and close other apps connected to it.</li><li>On the <b>HRV</b> tab, tap <b>Connect H10</b> and choose your strap.</li><li>Choose <b>Morning reading</b>, then your <b>position</b> and <b>reading length</b>. Two minutes is plenty; use the same choices every day. The app remembers them.</li><li>Tap <b>Begin</b>. The first 15 seconds let you settle; if you're already still and ready, tap <b>Skip settling</b>. Then the reading runs. Stay still and breathe normally.</li></ol>
+<p>While it runs you see a live <b>heart-rate trace</b> of the last minute, beat by beat, and your heart rate, your <b>HRV</b> (RMSSD over the last minute), your <b>breathing rate</b> and the signal quality. In the trace, the area above your average is shaded teal where your heart speeds up (usually as you breathe in) and lavender where it slows (as you breathe out), so each breath shows as a gentle wave: taller waves mean higher HRV. Beats left out as glitches appear as small grey rings off the line. In the standing test, a dashed line marks the moment you stood up. HRV and breathing appear after about half a minute and update every couple of seconds. Don't try to steer them: just breathe normally.</p>
+<ol><li>When it finishes, look over the result and tap <b>Save reading</b>, or <b>Discard</b> if something went wrong (you moved, talked, or it wasn't your usual routine).</li></ol>
+<p><b>Get the most from it:</b> read at the same time each morning, soon after waking, after the bathroom and before coffee, food or exercise, in the same position. Consistency matters far more than the exact routine you choose.</p>
+<h3>Your result</h3>
+<ul><li><b>HRV score</b>: lnRMSSD on a 0–100 scale (lnRMSSD × 100 / 6.5). Several apps use a similar scale, but the numbers are not interchangeable between apps.</li><li><b>lnRMSSD</b> and <b>RMSSD</b>: the standard short-reading HRV measure, from the strap's own beat-to-beat intervals.</li><li><b>Heart rate</b>: average over the reading.</li><li><b>Breathing</b>: about how many breaths a minute you took (3 to 30). It is estimated from your heart rhythm, which rises and falls slightly with each breath, so it is approximate and may be missing if your rhythm didn't show a clear pattern.</li><li><b>Signal</b>: beats that differ by more than 20 % from their neighbours (a missed or extra beat, or a strap glitch) are left out. If more than 10 % are left out, the reading is marked noisy and does not count towards your baseline.</li></ul>
+<h3>Your reading, beat by beat</h3>
+<p>Every result shows the whole reading as a heart-rate trace with the same teal and lavender shading (the faded strip at the start is the settle period). A standing test gets its own trace with the moment you stood up and your peak heart rate marked.</p>
+<p>Next to it, the <b>beat-to-beat pattern</b> plots each beat against the next (a Poincaré plot). A wide, round cloud means a lot of variation from beat to beat (higher HRV); a narrow cloud along the diagonal means less. Grey rings are beats that were left out.</p>
+<h3>Breathing and HRV</h3>
+<p>How you breathe moves HRV: slow, deep breathing raises it and faster breathing lowers it. So breathe the way you usually do during readings, whether that's normal or naturally slow. If a morning reading was breathed much faster or slower than your usual (by more than about half again), the result says so, so you don't mistake a change in breathing for a change in you.</p>
+<h3>What this means</h3>
+<p>Under every result, a short <b>What this means</b> section explains in everyday words what HRV is, what today's reading suggests and what, if anything, to do about it. Once your baseline is ready it also gives some context: where your usual value sits compared with published averages for healthy adults (roughly 20 to 75 ms RMSSD lying down, falling with age).</p>
+<p>The app deliberately doesn't grade HRV as <i>favourable</i>, <i>normal</i>, <i>borderline</i> or <i>outside normal range</i> the way Lead One ECG grades ECG measurements. Healthy people of the same age can differ two- or threefold in HRV, mostly because of genetics, so a population grade would worry people with naturally low HRV for nothing and reassure people with high HRV even when their own trend is sliding. Comparing you with your own usual range is what the research supports.</p>
+<h3>Your baseline</h3>
+<p>HRV varies a lot between people, so a single number means little. After <b>7 earlier mornings</b> in the same position, each reading is compared with your own usual range:</p>
+<ul><li><b>Usual range</b> is your 60-day average ± half a standard deviation of your daily values.</li><li>Your <b>7-day average</b> is compared with it, because day-to-day values bounce around.</li><li><b>In your usual range</b>: nothing stands out.</li><li><b>Lower than usual</b>: often follows hard training, short or poor sleep, alcohol, illness, travel or stress. An easier day and an early night are sensible.</li><li><b>Higher than usual</b>: usually good recovery; occasionally, with unusual tiredness after very heavy training, a sign of being run down.</li></ul>
+<p>Only the first good reading of each day counts, and each position has its own baseline.</p>
+<h3>Training guidance</h3>
+<p>Once your baseline is ready, morning results include a suggestion for today's training, based on the published HRV-guided training approach (Kiviniemi 2007, Plews 2013):</p>
+<ul><li><b>Go as planned</b>, or <b>Good day for a harder session</b> when you are above your usual range and today isn't low.</li><li><b>Keep it easy</b>: your 7-day average is below your usual range, or today is clearly lower than your usual.</li><li><b>Rest or very light</b>: today is well below your usual <i>and</i> either your week is low or your resting heart rate is 5 or more beats up.</li></ul>
+<p>It's a suggestion: how you feel counts too. Switch it off in <b>Settings → Options</b> if you don't train.</p>
+<h3>Tags (optional)</h3>
+<p>Under each result, <b>+ Add tags</b> lets you note anything that may have affected the reading: slept badly or well, alcohol last night, hard training or a rest day yesterday, sore muscles, feeling ill, stressed, a late or heavy meal, caffeine before the reading, travel or jet lag, period. You can also enter a <b>sleep score</b> (0–100, as shown by a Garmin, Oura, Fitbit or similar) and <b>hours slept</b>. Tags are entirely optional; you can add or change them later by opening the reading.</p>
+<h3>Something about skipped beats</h3>
+<p>If several of your recent readings (3 of the last 7) had beats left out even though the signal was good, the result suggests recording with <b>Lead One ECG</b>, our ECG app, which shows the actual heart trace from the same strap so you can see whether the odd beats were the strap or real early beats. Occasional early or skipped beats are common and usually harmless; if you have symptoms such as palpitations, dizziness or chest discomfort, see a doctor.</p>
+<h2>The standing test</h2>
+<p>Choose <b>Morning reading + standing test</b> (from lying or sitting). It uses your morning position and length, so the reading part joins your baseline as usual. After the reading, a chime asks you to <b>stand up calmly</b> and stay standing, still, for 2 minutes. You'll see:</p>
+<ul><li><b>Peak after standing</b>: your highest heart rate in the first 30 seconds, and how far it rose.</li><li><b>Standing, last minute</b>: where your heart rate settled, compared with lying or sitting.</li><li><b>30:15 ratio</b>: the longest beat interval around the 30th beat after standing divided by the shortest around the 15th. It reflects how quickly your heart rate comes back down after the initial jump.</li></ul>
+<p>Compare these with your own earlier tests; Trends charts them over time.</p>
+<h2>Breathe</h2>
+<p>Choose a <b>rhythm</b> and a length:</p>
+<ul><li><b>Longer out</b> (40 % in, 60 % out, the more relaxing choice) or <b>Even</b>, with a <b>pace</b> from 3 to 7 breaths a minute in half steps.</li><li><b>Box 4-4-4-4</b>: in 4 s, hold 4 s, out 4 s, hold 4 s.</li><li><b>4-7-8</b>: in 4 s, hold 7 s, out 8 s.</li><li><b>Custom</b>: set your own breath in, hold, breath out and hold, from 1 to 20 seconds (holds from 0) in half-second steps.</li></ul>
+<p>Follow the circle: it grows as you breathe in and shrinks as you breathe out, with a soft chime at each change if you like. Breathe gently through your nose into your belly. Don't force the breath; if you feel short of air, choose a faster pace.</p>
+<p>With the strap connected you'll see your heart rate rise as you breathe in and fall as you breathe out, and the size of that <b>swing</b> per breath.</p>
+<h3>Find your resonance pace</h3>
+<p>At one particular pace, usually between 4.5 and 6.5 breaths a minute, the swing is largest. The test guides you through 6.5, 6, 5.5, 5 and 4.5 breaths a minute for two minutes each and picks the pace with the biggest swing. Tap <b>Use … as my pace</b> to make it your default; it is marked with a dot among the pace buttons. Retest every month or two.</p>
+<h3>Open session</h3>
+<p>No guide and no counting: sit or lie comfortably, breathe naturally and let your mind settle. Choose open-ended or a length from 5 to 30 minutes (a soft chime marks the end). With the strap on, your heart rate and HRV are shown quietly, and the summary compares your first and last two minutes: as you settle, heart rate usually drifts down and HRV up.</p>
+<h2>Trends and history</h2>
+<p><b>Trends</b> shows the last 60 days: HRV score with your 7-day average and usual range, resting heart rate, standing-test results, spot checks and your breathing and open-session minutes. Tap any item in the history to open it.</p>
+<h3>This week and your weekly recap</h3>
+<p><b>This week</b> on Trends sums up the current week (Monday to Sunday): morning readings, average HRV score and resting heart rate compared with the week before, standing tests, breathing and open-session minutes, and your most-used tag. At the start of each week, the HRV tab shows <b>Your week</b>, the same summary for the week just finished, until you tap <b>Got it</b>.</p>
+<h3>What affects you</h3>
+<p>Once you've tagged some mornings, this card shows how each tag relates to your HRV, for example &quot;Alcohol last night: HRV about 12 % lower than on other mornings&quot;. A tag needs at least <b>3 mornings with it and 5 without</b>; sleep score and hours slept need <b>8 mornings</b> and compare your lower half with your upper half. Only differences of 5 % or more are listed. These are patterns in your own readings, not proof of cause.</p>
+<h3>What your trend shows</h3>
+<p>Once your baseline is ready, the top of Trends comments on the last few weeks in plain language. A green dot is reassuring, an orange dot is worth noticing, and a grey dot is about how the readings are taken. It looks at:</p>
+<ul><li><b>Direction</b>: whether your 7-day average is below or above your usual range, and for how many days, or slowly drifting over two weeks.</li><li><b>Day-to-day variation</b>: readings that jump around more than usual are often an early sign of strain, before the average itself drops.</li><li><b>Heart rate and HRV together</b>: resting heart rate up while HRV is down is a clearer sign of strain than either alone.</li><li><b>Standing test</b>: whether your heart-rate jump on standing has been bigger lately than it usually is.</li><li><b>Consistency</b>: missed mornings, or readings at very different times of day, which make the comparison less reliable.</li></ul>
+<p><b>When comments appear:</b> from your <b>8th morning reading</b> in the same position (7 earlier mornings plus today). Some need more: &quot;drifting up/down&quot; about two weeks of mornings, &quot;more up-and-down than usual&quot; at least 5 readings in the last week, &quot;heart rate up, HRV down&quot; at least 4 readings in the last week, and &quot;bigger jump on standing&quot; at least 6 standing tests. They are general wellness information, not medical advice.</p>
+<h2>Your data</h2>
+<p>Nothing is kept until you tap <b>Save</b>. Saved readings and sessions are stored in this browser on this device.</p>
+<ul><li><b>Save to file</b> (open any saved reading) saves that one reading, with all its beat-to-beat intervals, as a file.</li><li><b>Save all to file</b> (Settings, or the <b>Save all</b> button above the history list on Trends) saves every reading and breathing session, with all their beat intervals, in one backup file.</li><li><b>Save as spreadsheet</b> (Settings, or <b>Spreadsheet</b> on Trends) saves a CSV file with one row per reading and session: date, time, type, position, score, lnRMSSD, RMSSD, SDNN, heart rate, breathing rate, signal quality, standing-test results, and pace and swing for breathing. It opens in Excel, Google Sheets or LibreOffice. It is a summary, so it can't be imported back; keep the backup file for that.</li><li><b>Settings → Import history</b> brings a history file or a single reading file back in, for example on a new phone. Clearing the browser's site data deletes everything, so save a backup from time to time.</li></ul>
+<h3>Moving from Elite HRV</h3>
+<p>In Elite HRV, request your data export; you'll get a download link by email. Download the .zip, then in <b>Settings → Import from Elite HRV</b> choose that .zip (or the .txt files inside it, one per reading). Pick the position you took your readings in.</p>
+<ul><li>Readings before 11:00 that last up to 5½ minutes become morning readings; later or longer ones (open readings, meditations, guided breathing) become spot checks, so they can't skew your baseline. You can switch this off.</li><li>Everything is recalculated from the beat intervals with Still Point's own method, so old and new readings are measured the same way and your baseline and trends are ready straight away. On clean readings the score matches Elite's HRV number; on readings with a skipped or extra beat it can differ by a few points, because the two apps handle such beats differently.</li><li>Imported readings are marked <b>from Elite HRV</b>. If a batch went in with the wrong position, <b>Remove all Elite HRV imports</b> in the same place takes them out again. Elite's tags and moods aren't in the export, so they don't come across.</li></ul>
+<p><b>After you switch</b>, once you have 5 mornings in Still Point, Trends compares them with your last Elite HRV mornings. If they line up, it says so. If there's a clear step, usually from a change in routine such as breathing, position, time or reading length, it explains this and offers <b>Start my baseline from</b> the switch date, so the old routine doesn't skew your baseline. Old readings stay in your history and charts, and you can go back to your full history at any time.</p>
+<h2>Install as an app</h2>
+<p>In Chrome on Android, the HRV tab offers <b>Install</b> (also in <b>Settings → Options</b>, or Chrome's menu → <b>Add to Home screen</b> / <b>Install app</b>). It then has its own icon, opens full screen and works without a connection; Bluetooth still needs Chrome underneath, which it uses automatically. Your readings stay the same: the installed app and the web page share the same storage.</p>
+<h2>Troubleshooting</h2>
+<ul><li><b>Connect does nothing or the strap isn't listed:</b> close Polar Beat, Polar Flow and other apps using the strap, make sure the strap is worn and moist (it sleeps when dry), and that Bluetooth and location are on.</li><li><b>Noisy reading:</b> moisten the electrodes, tighten the strap a little, keep still and don't talk.</li><li><b>The screen turns off during a session:</b> the app asks the phone to stay awake; keep the page in the foreground.</li></ul>
+  </article></main>
+  <footer>
+    <nav aria-label="Studio links">
+      <a href="/">All apps</a>
+      <a href="https://ko-fi.com/anonacondacodelab">Support on Ko-fi</a>
+      <a href="https://github.com/Anonaconda-CodeLab">GitHub</a>
+      <a href="https://mastodon.social/@anonacondacodelab" rel="me">Mastodon</a>
+    </nav>
+    <p>No cookies, no analytics, no tracking, on this page or in the apps.</p>
+    <p>© 2026 Anonaconda Code Lab. Apps are free software under the GNU GPL v3. Polar and H10 are trademarks of Polar Electro Oy; these apps are independent and not affiliated with Polar.</p>
+  </footer>
+</div>
+</body>
+</html>
