@@ -1,0 +1,4 @@
+# Skip the deploy (it costs credits) when only the page generator, notes or this file changed.
+# Other settings stay as set on Netlify.
+[build]
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)tools' ':(exclude)README.md' ':(exclude)netlify.toml'"
