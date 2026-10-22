@@ -20,7 +20,7 @@
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Still Point","url":"https://stillpoint.anonacondacodelab.com","description":"A free, private morning HRV reading, standing test and calm breathing guide for the Polar H10. Compares you with your own baseline. No account; your data stays on your phone.","applicationCategory":"HealthApplication","operatingSystem":"Android (Chrome or Chromium), Windows, macOS, ChromeOS, Linux","browserRequirements":"Requires Web Bluetooth (Google Chrome or Chromium) and a Polar H10 chest strap","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"isAccessibleForFree":true,"license":"https://www.gnu.org/licenses/gpl-3.0.html","image":"https://anonacondacodelab.com/social/og-still-point.jpg","author":{"@type":"Organization","name":"Anonaconda Code Lab","url":"https://anonacondacodelab.com/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Still Point","url":"https://stillpoint.anonacondacodelab.com","description":"A free, private morning HRV reading, standing test and calm breathing guide for the Polar H10. Compares you with your own baseline. No account; your data stays on your phone.","applicationCategory":"HealthApplication","operatingSystem":"Android app; Android (Chrome or Chromium), Windows, macOS, ChromeOS, Linux","browserRequirements":"Requires Web Bluetooth (Google Chrome or Chromium) and a Polar H10 chest strap","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"isAccessibleForFree":true,"license":"https://www.gnu.org/licenses/gpl-3.0.html","image":"https://anonacondacodelab.com/social/og-still-point.jpg","author":{"@type":"Organization","name":"Anonaconda Code Lab","url":"https://anonacondacodelab.com/"}}</script>
 <style>
 @font-face{font-family:"Instrument Sans";font-style:normal;font-display:swap;font-weight:400 700;font-stretch:75% 100%;
   src:url(/fonts/InstrumentSans-latin-variable.woff2) format("woff2-variations")}
@@ -87,9 +87,9 @@ footer p{margin:6px 0;max-width:40em}
     <h1>Still Point</h1>
     <p class="lede">A calm morning check-in with your Polar H10. Take a two-minute heart rate variability reading, see how it compares with your own usual range, and breathe slowly with a soothing guide.</p>
     <p class="needs">Free. Runs in Google Chrome or Chromium on Android, or Chrome and Edge on a computer. No account, nothing uploaded. For general wellness only; not a medical device.</p>
+    <p class="soon new"><span>New</span>The <a href="https://stillpoint.anonacondacodelab.com/android.html">Android app</a>: readings, breathing sessions and chimes keep going with the screen off, and it has no internet access at all.</p>
     
-    <p class="soon"><span>Coming soon</span>The Android app: readings, breathing sessions and chimes keep going with the screen off, and it has no internet access at all.</p>
-    <div class="links"><a class="open" href="https://stillpoint.anonacondacodelab.com">Open Still Point</a><a href="/still-point/manual/">User manual</a></div>
+    <div class="links"><a class="open" href="https://stillpoint.anonacondacodelab.com">Open Still Point</a><a href="https://stillpoint.anonacondacodelab.com/android.html">Android app</a><a href="/still-point/manual/">User manual</a><a href="https://github.com/Anonaconda-CodeLab/still-point">Source code</a></div>
   </header>
   <main>
     <div class="shots" role="list" aria-label="Screenshots">
@@ -116,14 +116,16 @@ footer p{margin:6px 0;max-width:40em}
       <div><h3>Try it without a strap</h3><p>A simulated strap lets you explore every screen before you buy an H10.</p></div>
     </div>
     <h2>What you need</h2>
-    <ul class="needlist"><li>A <b>Polar H10</b> chest strap (a Polar H9 also works).</li><li><b>Google Chrome or Chromium on Android</b>, or Chrome or Edge on Windows, macOS, ChromeOS or Linux.</li><li>iPhone and iPad aren’t supported: Apple doesn’t allow websites to use Bluetooth.</li></ul>
+    <ul class="needlist"><li>A <b>Polar H10</b> chest strap (a Polar H9 also works).</li><li><b>Google Chrome or Chromium on Android</b>, or Chrome or Edge on Windows, macOS, ChromeOS or Linux.</li><li>Or the <a href="https://stillpoint.anonacondacodelab.com/android.html"><b>Android app</b></a>, which needs no browser at all.</li><li>iPhone and iPad aren’t supported: Apple doesn’t allow websites to use Bluetooth.</li></ul>
     <h2>Questions</h2>
     <details><summary>Is Still Point really free?</summary><p>Yes. There is no subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.</p></details>
     <details><summary>Where is my data stored?</summary><p>Only in your browser on your own device. Nothing is uploaded anywhere. Use <i>Save all to file</i> to keep a backup or move to another phone.</p></details>
     <details><summary>How is the HRV score calculated?</summary><p>It is lnRMSSD, the standard measure for short readings, on a 0–100 scale (lnRMSSD × 100 / 6.5). On clean readings it matches the HRV number in Elite HRV.</p></details>
     <details><summary>Can I move from Elite HRV?</summary><p>Yes. Request your data export in Elite HRV, then choose the downloaded .zip in Still Point’s settings. Your readings are recalculated and your baseline is ready immediately.</p></details>
     <details><summary>Does it work on iPhone?</summary><p>Not at the moment. Safari and every other iPhone browser block Bluetooth for websites.</p></details>
-    <details><summary>Can I install it like an app?</summary><p>Yes. In Chrome on Android, tap <i>Install</i> in the app or use Chrome’s menu. It gets its own icon, opens full screen and works offline.</p></details>
+    <details><summary>Can I install it like an app?</summary><p>Yes: install the <a href="https://stillpoint.anonacondacodelab.com/android.html">Android app</a>, which keeps going with the screen off, or in Chrome on Android tap <i>Install</i> in the web app. Either way it gets its own icon and works offline.</p></details>
+    <details><summary>Why isn’t the Android app on Google Play?</summary><p>Publishing there means registering with Google and handing over government ID, and Google is extending that check to apps installed from elsewhere. We think you should be able to install software you choose on a phone you own, so we support <a href="https://keepandroidopen.org">Keep Android Open</a> and offer the app directly. The <a href="https://stillpoint.anonacondacodelab.com/android.html">Android page</a> explains how to install it and check it’s the official build.</p></details>
+    <details><summary>Is the code open?</summary><p>Still Point is free software under the GNU GPL v3. The <a href="https://github.com/Anonaconda-CodeLab/still-point">source code is on GitHub</a>, and every Android release is built from it automatically, with a checksum to verify the download.</p></details>
     <details><summary>Is it a medical device?</summary><p>No. Still Point is for general wellness, relaxation and training. It cannot diagnose or rule out any condition. If you feel unwell, see a doctor.</p></details>
     <p class="note">Still Point is for general wellness only and is not a medical device. Slow breathing can make some people light-headed; stop and breathe normally if it does.</p>
   </main>

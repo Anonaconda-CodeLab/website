@@ -182,12 +182,14 @@ ${body}
 
 const SP = {
   name: 'Still Point', path: '/still-point/', appUrl: 'https://stillpoint.anonacondacodelab.com', icon: '/icons/still-point.svg', image: '/social/og-still-point.jpg',
+  os: 'Android app; Android (Chrome or Chromium), Windows, macOS, ChromeOS, Linux',
   title: 'Still Point: free HRV and breathing app for the Polar H10',
   desc: 'A free, private morning HRV reading, standing test and calm breathing guide for the Polar H10. Compares you with your own baseline. No account; your data stays on your phone.',
   manualDesc: 'morning HRV readings, the standing test, breathing, trends and importing from Elite HRV.',
   lede: 'A calm morning check-in with your Polar H10. Take a two-minute heart rate variability reading, see how it compares with your own usual range, and breathe slowly with a soothing guide.',
   needs: 'Free. Runs in Google Chrome or Chromium on Android, or Chrome and Edge on a computer. No account, nothing uploaded. For general wellness only; not a medical device.',
-  soon: 'The Android app: readings, breathing sessions and chimes keep going with the screen off, and it has no internet access at all.',
+  isNew: 'The <a href="https://stillpoint.anonacondacodelab.com/android.html">Android app</a>: readings, breathing sessions and chimes keep going with the screen off, and it has no internet access at all.',
+  links: [['https://stillpoint.anonacondacodelab.com/android.html', 'Android app'], ['/still-point/manual/', 'User manual'], ['https://github.com/Anonaconda-CodeLab/still-point', 'Source code']],
   shots: [
     ['/screens/still-point/1-home.webp', 'Choose a morning reading, a standing test, a spot check or breathing', 780, 1688],
     ['/screens/still-point/2-reading.webp', 'Live heart rate during a reading: each breath shows as a wave', 780, 1688],
@@ -210,28 +212,31 @@ const SP = {
     ['Private by design', 'No account, no server, no analytics. Everything stays in your browser on your phone; export a backup or a spreadsheet whenever you like.'],
     ['Try it without a strap', 'A simulated strap lets you explore every screen before you buy an H10.']
   ],
-  need: ['A <b>Polar H10</b> chest strap (a Polar H9 also works).', '<b>Google Chrome or Chromium on Android</b>, or Chrome or Edge on Windows, macOS, ChromeOS or Linux.', 'iPhone and iPad aren’t supported: Apple doesn’t allow websites to use Bluetooth.'],
+  need: ['A <b>Polar H10</b> chest strap (a Polar H9 also works).', '<b>Google Chrome or Chromium on Android</b>, or Chrome or Edge on Windows, macOS, ChromeOS or Linux.', 'Or the <a href="https://stillpoint.anonacondacodelab.com/android.html"><b>Android app</b></a>, which needs no browser at all.', 'iPhone and iPad aren’t supported: Apple doesn’t allow websites to use Bluetooth.'],
   faq: [
     ['Is Still Point really free?', 'Yes. There is no subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.'],
     ['Where is my data stored?', 'Only in your browser on your own device. Nothing is uploaded anywhere. Use <i>Save all to file</i> to keep a backup or move to another phone.'],
     ['How is the HRV score calculated?', 'It is lnRMSSD, the standard measure for short readings, on a 0–100 scale (lnRMSSD × 100 / 6.5). On clean readings it matches the HRV number in Elite HRV.'],
     ['Can I move from Elite HRV?', 'Yes. Request your data export in Elite HRV, then choose the downloaded .zip in Still Point’s settings. Your readings are recalculated and your baseline is ready immediately.'],
     ['Does it work on iPhone?', 'Not at the moment. Safari and every other iPhone browser block Bluetooth for websites.'],
-    ['Can I install it like an app?', 'Yes. In Chrome on Android, tap <i>Install</i> in the app or use Chrome’s menu. It gets its own icon, opens full screen and works offline.'],
+    ['Can I install it like an app?', 'Yes: install the <a href="https://stillpoint.anonacondacodelab.com/android.html">Android app</a>, which keeps going with the screen off, or in Chrome on Android tap <i>Install</i> in the web app. Either way it gets its own icon and works offline.'],
+['Why isn’t the Android app on Google Play?', 'Publishing there means registering with Google and handing over government ID, and Google is extending that check to apps installed from elsewhere. We think you should be able to install software you choose on a phone you own, so we support <a href="https://keepandroidopen.org">Keep Android Open</a> and offer the app directly. The <a href="https://stillpoint.anonacondacodelab.com/android.html">Android page</a> explains how to install it and check it’s the official build.'],
+    ['Is the code open?', 'Still Point is free software under the GNU GPL v3. The <a href="https://github.com/Anonaconda-CodeLab/still-point">source code is on GitHub</a>, and every Android release is built from it automatically, with a checksum to verify the download.'],
     ['Is it a medical device?', 'No. Still Point is for general wellness, relaxation and training. It cannot diagnose or rule out any condition. If you feel unwell, see a doctor.']
   ],
   disclaimer: 'Still Point is for general wellness only and is not a medical device. Slow breathing can make some people light-headed; stop and breathe normally if it does.'
 };
 const RD = {
   name: 'Rounds', path: '/rounds/', appUrl: 'https://rounds.anonacondacodelab.com', icon: '/icons/rounds.svg', image: '/social/og-rounds.jpg',
-  category: 'SportsApplication', os: 'Any modern browser: Android, iPhone, iPad, Windows, macOS, ChromeOS, Linux',
+  category: 'SportsApplication', os: 'Android app; any modern browser on Android, iPhone, iPad, Windows, macOS, ChromeOS, Linux',
   browserReq: 'Any modern browser. Optional heart rate needs Web Bluetooth (Chrome or Chromium, or Bluefy on iPhone)',
   title: 'Rounds: a free, loud interval timer for HIIT, Tabata and boxing',
   desc: 'A loud, clear interval timer with 16 presets (Tabata, EMOM, 4 × 4, boxing rounds and more) or your own timers. Free, no account, no ads, works offline.',
   manualDesc: 'presets, building your own timers, the beeps, spoken cues, heart rate and backing up your timers.',
   lede: 'A loud, clear interval timer. Pick one of 16 presets or build your own, press play, and follow the beeps. The whole screen changes colour with each round, so you can read it from across the room.',
   needs: 'Free. Works in any modern browser on a phone, tablet or computer, and offline once added to your home screen. No account, no ads, no tracking.',
-  soon: 'The Android app: beeps and voice cues keep going with the screen off, and it has no internet access at all.',
+  isNew: 'The <a href="https://rounds.anonacondacodelab.com/android.html">Android app</a>: beeps and voice cues keep going with the screen off, and it has no internet access at all.',
+  links: [['https://rounds.anonacondacodelab.com/android.html', 'Android app'], ['/rounds/manual/', 'User manual'], ['https://github.com/Anonaconda-CodeLab/rounds', 'Source code']],
   shots: [
     ['/screens/rounds/1-home.webp', 'Favourites, your own timers and 16 presets, sorted by goal or hardest first', 780, 1688],
     ['/screens/rounds/2-about.webp', 'Every preset explains what it is, how to do it, why it works and where it comes from', 780, 1688],
@@ -252,14 +257,16 @@ const RD = {
     ['Favourites and backup', 'Star the timers you use most to keep them at the top. Save all your timers to a file and import them on another phone or browser.'],
     ['Private and offline', 'No account, no server, no analytics. Your timers stay on your device, and it works without a connection once added to your home screen.']
   ],
-  need: ['Any modern browser on a phone, tablet or computer.', 'For heart rate (optional): a Bluetooth heart-rate strap or watch, and <b>Chrome or Chromium on Android</b> or a computer, or the free <b>Bluefy</b> browser on iPhone and iPad.'],
+  need: ['Any modern browser on a phone, tablet or computer, or the <a href="https://rounds.anonacondacodelab.com/android.html"><b>Android app</b></a>.', 'For heart rate (optional): a Bluetooth heart-rate strap or watch, and <b>Chrome or Chromium on Android</b> or a computer, or the free <b>Bluefy</b> browser on iPhone and iPad.'],
   faq: [
     ['Is Rounds really free?', 'Yes. No subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.'],
     ['Why can’t I hear the beeps?', 'Turn up the phone’s <i>media</i> volume (not the ringer), and check the phone isn’t muting media. <i>Test the beeps</i> in Settings plays them all.'],
-    ['Does it keep going when the screen is off?', 'In a browser, keep the screen on: Rounds does this for you while a timer runs, because browsers pause pages in the background. The Android app, coming soon, keeps the beeps and voice cues going with the screen off.'],
+    ['Does it keep going when the screen is off?', 'In a browser, keep the screen on: Rounds does this for you while a timer runs, because browsers pause pages in the background. The <a href="https://rounds.anonacondacodelab.com/android.html">Android app</a> keeps the beeps and voice cues going with the screen off.'],
     ['Where are my timers stored?', 'Only in your browser on your own device. Use <i>Save timers to file</i> in Settings to keep a backup or move them to another phone.'],
     ['Does it work on iPhone?', 'Yes, the timer works in Safari and any other browser. For heart rate, use the free Bluefy browser, because Safari can’t use Bluetooth.'],
-    ['Can I install it like an app?', 'Yes. Use <i>Add to home screen</i> or <i>Install app</i> in your browser’s menu. It gets its own icon, opens full screen and works offline.']
+    ['Can I install it like an app?', 'Yes: install the <a href="https://rounds.anonacondacodelab.com/android.html">Android app</a>, or use <i>Add to home screen</i> or <i>Install app</i> in your browser’s menu. It gets its own icon, opens full screen and works offline.'],
+    ['Why isn’t the Android app on Google Play?', 'Publishing there means registering with Google and handing over government ID, and Google is extending that check to apps installed from elsewhere. We think you should be able to install software you choose on a phone you own, so we support <a href="https://keepandroidopen.org">Keep Android Open</a> and offer the app directly. The <a href="https://rounds.anonacondacodelab.com/android.html">Android page</a> explains how to install it and check it’s the official build.'],
+    ['Is the code open?', 'Rounds is free software under the GNU GPL v3. The <a href="https://github.com/Anonaconda-CodeLab/rounds">source code is on GitHub</a>, and every Android release is built from it automatically, with a checksum to verify the download.']
   ],
   disclaimer: 'High-intensity intervals are very demanding. If you are new to hard exercise or have a heart condition, check with a doctor first, and build up gradually. Stop if you feel unwell.'
 };
