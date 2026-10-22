@@ -1,16 +1,18 @@
 #!/usr/bin/env node
 // Builds the app pages, the user-manual pages, sitemap.xml and robots.txt for anonacondacodelab.com.
 // The site itself has no build step: run this after changing a page's content or a manual, then commit the output.
-//   node tools/pages.mjs <path to still-point/docs/MANUAL.md> <path to lead-one-ecg/docs/MANUAL.md>
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+//   node tools/pages.mjs [still-point/docs/MANUAL.md] [lead-one-ecg/docs/MANUAL.md] [rounds/docs/MANUAL.md]
+// Each manual path defaults to the app's repository cloned next to this one (../still-point, ../lead-one-ecg, ../rounds).
+// A manual that can't be found is skipped and its existing page is left as it is.
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { md } from './md.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://anonacondacodelab.com';
-const [spManual, loManual] = process.argv.slice(2);
-if (!spManual || !loManual) { console.error('usage: node tools/pages.mjs <still-point MANUAL.md> <lead-one MANUAL.md>'); process.exit(1); }
+const arg = process.argv.slice(2), sib = r => join(root, '..', r, 'docs', 'MANUAL.md');
+const spManual = arg[0] || sib('still-point'), loManual = arg[1] || sib('lead-one-ecg'), rdManual = arg[2] || sib('rounds');
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const out = (p, s) => { mkdirSync(dirname(join(root, p)), { recursive: true }); writeFileSync(join(root, p), s); };
 
@@ -119,8 +121,8 @@ const FOOT = `
 `;
 const appLd = a => ({
   '@context': 'https://schema.org', '@type': 'WebApplication', name: a.name, url: a.appUrl, description: a.desc,
-  applicationCategory: 'HealthApplication', operatingSystem: 'Android (Chrome or Chromium), Windows, macOS, ChromeOS, Linux',
-  browserRequirements: 'Requires Web Bluetooth (Google Chrome or Chromium) and a Polar H10 chest strap',
+  applicationCategory: a.category || 'HealthApplication', operatingSystem: a.os || 'Android (Chrome or Chromium), Windows, macOS, ChromeOS, Linux',
+  browserRequirements: a.browserReq || 'Requires Web Bluetooth (Google Chrome or Chromium) and a Polar H10 chest strap',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, isAccessibleForFree: true, license: 'https://www.gnu.org/licenses/gpl-3.0.html',
   image: SITE + a.image, author: { '@type': 'Organization', name: 'Anonaconda Code Lab', url: SITE + '/' }
 });
@@ -171,6 +173,7 @@ const SP = {
   manualDesc: 'morning HRV readings, the standing test, breathing, trends and importing from Elite HRV.',
   lede: 'A calm morning check-in with your Polar H10. Take a two-minute heart rate variability reading, see how it compares with your own usual range, and breathe slowly with a soothing guide.',
   needs: 'Free. Runs in Google Chrome or Chromium on Android, or Chrome and Edge on a computer. No account, nothing uploaded. For general wellness only; not a medical device.',
+  soon: 'The Android app: readings, breathing sessions and chimes keep going with the screen off, and it has no internet access at all.',
   shots: [
     ['/screens/still-point/1-home.webp', 'Choose a morning reading, a standing test, a spot check or breathing', 780, 1688],
     ['/screens/still-point/2-reading.webp', 'Live heart rate during a reading: each breath shows as a wave', 780, 1688],
@@ -204,6 +207,47 @@ const SP = {
     ['Is it a medical device?', 'No. Still Point is for general wellness, relaxation and training. It cannot diagnose or rule out any condition. If you feel unwell, see a doctor.']
   ],
   disclaimer: 'Still Point is for general wellness only and is not a medical device. Slow breathing can make some people light-headed; stop and breathe normally if it does.'
+};
+const RD = {
+  name: 'Rounds', path: '/rounds/', appUrl: 'https://rounds.anonacondacodelab.com', icon: '/icons/rounds.svg', image: '/social/og-rounds.jpg',
+  category: 'SportsApplication', os: 'Any modern browser: Android, iPhone, iPad, Windows, macOS, ChromeOS, Linux',
+  browserReq: 'Any modern browser. Optional heart rate needs Web Bluetooth (Chrome or Chromium, or Bluefy on iPhone)',
+  title: 'Rounds: a free, loud interval timer for HIIT, Tabata and boxing',
+  desc: 'A loud, clear interval timer with 16 presets (Tabata, EMOM, 4 × 4, boxing rounds and more) or your own timers. Free, no account, no ads, works offline.',
+  manualDesc: 'presets, building your own timers, the beeps, spoken cues, heart rate and backing up your timers.',
+  lede: 'A loud, clear interval timer. Pick one of 16 presets or build your own, press play, and follow the beeps. The whole screen changes colour with each round, so you can read it from across the room.',
+  needs: 'Free. Works in any modern browser on a phone, tablet or computer, and offline once added to your home screen. No account, no ads, no tracking.',
+  soon: 'The Android app: beeps and voice cues keep going with the screen off, and it has no internet access at all.',
+  shots: [
+    ['/screens/rounds/1-home.webp', 'Favourites, your own timers and 16 presets, sorted by goal or hardest first', 780, 1688],
+    ['/screens/rounds/2-about.webp', 'Every preset explains what it is, how to do it, why it works and where it comes from', 780, 1688],
+    ['/screens/rounds/3-work.webp', 'Work: the whole screen turns orange, with the exercise name, round and set', 780, 1688],
+    ['/screens/rounds/4-rest.webp', 'Rest: green, with what comes next', 780, 1688],
+    ['/screens/rounds/5-editor.webp', 'Build your own: work, rest, rounds, sets, warm-up, cool-down and exercise names', 780, 1688],
+    ['/screens/rounds/6-finish.webp', 'Done: work rounds and total time, with your heart rate if a strap was connected', 780, 1688]
+  ],
+  features: [
+    ['Beeps you can’t miss', 'Three short beeps count you into and out of every work round, then a long high beep for go and a long low beep for stop. They are scheduled on the audio clock, so they stay on time.'],
+    ['16 presets', 'Tabata, the One-Minute Workout, Gibala intervals, the Little method, 10-20-30, 4 × 4 Norwegian, tempo intervals, a pyramid, fartlek, 30 / 30, EMOM, AMRAP, HIIT 40 / 20, boxing rounds and a core circuit.'],
+    ['Sorted for you', 'Filter the presets by goal: short on time, heart and endurance, fitness and VO₂max, speed and power, or circuits and strength. Or sort them from hardest to easiest.'],
+    ['Explained, with sources', 'Each preset says what it is, how to do it and why it works, with the research it comes from.'],
+    ['Build your own', 'Work, rest, rounds, sets with a longer break between them, warm-up and cool-down. Custom steps handle patterns like 10-20-30 or a pyramid, and exercise names are shown in each work round.'],
+    ['Readable from across the room', 'Big numbers, a ring that empties as the time runs down, and a full-screen colour for each phase: work, rest, set break, warm-up and cool-down.'],
+    ['Spoken cues and vibration', 'Optional voice cues (“Work”, “Rest”, “Round 3 of 8” and exercise names), a buzz at each change, and a halfway beep in long work rounds.'],
+    ['Heart rate (optional)', 'Connect any standard Bluetooth heart-rate strap or watch: Polar, Garmin, Wahoo, Coospo and most others. See your heart rate live, then your average and peak in the work rounds. Shown only, never saved or sent.'],
+    ['Favourites and backup', 'Star the timers you use most to keep them at the top. Save all your timers to a file and import them on another phone or browser.'],
+    ['Private and offline', 'No account, no server, no analytics. Your timers stay on your device, and it works without a connection once added to your home screen.']
+  ],
+  need: ['Any modern browser on a phone, tablet or computer.', 'For heart rate (optional): a Bluetooth heart-rate strap or watch, and <b>Chrome or Chromium on Android</b> or a computer, or the free <b>Bluefy</b> browser on iPhone and iPad.'],
+  faq: [
+    ['Is Rounds really free?', 'Yes. No subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.'],
+    ['Why can’t I hear the beeps?', 'Turn up the phone’s <i>media</i> volume (not the ringer), and check the phone isn’t muting media. <i>Test the beeps</i> in Settings plays them all.'],
+    ['Does it keep going when the screen is off?', 'In a browser, keep the screen on: Rounds does this for you while a timer runs, because browsers pause pages in the background. The Android app, coming soon, keeps the beeps and voice cues going with the screen off.'],
+    ['Where are my timers stored?', 'Only in your browser on your own device. Use <i>Save timers to file</i> in Settings to keep a backup or move them to another phone.'],
+    ['Does it work on iPhone?', 'Yes, the timer works in Safari and any other browser. For heart rate, use the free Bluefy browser, because Safari can’t use Bluetooth.'],
+    ['Can I install it like an app?', 'Yes. Use <i>Add to home screen</i> or <i>Install app</i> in your browser’s menu. It gets its own icon, opens full screen and works offline.']
+  ],
+  disclaimer: 'High-intensity intervals are very demanding. If you are new to hard exercise or have a heart condition, check with a doctor first, and build up gradually. Stop if you feel unwell.'
 };
 const LO = {
   name: 'Lead One ECG', path: '/lead-one/', appUrl: 'https://leadone.anonacondacodelab.com', icon: '/icons/lead-one.svg', image: '/social/og-lead-one.jpg', wide: true,
@@ -245,11 +289,14 @@ const LO = {
   disclaimer: 'Lead One ECG is for general wellness and education only and is not a medical device. It cannot diagnose or rule out any condition. If you have chest pain, fainting, severe breathlessness or a racing or very irregular heartbeat, seek medical care immediately.'
 };
 
+out('rounds/index.html', appPage(RD));
 out('still-point/index.html', appPage(SP));
 out('lead-one/index.html', appPage(LO));
-out('still-point/manual/index.html', manualPage(SP, readFileSync(spManual, 'utf8')));
-out('lead-one/manual/index.html', manualPage(LO, readFileSync(loManual, 'utf8')));
-const urls = ['/', '/still-point/', '/still-point/manual/', '/lead-one/', '/lead-one/manual/'];
+for (const [a, f, dir] of [[RD, rdManual, 'rounds'], [SP, spManual, 'still-point'], [LO, loManual, 'lead-one']]) {
+  if (existsSync(f)) out(dir + '/manual/index.html', manualPage(a, readFileSync(f, 'utf8')));
+  else console.warn(`skipped ${dir}/manual: ${f} not found`);
+}
+const urls = ['/', '/rounds/', '/rounds/manual/', '/still-point/', '/still-point/manual/', '/lead-one/', '/lead-one/manual/'];
 const today = new Date().toISOString().slice(0, 10);
 out('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${SITE}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n')}\n</urlset>\n`);
 out('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);

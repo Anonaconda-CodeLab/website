@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Rounds user manual</title>
+<meta name="description" content="How to use Rounds: presets, building your own timers, the beeps, spoken cues, heart rate and backing up your timers.">
+<link rel="canonical" href="https://anonacondacodelab.com/rounds/manual/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Anonaconda Code Lab">
+<meta property="og:title" content="Rounds user manual">
+<meta property="og:description" content="How to use Rounds: presets, building your own timers, the beeps, spoken cues, heart rate and backing up your timers.">
+<meta property="og:url" content="https://anonacondacodelab.com/rounds/manual/">
+<meta property="og:image" content="https://anonacondacodelab.com/social/og-rounds.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#22362B">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+@font-face{font-family:"Instrument Sans";font-style:normal;font-display:swap;font-weight:400 700;font-stretch:75% 100%;
+  src:url(/fonts/InstrumentSans-latin-variable.woff2) format("woff2-variations")}
+:root{--paper:#ECEFE7; --new:#B31F39; --new-ink:#FFFFFF;--ink:#22362B;--line:#6E7F3A;--muted:#5E6B61;--rule:#CBD2C4;--head:#8FA048;--card:#F6F8F3;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#141A16; --new:#F07A8D; --new-ink:#141A16;--ink:#E3E8DE;--line:#A9B865;--muted:#94A096;--rule:#2C362F;--head:#B9C97A;--card:#1A221D}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 "Instrument Sans",system-ui,sans-serif}
+a{color:inherit}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--line);outline-offset:3px;border-radius:4px}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.crumbs{display:flex;align-items:center;gap:10px;padding-top:28px;font-size:15px;color:var(--muted)}
+.crumbs a{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
+.crumbs img{width:30px;height:30px}
+header.hero{padding:40px 0 8px}
+.hero .icon{width:64px;height:64px;display:block}
+h1{font-size:clamp(44px,10vw,80px);line-height:.95;font-stretch:75%;font-weight:650;letter-spacing:-.01em;margin:18px 0 0;text-wrap:balance}
+.lede{font-size:clamp(19px,2.6vw,22px);line-height:1.45;max-width:32em;margin:18px 0 0}
+.needs{font-size:15px;color:var(--muted);max-width:40em;margin:10px 0 0}
+.links{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-top:20px}
+.open{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600;padding:11px 20px;border-radius:999px}
+.open:hover{background:var(--line);color:#fff}
+.links a:not(.open){font-weight:500;text-underline-offset:3px}
+.soon{font-size:15px;margin-top:12px}
+.soon span{display:inline-block;font-size:11.5px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;background:var(--line);color:var(--paper);padding:2px 9px;border-radius:999px;margin-right:9px;vertical-align:1px}
+.soon.new{margin-top:14px;padding:11px 14px;border-left:4px solid var(--new);border-radius:10px;background:color-mix(in srgb,var(--new) 9%,transparent);font-weight:550}
+.soon.new span{background:var(--new);color:var(--new-ink);font-size:13px;padding:3px 11px}
+.soon.new a{color:var(--new);font-weight:700}
+.shots{display:flex;gap:14px;overflow-x:auto;padding:28px 2px 18px;margin:20px 0 0;scroll-snap-type:x mandatory}
+.shots figure{margin:0;flex:none;width:210px;scroll-snap-align:start}
+.shots img{width:100%;height:auto;display:block;border-radius:18px;border:1px solid var(--rule);background:var(--card)}
+.shots.wide figure{width:280px}
+.shots figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.35}
+h2{font-size:30px;font-stretch:85%;font-weight:600;line-height:1.1;margin:44px 0 6px;text-wrap:balance}
+h3{font-size:18.5px;font-weight:600;margin:0}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px 28px;margin-top:18px}
+.features p{margin:4px 0 0;font-size:16px}
+.needlist{margin:10px 0 0;padding-left:20px}
+.needlist li{margin:4px 0}
+details{border-top:1px solid var(--rule);padding:14px 0}
+details:last-of-type{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer;font-weight:600;font-size:17.5px}
+details p{margin:8px 0 0;max-width:40em}
+.note{font-size:15px;color:var(--muted);margin-top:26px;max-width:40em}
+.manual{max-width:42em}
+.manual h2{font-size:26px;margin-top:36px}
+.manual h3{margin-top:22px;font-size:18px}
+.manual ul,.manual ol{padding-left:22px}
+.manual li{margin:4px 0}
+.manual code{font-size:14px;background:var(--card);border:1px solid var(--rule);border-radius:5px;padding:0 4px;overflow-wrap:anywhere}
+.manual .callout{border:2px solid var(--head);border-radius:14px;padding:4px 18px;margin:18px 0;background:var(--card)}
+.manual hr{border:0;border-top:1px solid var(--rule);margin:28px 0}
+footer{border-top:1px solid var(--rule);margin-top:48px;padding:26px 0 48px;font-size:15px;color:var(--muted)}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:14px}
+footer nav a{color:var(--ink);font-weight:500;text-underline-offset:3px}
+footer p{margin:6px 0;max-width:40em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumbs"><a href="/"><img src="/logo.svg" alt="">Anonaconda Code Lab</a></div>
+  <header class="hero">
+    <img class="icon" src="/icons/rounds.svg" alt="">
+    <h1>Rounds user manual</h1>
+    <div class="links"><a class="open" href="https://rounds.anonacondacodelab.com">Open Rounds</a><a href="/rounds/">About Rounds</a></div>
+  </header>
+  <main><article class="manual">
+<p>Rounds is a loud, clear interval timer. Pick one of 16 presets or build your own timer, press play, and follow the beeps. It is free, needs no account, and your timers stay on your device.</p>
+<h2>Getting started</h2>
+<ol><li>Open <b>rounds.anonacondacodelab.com</b> in your phone's browser.</li><li>Turn the phone's <b>media volume</b> up. The beeps are high-pitched so they carry over music and traffic.</li><li>Tap the <b>▶</b> button on any preset to start it. You get three seconds to get ready, then the first round begins.</li></ol>
+<p>To use Rounds like an app, add it to your home screen (in Chrome: menu → <i>Add to home screen</i> or <i>Install app</i>). It then has its own icon, opens full screen and works offline.</p>
+<h2>How the beeps work</h2>
+<ul><li><b>Into work:</b> three short beeps, one per second, then a long <b>high</b> beep: go.</li><li><b>Out of work:</b> three short beeps, then a long <b>low</b> beep: stop.</li><li><b>Finished:</b> a rising three-note beep.</li><li><b>Halfway beep</b> (optional): one short beep halfway through work rounds of 2 minutes or more. Switch it on in Settings.</li></ul>
+<p>The beeps are scheduled in advance on the phone's audio clock, so they stay on time even if the screen is busy. Use <b>Test the beeps</b> in Settings to hear them all.</p>
+<h2>The home screen</h2>
+<ul><li><b>Presets</b> are listed under the <b>goal chips</b>: <i>Short on time</i>, <i>Heart &amp; endurance</i>, <i>Fitness &amp; VO₂max</i>, <i>Speed &amp; power</i> and <i>Circuits &amp; strength</i>. Tap a chip to see only the presets for that goal, or <i>All</i>.</li><li><b>↓ Hardest first</b> sorts the presets from hardest to easiest, judged by how hard the efforts are, how short the rests and how much there is in total. Each preset then shows its rank (#1 is the hardest).</li><li><b>About</b> on a preset explains what it is, how to do it, why it works and where it comes from.</li><li><b>☆</b> adds a timer to <b>★ Favourites</b> at the top of the screen. Tap ★ again to remove it.</li><li><b>Customise</b> opens a preset in the editor as your own copy; the original stays as it was.</li><li><b>Your timers</b> lists the timers you've made, with <b>Edit</b> on each.</li></ul>
+<h2>The presets</h2>
+<ul><li><b>Tabata</b>: 20 s all-out, 10 s rest, 8 rounds</li><li><b>One-Minute Workout</b>: Gibala: 3 × 20 s all-out in 10 minutes</li><li><b>Gibala 10 × 1</b>: 10 × 1 min hard, 1 min easy</li><li><b>Gibala sprint intervals</b>: 4 × 30 s all-out, 4 min easy</li><li><b>Little method</b>: 60 s hard, 75 s easy, 12 rounds</li><li><b>10-20-30</b>: 30 s slow, 20 s steady, 10 s sprint; 3 blocks</li><li><b>4 × 4 Norwegian</b>: 4 min hard, 3 min easy, with warm-up and cool-down</li><li><b>Tempo intervals</b>: 3 × 5 min at threshold, 5 min easy</li><li><b>Pyramid 1-2-3-2-1</b>: Work 1, 2, 3, 2, 1 min with equal rest</li><li><b>Fartlek</b>: 20 min of random surges</li><li><b>30 / 30</b>: 30 s on, 30 s off, 10 rounds</li><li><b>EMOM 10</b>: Every minute on the minute, 10 minutes</li><li><b>AMRAP 15</b>: As many rounds as possible in 15 minutes</li><li><b>HIIT 40 / 20</b>: 5 exercises × 3 sets, 1 min between sets</li><li><b>Boxing rounds</b>: 3 min rounds, 1 min rest, 12 rounds</li><li><b>Core 45 / 15</b>: 45 s hold, 15 s switch, 8 rounds</li></ul>
+<p>All-out sprints are very demanding. If you are new to hard exercise or have a heart condition, check with a doctor first, and build up gradually.</p>
+<h2>Making your own timer</h2>
+<p>Tap <b>+ New timer</b>, or <b>Customise</b> on a preset. The total time updates as you go.</p>
+<ul><li><b>Name</b>: shown at the top while the timer runs.</li><li><b>Work</b> and <b>Rest</b>: the length of each work and rest period. Tap the value to type a time, or use − and +.</li><li><b>Rounds</b>: how many times work and rest repeat. There is no rest after the last round.</li><li><b>Sets</b> and <b>Break between sets</b>: repeat the whole block of rounds, with a longer break in between. The break replaces the last rest of each set.</li><li><b>Warm-up</b> and <b>Cool-down</b>: an easy period before the first round and after the last.</li><li><b>Exercise names</b> (optional): one per line. Each work round shows the next name in order, and spoken cues read it out, which is handy for circuits.</li><li><b>Custom steps</b>: for patterns that aren't a simple work and rest, such as 10-20-30 or a pyramid, tap <i>Use custom steps</i>. Each round is then a list of steps, each with its own length and label. Work steps get the 3-2-1 beeps; rest steps are easy or recovery.</li></ul>
+<p>Tap <b>Save</b> to keep the timer under <i>Your timers</i>, or <b>Start</b> to run it straight away. <b>Delete</b> removes a timer you made.</p>
+<h2>While a timer runs</h2>
+<ul><li>The whole screen changes colour with the phase, so you can see from across the room whether it's work or rest.</li><li>The <b>ring</b> empties as the current period runs down, with the time left in the middle. Above it is the phase and the round (for example <i>Round 3 / 8 · Set 1 / 2</i>); below it, what comes next.</li><li><b>Pause</b> stops the timer and the beeps; tap again to carry on.</li><li><b>Back</b> (⏮) goes back to the start of the current period (or the previous one, if you're in the first two seconds); <b>Skip</b> (⏭) skips to the next period.</li><li><b>End</b> asks you to tap again within three seconds, so a stray tap can't stop your workout.</li><li>The screen stays on while a timer runs.</li></ul>
+<p>When the timer finishes, you see how many work rounds you did and the total time. <b>Again</b> runs the same timer once more; <b>Home</b> goes back to the list.</p>
+<h2>Spoken cues and vibration</h2>
+<p>In <b>Settings</b>:</p>
+<ul><li><b>Spoken cues</b> says &quot;Get ready&quot;, &quot;Work&quot;, &quot;Rest&quot;, &quot;Round 3 of 8&quot; and exercise names as each period starts. It uses the phone's own voice, so it works offline once a voice is installed.</li><li><b>Vibrate at each change</b>: a long buzz when work starts and two short buzzes at every other change, on phones that support it.</li><li><b>Halfway beep</b>: see <i>How the beeps work</i>.</li></ul>
+<h2>Heart rate (optional)</h2>
+<p>Tap <b>♥</b> at the top of the home screen, or beside the dial during a timer, and choose your strap or watch in the list. Any device that shares standard Bluetooth heart rate works: Polar, Garmin HRM-Dual or HRM-Pro, Wahoo TICKR, Coospo and most others, including many watches in &quot;broadcast heart rate&quot; mode.</p>
+<p>Your heart rate is shown during the timer, and the finish screen shows your average and peak heart rate in the work rounds. Readings are only shown, never saved or sent. Tap ♥ twice to disconnect.</p>
+<p>In a browser this needs Chrome or Chromium on Android or a computer, or the free Bluefy browser on iPhone and iPad. If the browser can't use Bluetooth, the ♥ button simply doesn't appear.</p>
+<h2>Backing up your timers</h2>
+<p>In <b>Settings → Your timers</b>:</p>
+<ul><li><b>Save timers to file</b> saves your own timers, favourites and settings in one file. Keep it as a backup, or use it to move your timers to another phone or browser.</li><li><b>Import timers</b> adds the timers from such a file. Timers you already have are kept; a timer that is already there is replaced by the copy in the file, and favourites are combined.</li></ul>
+<p>Your timers are stored in the browser on this device. Clearing the browser's site data deletes them, so save a backup now and then if you have many.</p>
+<h2>Questions</h2>
+<p><b>Why can't I hear the beeps?</b> Check the phone's media volume (not the ringer volume), that the phone isn't on silent for media, and that no other app is holding the audio. Use <i>Test the beeps</i> in Settings.</p>
+<p><b>The timer stopped when I locked the phone.</b> Browsers pause pages in the background. Keep the screen on (Rounds does this for you while a timer runs). The Rounds Android app, coming soon, keeps the beeps and voice cues going with the screen off.</p>
+<p><b>Does Rounds work offline?</b> Yes, once you've opened it once. Adding it to your home screen makes this more reliable.</p>
+<p><b>Is it free?</b> Yes. No subscription, no account and no ads. If you find it useful, you can support it on Ko-fi: <a href="https://ko-fi.com/anonacondacodelab" target="_blank" rel="noopener noreferrer">ko-fi.com/anonacondacodelab</a>.</p>
+  </article></main>
+  <footer>
+    <nav aria-label="Studio links">
+      <a href="/">All apps</a>
+      <a href="https://ko-fi.com/anonacondacodelab">Support on Ko-fi</a>
+      <a href="https://github.com/Anonaconda-CodeLab">GitHub</a>
+      <a href="https://mastodon.social/@anonacondacodelab" rel="me">Mastodon</a>
+    </nav>
+    <p>No cookies, no analytics, no tracking, on this page or in the apps.</p>
+    <p>© 2026 Anonaconda Code Lab. Apps are free software under the GNU GPL v3. Polar and H10 are trademarks of Polar Electro Oy; these apps are independent and not affiliated with Polar.</p>
+  </footer>
+</div>
+</body>
+</html>
