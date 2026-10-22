@@ -16,8 +16,8 @@ const out = (p, s) => { mkdirSync(dirname(join(root, p)), { recursive: true }); 
 
 const CSS = `@font-face{font-family:"Instrument Sans";font-style:normal;font-display:swap;font-weight:400 700;font-stretch:75% 100%;
   src:url(/fonts/InstrumentSans-latin-variable.woff2) format("woff2-variations")}
-:root{--paper:#ECEFE7;--ink:#22362B;--line:#6E7F3A;--muted:#5E6B61;--rule:#CBD2C4;--head:#8FA048;--card:#F6F8F3;color-scheme:light dark}
-@media (prefers-color-scheme:dark){:root{--paper:#141A16;--ink:#E3E8DE;--line:#A9B865;--muted:#94A096;--rule:#2C362F;--head:#B9C97A;--card:#1A221D}}
+:root{--paper:#ECEFE7; --new:#B31F39; --new-ink:#FFFFFF;--ink:#22362B;--line:#6E7F3A;--muted:#5E6B61;--rule:#CBD2C4;--head:#8FA048;--card:#F6F8F3;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#141A16; --new:#F07A8D; --new-ink:#141A16;--ink:#E3E8DE;--line:#A9B865;--muted:#94A096;--rule:#2C362F;--head:#B9C97A;--card:#1A221D}}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 "Instrument Sans",system-ui,sans-serif}
@@ -38,6 +38,9 @@ h1{font-size:clamp(44px,10vw,80px);line-height:.95;font-stretch:75%;font-weight:
 .links a:not(.open){font-weight:500;text-underline-offset:3px}
 .soon{font-size:15px;margin-top:12px}
 .soon span{display:inline-block;font-size:11.5px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;background:var(--line);color:var(--paper);padding:2px 9px;border-radius:999px;margin-right:9px;vertical-align:1px}
+.soon.new{margin-top:14px;padding:11px 14px;border-left:4px solid var(--new);border-radius:10px;background:color-mix(in srgb,var(--new) 9%,transparent);font-weight:550}
+.soon.new span{background:var(--new);color:var(--new-ink);font-size:13px;padding:3px 11px}
+.soon.new a{color:var(--new);font-weight:700}
 .shots{display:flex;gap:14px;overflow-x:auto;padding:28px 2px 18px;margin:20px 0 0;scroll-snap-type:x mandatory}
 .shots figure{margin:0;flex:none;width:210px;scroll-snap-align:start}
 .shots img{width:100%;height:auto;display:block;border-radius:18px;border:1px solid var(--rule);background:var(--card)}
@@ -129,8 +132,9 @@ function appPage(a) {
     <h1>${esc(a.name)}</h1>
     <p class="lede">${a.lede}</p>
     <p class="needs">${a.needs}</p>
+    ${a.isNew ? `<p class="soon new"><span>New</span>${a.isNew}</p>` : ''}
     ${a.soon ? `<p class="soon"><span>Coming soon</span>${a.soon}</p>` : ''}
-    <div class="links"><a class="open" href="${a.appUrl}">Open ${esc(a.name)}</a><a href="${a.path}manual/">User manual</a></div>
+    <div class="links"><a class="open" href="${a.appUrl}">Open ${esc(a.name)}</a>${(a.links || [[a.path + 'manual/', 'User manual']]).map(([h, t]) => `<a href="${h}">${esc(t)}</a>`).join('')}</div>
   </header>
   <main>
     <div class="shots${a.wide ? ' wide' : ''}" role="list" aria-label="Screenshots">
@@ -207,8 +211,9 @@ const LO = {
   desc: 'Record a single-lead ECG with a Polar H10 chest strap and get a clear, graded A4 report with rhythm, HRV, breathing and recovery. Free, no account, runs in your browser.',
   manualDesc: 'recording an ECG, training tests, reading your report and keeping your data safe.',
   lede: 'Turn a Polar H10 chest strap into a single-lead ECG recorder. Record for a few minutes or all night, then get a clear, multi-page report you can save as a PDF.',
-  needs: 'Free. Runs in Google Chrome or Chromium on Android, or Chrome and Edge on a computer. No account, nothing uploaded. For wellness and education only; not a medical device.',
-  soon: 'An Android app that keeps recording with the screen off.',
+  needs: 'Free. Runs in Google Chrome or Chromium on Android, Chrome and Edge on a computer, or Bluefy on iPhone and iPad. No account, nothing uploaded. For wellness and education only; not a medical device.',
+  isNew: 'The <a href="https://leadone.anonacondacodelab.com/android.html">Android app</a>: keeps recording with the screen off, and has no internet access at all.',
+  links: [['https://leadone.anonacondacodelab.com/android.html', 'Android app'], ['/lead-one/manual/', 'User manual'], ['https://github.com/Anonaconda-CodeLab/lead-one-ecg', 'Source code']],
   shots: [
     ['/screens/lead-one/app-home.webp', 'Set the context and position, then start recording', 780, 1688],
     ['/screens/lead-one/app-recording.webp', 'Live ECG, heart rate, signal quality and breathing while recording', 780, 1688],
@@ -226,13 +231,15 @@ const LO = {
     ['Private by design', 'No account, no server, no analytics. Recordings live in your browser; export them for backups or to move to another device.'],
     ['Sample reports', 'Open synthetic sample reports to see exactly what you’ll get before you record.']
   ],
-  need: ['A <b>Polar H10</b> chest strap.', '<b>Google Chrome or Chromium on Android</b>, or Chrome or Edge on Windows, macOS, ChromeOS or Linux.', 'iPhone and iPad aren’t supported: Apple doesn’t allow websites to use Bluetooth.'],
+  need: ['A <b>Polar H10</b> chest strap.', '<b>Google Chrome or Chromium on Android</b>, or Chrome or Edge on Windows, macOS, ChromeOS or Linux.', 'On <b>iPhone and iPad</b>, the free <b>Bluefy</b> browser from the App Store (Safari can’t use Bluetooth).', 'Or the <a href="https://leadone.anonacondacodelab.com/android.html"><b>Android app</b></a>, which needs no browser at all.'],
   faq: [
     ['Is Lead One ECG free?', 'Yes. No subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.'],
     ['How long can I record?', 'From one minute up to 8 hours, so overnight recordings work. Keep the phone on charge with the page open.'],
     ['Can I save the report as a PDF?', 'Yes. Tap <i>Save as PDF</i> and choose “Save as PDF” as the printer.'],
     ['Where are my recordings stored?', 'Only in your browser on your own device. Nothing is uploaded. Export your history to keep a backup.'],
-    ['Does it work on iPhone?', 'Not at the moment. Safari and every other iPhone browser block Bluetooth for websites.'],
+    ['Does it work on iPhone?', 'Yes, in the free Bluefy browser from the App Store. Safari and the other iPhone browsers block Bluetooth for websites, so they can’t connect to the strap.'],
+    ['Why isn’t the Android app on Google Play?', 'Publishing there means registering with Google and handing over government ID, and Google is extending that check to apps installed from elsewhere. We think you should be able to install software you choose on a phone you own, so we support <a href="https://keepandroidopen.org">Keep Android Open</a> and offer the app directly. The <a href="https://leadone.anonacondacodelab.com/android.html">Android page</a> explains how to install it and check it’s the official build.'],
+    ['Is the code open?', 'Yes. Lead One ECG is free software under the GNU GPL v3. The <a href="https://github.com/Anonaconda-CodeLab/lead-one-ecg">source code is on GitHub</a>, and every Android release is built from it automatically, with a checksum to verify the download.'],
     ['Is it a medical device?', 'No. Lead One ECG is for general wellness, training and education. A chest strap records one ECG lead and cannot diagnose or rule out heart conditions. If you feel unwell, call your local emergency number.']
   ],
   disclaimer: 'Lead One ECG is for general wellness and education only and is not a medical device. It cannot diagnose or rule out any condition. If you have chest pain, fainting, severe breathlessness or a racing or very irregular heartbeat, seek medical care immediately.'

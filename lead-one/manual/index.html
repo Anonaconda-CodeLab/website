@@ -23,8 +23,8 @@
 <style>
 @font-face{font-family:"Instrument Sans";font-style:normal;font-display:swap;font-weight:400 700;font-stretch:75% 100%;
   src:url(/fonts/InstrumentSans-latin-variable.woff2) format("woff2-variations")}
-:root{--paper:#ECEFE7;--ink:#22362B;--line:#6E7F3A;--muted:#5E6B61;--rule:#CBD2C4;--head:#8FA048;--card:#F6F8F3;color-scheme:light dark}
-@media (prefers-color-scheme:dark){:root{--paper:#141A16;--ink:#E3E8DE;--line:#A9B865;--muted:#94A096;--rule:#2C362F;--head:#B9C97A;--card:#1A221D}}
+:root{--paper:#ECEFE7; --new:#B31F39; --new-ink:#FFFFFF;--ink:#22362B;--line:#6E7F3A;--muted:#5E6B61;--rule:#CBD2C4;--head:#8FA048;--card:#F6F8F3;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#141A16; --new:#F07A8D; --new-ink:#141A16;--ink:#E3E8DE;--line:#A9B865;--muted:#94A096;--rule:#2C362F;--head:#B9C97A;--card:#1A221D}}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 "Instrument Sans",system-ui,sans-serif}
@@ -45,6 +45,9 @@ h1{font-size:clamp(44px,10vw,80px);line-height:.95;font-stretch:75%;font-weight:
 .links a:not(.open){font-weight:500;text-underline-offset:3px}
 .soon{font-size:15px;margin-top:12px}
 .soon span{display:inline-block;font-size:11.5px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;background:var(--line);color:var(--paper);padding:2px 9px;border-radius:999px;margin-right:9px;vertical-align:1px}
+.soon.new{margin-top:14px;padding:11px 14px;border-left:4px solid var(--new);border-radius:10px;background:color-mix(in srgb,var(--new) 9%,transparent);font-weight:550}
+.soon.new span{background:var(--new);color:var(--new-ink);font-size:13px;padding:3px 11px}
+.soon.new a{color:var(--new);font-weight:700}
 .shots{display:flex;gap:14px;overflow-x:auto;padding:28px 2px 18px;margin:20px 0 0;scroll-snap-type:x mandatory}
 .shots figure{margin:0;flex:none;width:210px;scroll-snap-align:start}
 .shots img{width:100%;height:auto;display:block;border-radius:18px;border:1px solid var(--rule);background:var(--card)}
@@ -96,7 +99,9 @@ footer p{margin:6px 0;max-width:40em}
 <p>The first time you open the app, it asks you to confirm that you have read and understood this.</p>
 <h2>What you need</h2>
 <ul><li>A <b>Polar H10</b> chest strap.</li><li>A browser that supports Bluetooth for web apps (called &quot;Web Bluetooth&quot;):<ul><li><b>On a phone, use Google Chrome or Chromium on Android.</b> This is the browser the app is built and tested for. Other phone browsers such as Firefox, Brave or Samsung Internet either cannot use Bluetooth in web apps or are not tested.</li><li><b>On a computer</b> (Windows, macOS or ChromeOS), use <b>Chrome or Microsoft Edge</b>. Other Chromium-based browsers such as Opera usually work too. Brave and Linux need a setting switched on first (see <i>Troubleshooting</i>), and recording on Linux can be unreliable.</li><li><b>On iPhone and iPad, use the free Bluefy browser</b> (from the App Store). Safari, Chrome and the other iPhone and iPad browsers do not offer Web Bluetooth and cannot connect to the strap. <b>Firefox and Safari</b> do not support it on any device.</li></ul></li><li>The app's web address: <b><a href="https://leadone.anonacondacodelab.com" target="_blank" rel="noopener noreferrer">leadone.anonacondacodelab.com</a></b></li></ul>
-<p>There is nothing to install from an app store. To open the app from an icon like a normal app, tap <b>Add to home screen</b> under <b>More</b> on the home screen and confirm. If Chrome doesn't offer it there, tap Chrome's <b>⋮</b> menu and choose <b>Add to Home screen</b> (or <b>Install app</b>). The icon opens the same web address, so your recordings and history are all there. It opens full screen, without the address bar.</p>
+<p>There is nothing you have to install. To open the app from an icon like a normal app, tap <b>Add to home screen</b> under <b>More</b> on the home screen and confirm. If Chrome doesn't offer it there, tap Chrome's <b>⋮</b> menu and choose <b>Add to Home screen</b> (or <b>Install app</b>). The icon opens the same web address, so your recordings and history are all there. It opens full screen, without the address bar.</p>
+<h3>The Android app</h3>
+<p>There is also an Android app: the same app, with recording that continues while the screen is off, and no internet permission at all. It is not on Google Play; download it from <b><a href="https://leadone.anonacondacodelab.com/android.html" target="_blank" rel="noopener noreferrer">leadone.anonacondacodelab.com/android.html</a></b>, which explains how to install it, how to check it is the official build, and why it isn't on Google Play. In the app, <b>Settings → About → Check for updates</b> opens that page and tells you whether a newer version exists. Updates install over the old version and keep your recordings. The web app and the Android app keep separate data on the same phone; move it with <b>Export history</b> and <b>Save recording</b>.</p>
 <h2>First-time setup</h2>
 <p>The first time you open the app it shows a short <b>Before you start</b> notice about wellness use. Tick the box to confirm you understand it, then tap <b>Continue</b>.</p>
 <p>Next it asks for your <b>date of birth</b> and <b>sex</b>. These choose the right reference ranges and heart-rate zones; your age is worked out for the date of each recording, so you never need to update it. A name for the reports is optional. You can change all of this later with the <b>settings icon</b> (top right).</p>
@@ -132,7 +137,7 @@ footer p{margin:6px 0;max-width:40em}
 <p>Record on waking, before caffeine, after using the toilet if needed, in the same position every day (lying or seated), for the same duration (5 minutes is ideal; use Auto-stop). Breathe normally and stay still. Choose <b>Morning baseline</b> and your position each time.</p>
 <h2>Your data</h2>
 <p>Everything is stored <b>only in Chrome on the device you record with</b>, at this app's web address. There is no account and no cloud copy.</p>
-<ul><li><b>Reading history</b> (the summary of each reading, used for your baseline and trends) is small and kept indefinitely.</li><li><b>Recordings</b> (the raw ECG) are kept on the device until you delete them from the list on the home screen.</li></ul>
+<ul><li><b>Reading history</b> (the summary of each reading, used for your baseline and trends) is small and kept indefinitely.</li><li><b>Recordings</b> (the raw ECG) are kept on the device until you delete them from the list on the home screen. Deleting a recording also removes it from your personal baseline, so a reading taken under the wrong conditions no longer affects later comparisons.</li></ul>
 <p><b>Back up regularly.</b> Clearing Chrome's browsing data (&quot;Cookies and site data&quot;), uninstalling Chrome, resetting or replacing your phone, or using an Incognito tab would lose them. The app shows a reminder when a backup is due.</p>
 <ul><li><b>Settings → Export history</b> saves a backup file of your reading history. Keep it somewhere safe, such as Google Drive.</li><li><b>Settings → Import history</b> restores it, on the same phone or a new one. Readings already present are not duplicated.</li><li><b>Moving to a new phone:</b> send yourself the backup file (e-mail, Google Drive or a chat app), and <b>save it to the new phone first</b> (Download, or Save to Files). Then open the app; on the setup screen tap <b>Import your history file</b>, or later use <b>Settings → Import history</b>. Your profile comes across too.</li><li>To keep a particular recording in full, use <b>Save recording</b> or <b>Save as PDF</b> on its report. Imported history brings back your baseline and trends, but not the raw recordings.</li></ul>
 <h2>Troubleshooting</h2>
@@ -149,8 +154,9 @@ footer p{margin:6px 0;max-width:40em}
 <h3>The report says recovery was not measured</h3>
 <p>The recording ended while you were still exercising. Tap <b>Start recovery</b> when you stop, and keep recording for at least 2 minutes.</p>
 <h2>Privacy</h2>
-<p>Lead One ECG makes no network requests at all while you use it: no analytics, no tracking, no cookies, no account. Your recordings, history and profile never leave your device unless you export them yourself. The app's source code is open, so anyone can check this.</p>
+<p>Lead One ECG makes no network requests at all while you use it: no analytics, no tracking, no cookies, no account. Your recordings, history and profile never leave your device unless you export them yourself. The Android app goes further: it has no internet permission, so it cannot connect to anything except the strap. The app's source code is open, so anyone can check this.</p>
 <h2>Support and feedback</h2>
+<p>Questions, problems or ideas: email <b>hello@anonacondacodelab.com</b>. Describe what happened and, if you can, add a screenshot. Please don't send recordings, reports or history exports unless you are happy to share them: they contain your health data. Technical users can also open an issue at <b><a href="https://github.com/Anonaconda-CodeLab/lead-one-ecg" target="_blank" rel="noopener noreferrer">github.com/Anonaconda-CodeLab/lead-one-ecg</a></b>.</p>
 <p>Lead One ECG is free and open-source software from Anonaconda Code Lab, released under the GNU General Public License v3. If it is useful to you, you can support its development at <b><a href="https://ko-fi.com/anonacondacodelab" target="_blank" rel="noopener noreferrer">ko-fi.com/anonacondacodelab</a></b>.</p>
 <p>Polar and H10 are trademarks of Polar Electro Oy. Lead One ECG is independent and not affiliated with or endorsed by Polar Electro.</p>
 <hr>
