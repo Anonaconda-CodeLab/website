@@ -39,16 +39,18 @@ a:focus-visible{outline:2px solid var(--line);outline-offset:3px;border-radius:4
 .wrap{max-width:720px;margin:0 auto;padding:0 20px}
 
 /* hero: the studio's one line, drawn once */
-header{padding:56px 0 8px}
-.mark{display:flex;align-items:center;gap:12px;font-weight:600;font-size:15px;color:var(--muted);text-decoration:none}
-.mark img{width:36px;height:36px}
-.snake{display:block;width:100%;height:auto;margin:40px 0 0;overflow:visible}
+/* the hero is always dark, like the studio's social banners */
+header{--ink:#E3E8DE;--line:#A9B865;--head:#B9C97A;--muted:#94A096;background:#141A16;color:var(--ink);padding:52px 0 60px}
+@media (prefers-color-scheme:dark){header{border-bottom:1px solid var(--rule)}}
+.mark{display:inline-flex;align-items:center;gap:14px;font-weight:600;font-size:15px;color:var(--muted);text-decoration:none}
+.mark img{width:43px;height:44px}
+.snake{display:block;width:100%;height:auto;margin:34px 0 0;overflow:visible}
 .snake path{fill:none;stroke:var(--line);stroke-width:3;stroke-linecap:round;stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 1.8s cubic-bezier(.6,.05,.25,1) .2s forwards}
 .snake circle{fill:var(--head);opacity:0;animation:appear .3s ease-out 1.9s forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
 @keyframes appear{to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.snake path{animation:none;stroke-dashoffset:0}.snake circle{animation:none;opacity:1}}
-h1{font-size:clamp(46px,11vw,92px);line-height:.92;font-stretch:75%;font-weight:650;letter-spacing:-.01em;margin:18px 0 0}
+h1{font-size:clamp(40px,10.5vw,86px);line-height:.92;font-stretch:75%;font-weight:650;letter-spacing:-.01em;margin:18px 0 0}
 .lede{font-size:clamp(18px,2.6vw,21px);line-height:1.45;max-width:30em;margin:22px 0 0}
 
 /* apps hang off a spine, newest first; the date is information: when it was released */
@@ -87,16 +89,18 @@ footer .thanks a{font-weight:500;text-underline-offset:3px}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <a class="mark" href="/"><img src="favicon-192.png" alt="">Anonaconda Code Lab</a>
+<header>
+  <div class="wrap">
+    <a class="mark" href="/"><img src="mark.png" alt="">Anonaconda Code Lab</a>
     <svg class="snake" viewBox="0 0 680 90" aria-hidden="true" preserveAspectRatio="xMinYMid meet">
       <path d="M3 62c40 0 50-44 96-44s52 52 100 52 54-52 102-52 52 52 100 52 54-48 100-48 60 36 98 38"/>
       <circle cx="604" cy="60" r="8"/>
     </svg>
     <h1>Anonaconda Code&nbsp;Lab</h1>
     <p class="lede">Small apps that each do one job well. Free to use, open source, and built so your data never leaves your device.</p>
-  </header>
+  </div>
+</header>
+<div class="wrap">
 
   <main>
     <!-- To add an app: copy one <li class="app"> block, newest at the top. -->
