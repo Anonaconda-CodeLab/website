@@ -94,7 +94,7 @@ function head({ title, desc, path, image, jsonld }) {
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#22362B">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
-<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script>\n` : ''}<style>
 ${CSS}
@@ -102,7 +102,7 @@ ${CSS}
 </head>
 <body>
 <div class="wrap">
-  <div class="crumbs"><a href="/"><img src="/logo.svg" alt="">Anonaconda Code Lab</a></div>`;
+  <div class="crumbs"><a href="/"><img src="/favicon-192.png" alt="">Anonaconda Code Lab</a></div>`;
 }
 const FOOT = `
   <footer>
