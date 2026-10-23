@@ -4,15 +4,29 @@
 //   node tools/pages.mjs [still-point/docs/MANUAL.md] [lead-one-ecg/docs/MANUAL.md] [rounds/docs/MANUAL.md]
 // Each manual path defaults to the app's repository cloned next to this one (../still-point, ../lead-one-ecg, ../rounds).
 // A manual that can't be found is skipped and its existing page is left as it is.
+// A default (sibling) manual is only used if that folder is a git clone that is up to date with GitHub, so an old
+// copy can't quietly overwrite a newer live manual. Pass a path explicitly to use a file as it is.
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { execFileSync } from 'node:child_process';
 import { md } from './md.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://anonacondacodelab.com';
 const arg = process.argv.slice(2), sib = r => join(root, '..', r, 'docs', 'MANUAL.md');
-const spManual = arg[0] || sib('still-point'), loManual = arg[1] || sib('lead-one-ecg'), rdManual = arg[2] || sib('rounds');
+const git = (dir, ...a) => execFileSync('git', ['-C', dir, ...a], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+// returns why a sibling manual can't be trusted, or '' if it's current
+function stale(f) {
+  const repo = join(dirname(f), '..');
+  if (!existsSync(f)) return '';
+  try { git(repo, 'rev-parse', '--git-dir'); } catch { return 'not a git clone'; }
+  try { git(repo, 'fetch', '-q', 'origin'); } catch { return 'could not check GitHub for a newer version'; }
+  let behind; try { behind = +git(repo, 'rev-list', '--count', 'HEAD..@{upstream}'); } catch { return 'branch has no upstream'; }
+  return behind ? `${behind} commit(s) behind GitHub; pull first` : '';
+}
+const pick = (i, name) => { if (arg[i]) return arg[i]; const f = sib(name), why = stale(f); if (why) { console.warn(`skipped ${name} manual: ../${name} is ${why}`); return ''; } return f; };
+const spManual = pick(0, 'still-point'), loManual = pick(1, 'lead-one-ecg'), rdManual = pick(2, 'rounds');
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const out = (p, s) => { mkdirSync(dirname(join(root, p)), { recursive: true }); writeFileSync(join(root, p), s); };
 
@@ -293,8 +307,8 @@ out('rounds/index.html', appPage(RD));
 out('still-point/index.html', appPage(SP));
 out('lead-one/index.html', appPage(LO));
 for (const [a, f, dir] of [[RD, rdManual, 'rounds'], [SP, spManual, 'still-point'], [LO, loManual, 'lead-one']]) {
-  if (existsSync(f)) out(dir + '/manual/index.html', manualPage(a, readFileSync(f, 'utf8')));
-  else console.warn(`skipped ${dir}/manual: ${f} not found`);
+  if (f && existsSync(f)) out(dir + '/manual/index.html', manualPage(a, readFileSync(f, 'utf8')));
+  else if (f) console.warn(`skipped ${dir}/manual: ${f} not found`);
 }
 const urls = ['/', '/rounds/', '/rounds/manual/', '/still-point/', '/still-point/manual/', '/lead-one/', '/lead-one/manual/'];
 const today = new Date().toISOString().slice(0, 10);
