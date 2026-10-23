@@ -127,7 +127,7 @@ const FOOT = `
       <a href="https://mastodon.social/@anonacondacodelab" rel="me">Mastodon</a>
     </nav>
     <p>No cookies, no analytics, no tracking, on this page or in the apps.</p>
-    <p>© 2026 Anonaconda Code Lab. Apps are free software under the GNU GPL v3. Polar and H10 are trademarks of Polar Electro Oy; these apps are independent and not affiliated with Polar.</p>
+    <p>© 2026 Anonaconda Code Lab. Apps are free software under the GNU GPL v3. Polar and H10 are trademarks of Polar Electro Oy; Garmin, HRM-Dual and HRM-Pro of Garmin Ltd.; Wahoo and TICKR of Wahoo Fitness; Coospo, Magene and Decathlon of their respective owners. These apps are independent and not affiliated with any of them.</p>
   </footer>
 </div>
 </body>
@@ -183,10 +183,11 @@ ${body}
 const SP = {
   name: 'Still Point', path: '/still-point/', appUrl: 'https://stillpoint.anonacondacodelab.com', icon: '/icons/still-point.svg', image: '/social/og-still-point.jpg',
   os: 'Android app; Android (Chrome or Chromium), Windows, macOS, ChromeOS, Linux',
-  title: 'Still Point: free HRV and breathing app for the Polar H10',
-  desc: 'A free, private morning HRV reading, standing test and calm breathing guide for the Polar H10. Compares you with your own baseline. No account; your data stays on your phone.',
+  browserReq: 'Requires Web Bluetooth (Google Chrome or Chromium) and a Polar H10 or standard Bluetooth chest strap',
+  title: 'Still Point: free HRV and breathing app for the Polar H10 and other chest straps',
+  desc: 'A free, private morning HRV reading, standing test and calm breathing guide for the Polar H10 or any standard Bluetooth chest strap. Compares you with your own baseline. No account; your data stays on your phone.',
   manualDesc: 'morning HRV readings, the standing test, breathing, trends and importing from Elite HRV.',
-  lede: 'A calm morning check-in with your Polar H10. Take a two-minute heart rate variability reading, see how it compares with your own usual range, and breathe slowly with a soothing guide.',
+  lede: 'A calm morning check-in with your Polar H10 or any standard Bluetooth chest strap. Take a two-minute heart rate variability reading, see how it compares with your own usual range, and breathe slowly with a soothing guide.',
   needs: 'Free. Runs in Google Chrome or Chromium on Android, or Chrome and Edge on a computer. No account, nothing uploaded. For general wellness only; not a medical device.',
   isNew: 'The <a href="https://stillpoint.anonacondacodelab.com/android.html">Android app</a>: readings, breathing sessions and chimes keep going with the screen off, and it has no internet access at all.',
   links: [['https://stillpoint.anonacondacodelab.com/android.html', 'Android app'], ['/still-point/manual/', 'User manual'], ['https://github.com/Anonaconda-CodeLab/still-point', 'Source code']],
@@ -210,10 +211,12 @@ const SP = {
     ['Training guidance', 'A daily suggestion based on published HRV-guided training research: go as planned, keep it easy, or rest.'],
     ['Import from Elite HRV', 'Bring your Elite HRV history across from its export. Every reading is recalculated with Still Point’s own method, so your baseline is ready on day one.'],
     ['Private by design', 'No account, no server, no analytics. Everything stays in your browser on your phone; export a backup or a spreadsheet whenever you like.'],
-    ['Try it without a strap', 'A simulated strap lets you explore every screen before you buy an H10.']
+    ['Works with most chest straps', 'A Polar H10 or any strap that sends the standard Bluetooth heart-rate signal with beat-to-beat intervals. Each reading notes the strap, and Trends tells you if your baseline mixes straps.'],
+    ['Try it without a strap', 'A simulated strap lets you explore every screen before you buy a strap.']
   ],
-  need: ['A <b>Polar H10</b> chest strap (a Polar H9 also works).', '<b>Google Chrome or Chromium on Android</b>, or Chrome or Edge on Windows, macOS, ChromeOS or Linux.', 'Or the <a href="https://stillpoint.anonacondacodelab.com/android.html"><b>Android app</b></a>, which needs no browser at all.', 'iPhone and iPad aren’t supported: Apple doesn’t allow websites to use Bluetooth.'],
+  need: ['A <b>Polar H10</b> or <b>any standard Bluetooth chest strap</b> that sends beat-to-beat intervals, such as a Garmin HRM-Dual or HRM-Pro, Wahoo TICKR, Coospo, Magene or Decathlon strap (a Polar H9 also works).', '<b>Google Chrome or Chromium on Android</b>, or Chrome or Edge on Windows, macOS, ChromeOS or Linux.', 'Or the <a href="https://stillpoint.anonacondacodelab.com/android.html"><b>Android app</b></a>, which needs no browser at all.', 'iPhone and iPad aren’t supported: Apple doesn’t allow websites to use Bluetooth.'],
   faq: [
+    ['Which heart-rate straps work?', 'The Polar H10, and any chest strap that sends the standard Bluetooth heart-rate signal with beat-to-beat intervals: for example Garmin HRM-Dual and HRM-Pro, Wahoo TICKR, and straps from Coospo, Magene and Decathlon. Many watches that broadcast heart rate send heart rate only, without the beat-to-beat data HRV needs; Still Point tells you if a device can’t be used for readings.'],
     ['Is Still Point really free?', 'Yes. There is no subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.'],
     ['Where is my data stored?', 'Only in your browser on your own device. Nothing is uploaded anywhere. Use <i>Save all to file</i> to keep a backup or move to another phone.'],
     ['How is the HRV score calculated?', 'It is lnRMSSD, the standard measure for short readings, on a 0–100 scale (lnRMSSD × 100 / 6.5). On clean readings it matches the HRV number in Elite HRV.'],
