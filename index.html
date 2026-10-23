@@ -26,10 +26,7 @@
   src:url(fonts/InstrumentSans-latin-variable.woff2) format("woff2-variations")}
 :root{
   --paper:#ECEFE7; --new:#B31F39; --new-ink:#FFFFFF; --ink:#22362B; --line:#6E7F3A; --muted:#5E6B61; --rule:#CBD2C4; --head:#8FA048;
-  color-scheme:light dark;
-}
-@media (prefers-color-scheme:dark){
-  :root{--paper:#141A16; --new:#F07A8D; --new-ink:#141A16; --ink:#E3E8DE; --line:#A9B865; --muted:#94A096; --rule:#2C362F; --head:#B9C97A}
+  color-scheme:light;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -39,9 +36,8 @@ a:focus-visible{outline:2px solid var(--line);outline-offset:3px;border-radius:4
 .wrap{max-width:720px;margin:0 auto;padding:0 20px}
 
 /* hero: the studio's one line, drawn once */
-/* the hero is always dark, like the studio's social banners */
+/* the hero is always dark, like the studio's social banners; the rest of the site is always light (same in every browser and theme) */
 header{--ink:#E3E8DE;--line:#A9B865;--head:#B9C97A;--muted:#94A096;background:#141A16;color:var(--ink);padding:52px 0 60px}
-@media (prefers-color-scheme:dark){header{border-bottom:1px solid var(--rule)}}
 .mark{display:inline-flex;align-items:center;gap:14px;font-weight:600;font-size:15px;color:var(--muted);text-decoration:none}
 .mark img{width:43px;height:44px}
 .snake{display:block;width:100%;height:auto;margin:34px 0 0;overflow:visible}
