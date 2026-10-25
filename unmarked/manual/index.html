@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Unmarked user manual</title>
+<meta name="description" content="How to use Unmarked: what it finds and removes in photos and PDFs, the options, and what it can’t remove.">
+<link rel="canonical" href="https://anonacondacodelab.com/unmarked/manual/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Anonaconda Code Lab">
+<meta property="og:title" content="Unmarked user manual">
+<meta property="og:description" content="How to use Unmarked: what it finds and removes in photos and PDFs, the options, and what it can’t remove.">
+<meta property="og:url" content="https://anonacondacodelab.com/unmarked/manual/">
+<meta property="og:image" content="https://anonacondacodelab.com/social/og-unmarked.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#22362B">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+@font-face{font-family:"Instrument Sans";font-style:normal;font-display:swap;font-weight:400 700;font-stretch:75% 100%;
+  src:url(/fonts/InstrumentSans-latin-variable.woff2) format("woff2-variations")}
+:root{--paper:#ECEFE7; --new:#B31F39; --new-ink:#FFFFFF;--ink:#22362B;--line:#6E7F3A;--muted:#5E6B61;--rule:#CBD2C4;--head:#8FA048;--card:#F6F8F3;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#141A16; --new:#F07A8D; --new-ink:#141A16;--ink:#E3E8DE;--line:#A9B865;--muted:#94A096;--rule:#2C362F;--head:#B9C97A;--card:#1A221D}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 "Instrument Sans",system-ui,sans-serif}
+a{color:inherit}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--line);outline-offset:3px;border-radius:4px}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.crumbs{display:flex;align-items:center;gap:10px;padding-top:28px;font-size:15px;color:var(--muted)}
+.crumbs a{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
+.crumbs img{width:30px;height:30px}
+header.hero{padding:40px 0 8px}
+.hero .icon{width:64px;height:64px;display:block}
+h1{font-size:clamp(44px,10vw,80px);line-height:.95;font-stretch:75%;font-weight:650;letter-spacing:-.01em;margin:18px 0 0;text-wrap:balance}
+.lede{font-size:clamp(19px,2.6vw,22px);line-height:1.45;max-width:32em;margin:18px 0 0}
+.needs{font-size:15px;color:var(--muted);max-width:40em;margin:10px 0 0}
+.links{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-top:20px}
+.open{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600;padding:11px 20px;border-radius:999px}
+.open:hover{background:var(--line);color:#fff}
+.links a:not(.open){font-weight:500;text-underline-offset:3px}
+.soon{font-size:15px;margin-top:12px}
+.soon span{display:inline-block;font-size:11.5px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;background:var(--line);color:var(--paper);padding:2px 9px;border-radius:999px;margin-right:9px;vertical-align:1px}
+.soon.new{margin-top:14px;padding:11px 14px;border-left:4px solid var(--new);border-radius:10px;background:color-mix(in srgb,var(--new) 9%,transparent);font-weight:550}
+.soon.new span{background:var(--new);color:var(--new-ink);font-size:13px;padding:3px 11px}
+.soon.new a{color:var(--new);font-weight:700}
+.shots{display:flex;gap:14px;overflow-x:auto;padding:28px 2px 18px;margin:20px 0 0;scroll-snap-type:x mandatory}
+.shots figure{margin:0;flex:none;width:210px;scroll-snap-align:start}
+.shots img{width:100%;height:auto;display:block;border-radius:18px;border:1px solid var(--rule);background:var(--card)}
+.shots.wide figure{width:280px}
+.shots figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.35}
+h2{font-size:30px;font-stretch:85%;font-weight:600;line-height:1.1;margin:44px 0 6px;text-wrap:balance}
+h3{font-size:18.5px;font-weight:600;margin:0}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px 28px;margin-top:18px}
+.features p{margin:4px 0 0;font-size:16px}
+.needlist{margin:10px 0 0;padding-left:20px}
+.needlist li{margin:4px 0}
+details{border-top:1px solid var(--rule);padding:14px 0}
+details:last-of-type{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer;font-weight:600;font-size:17.5px}
+details p{margin:8px 0 0;max-width:40em}
+.note{font-size:15px;color:var(--muted);margin-top:26px;max-width:40em}
+.manual{max-width:42em}
+.manual h2{font-size:26px;margin-top:36px}
+.manual h3{margin-top:22px;font-size:18px}
+.manual ul,.manual ol{padding-left:22px}
+.manual li{margin:4px 0}
+.manual code{font-size:14px;background:var(--card);border:1px solid var(--rule);border-radius:5px;padding:0 4px;overflow-wrap:anywhere}
+.manual .callout{border:2px solid var(--head);border-radius:14px;padding:4px 18px;margin:18px 0;background:var(--card)}
+.manual hr{border:0;border-top:1px solid var(--rule);margin:28px 0}
+footer{border-top:1px solid var(--rule);margin-top:48px;padding:26px 0 48px;font-size:15px;color:var(--muted)}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:14px}
+footer nav a{color:var(--ink);font-weight:500;text-underline-offset:3px}
+footer p{margin:6px 0;max-width:40em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumbs"><a href="/"><img src="/favicon-192.png" alt="">Anonaconda Code Lab</a></div>
+  <header class="hero">
+    <img class="icon" src="/icons/unmarked.svg" alt="">
+    <h1>Unmarked user manual</h1>
+    <div class="links"><a class="open" href="https://unmarked.anonacondacodelab.com">Open Unmarked</a><a href="/unmarked/">About Unmarked</a></div>
+  </header>
+  <main><article class="manual">
+<h2>What Unmarked does</h2>
+<p>Photos and documents carry information you can't see on screen. A photo from a phone usually records <b>where it was taken</b> (often to within a few metres), <b>when</b>, <b>which phone</b> took it, and sometimes the <b>owner's name</b> and the camera's <b>serial number</b>. A PDF can carry the <b>author's name</b>, the app and computer that made it, <b>comments and who wrote them</b>, <b>attached files</b>, and even <b>earlier versions of the document</b> with text you thought you deleted.</p>
+<p>Unmarked shows you what's inside each file and makes a clean copy without it. It runs entirely on your device: your files are never uploaded anywhere.</p>
+<div class="callout"><p>Unmarked makes a <b>clean copy</b>. Your original file is not changed, and neither is your gallery or cloud backup. Share the clean copy, not the original.</p></div>
+<h2>Why use it</h2>
+<ul><li><b>Selling something online.</b> A photo of the item, taken at home, can show exactly where you live.</li><li><b>Photos of your children.</b> Pictures taken at home, school or the park can reveal where they spend their days.</li><li><b>Sending files, not posting them.</b> Big social networks usually remove hidden data, but email, cloud links, &quot;send as file&quot; in chat apps, and many forums and marketplaces pass it on untouched.</li><li><b>Documents for a landlord, employer or school.</b> A PDF can carry your name, the computer it was made on, comments, and earlier versions with text you deleted.</li><li><b>Job applications.</b> A CV made from an old template can still carry a previous author's name or your current employer's.</li><li><b>Meeting people online.</b> Photos for a dating profile or a new contact can give away your home or workplace.</li><li><b>Reporting something anonymously.</b> A photo or document can say which phone or computer made it, and who owns it.</li></ul>
+<h2>How to use it</h2>
+<ol><li>Tap <b>Choose photos or PDFs</b> (or drop files onto the page on a computer). You can pick many at once.</li><li>Each file is checked. Tap <b>What's inside</b> to see exactly what was found, from the most revealing to the most technical, and whether each item will be removed or kept.</li><li>Choose any <b>options</b> (below), then tap <b>Remove hidden data</b>.</li><li>Each clean copy is <b>checked again</b> to confirm nothing was left behind.</li><li><b>Save</b> or <b>Share</b> the clean copies. Several files can be saved together as one <code>.zip</code> file. In the Android app the save screen opens in the <b>same folder as the original</b>, and suggests a name like <code>photo-unmarked.jpg</code> so you can't replace your original by accident. Browsers save to their usual download folder.</li></ol>
+<p>On Android you can also start from another app: in your gallery or file manager, pick photos or PDFs, tap <b>Share</b> and choose <b>Unmarked</b>.</p>
+<h2>Options</h2>
+<ul><li><b>Keep the date taken</b>: leaves the date and time a photo was taken. The time zone, which hints at where you were, is still removed.</li><li><b>Keep copyright notices</b>: for photographers and artists who want their copyright line to stay with the picture.</li><li><b>Give files plain names</b>: file names often give things away too. <code>IMG_20261024_143512.jpg</code> says the photo was taken on 24 October 2026 at 14:35. With this option the copies are called <code>image-01.jpg</code>, <code>document-01.pdf</code> and so on.</li></ul>
+<p>Your choices are remembered on this device.</p>
+<h2>Photos (JPEG, PNG, WebP)</h2>
+<p>Removed:</p>
+<ul><li><b>Location</b> (GPS position, altitude, the direction the camera faced) and place names</li><li><b>Names</b>: author, camera owner, creator, contact details</li><li><b>Device details</b>: phone or camera maker and model, serial numbers, lens, software and editing apps</li><li><b>Dates and time zone</b></li><li><b>Embedded thumbnails</b>: a small copy of the original picture, which can still show parts you cropped out</li><li><b>Motion photos</b>: the short video clip some phones attach to a photo</li><li><b>Edit history</b>, document IDs and other data added by editing apps</li><li><b>Comments, titles, descriptions and keywords</b></li><li>Camera settings (exposure, ISO and similar) and other technical data</li></ul>
+<p>Kept, because they are harmless and needed to show the picture correctly:</p>
+<ul><li><b>Rotation</b>: so the photo appears the right way up</li><li><b>Colour profile</b>: so colours look right</li></ul>
+<p>Cleaning is <b>lossless</b>. Unmarked cuts the hidden data out of the file without touching the picture itself, so there is no recompression and no loss of quality.</p>
+<h2>PDF documents</h2>
+<p>Removed:</p>
+<ul><li><b>Document information</b>: author, title, subject, keywords, the app that made it, creation and modification dates</li><li><b>XMP metadata</b>, document IDs and edit history</li><li><b>Earlier saved versions</b>: many apps add edits to the end of a PDF and leave the old version inside the file. Unmarked writes a fresh copy containing only the current version.</li><li><b>Camera data inside photos</b> placed in the document</li><li><b>Page thumbnails</b> and private editing data left by apps such as Word or Illustrator</li></ul>
+<p>You choose, for each PDF that has them (all are ticked to start with):</p>
+<ul><li><b>Attached files</b>: files stored inside the PDF. They can carry their own hidden data.</li><li><b>Scripts</b>: code that runs when the PDF is opened. Rarely needed.</li><li><b>Comments and markup</b>: notes, highlights and drawings, and the names of the people who made them.</li></ul>
+<p>Kept: the text, pictures and layout, links, form fields and their answers, and layers.</p>
+<h2>What Unmarked can't remove</h2>
+<div class="callout"><p>Unmarked removes hidden data. It can't change what anyone can <b>see</b> in the file.</p></div>
+<ul><li><b>The picture or page itself</b>: faces, street signs, house numbers, car number plates, reflections, screens, and text on a page. Crop or cover them before cleaning.</li><li><b>Text that is in the document</b>, including tracked changes that were already accepted.</li><li><b>Your device's own records</b>: the original file, your gallery, and cloud backups keep their data.</li><li><b>Hidden layers in PDFs</b> are kept. If a PDF has layers, Unmarked says so; check them in a PDF reader.</li></ul>
+<h2>Files Unmarked can't clean (yet)</h2>
+<ul><li><b>HEIC photos</b> (the default on iPhones and some Android phones). Most phones can save or share as JPEG instead.</li><li><b>Password-protected or encrypted PDFs.</b></li><li>GIF, TIFF, camera RAW files and videos.</li></ul>
+<h2>Privacy</h2>
+<p>Unmarked has no server, no account and no tracking. The web app blocks every network connection, and the Android app has no internet permission, so it couldn't send your files anywhere even if it tried. The only things remembered on your device are your three option settings and a count of how many times you have cleaned files (used only to ask, now and then, whether you would like to support the app).</p>
+<h2>The Android app</h2>
+<p>The Android app is the same app with two extras: <b>Share → Unmarked</b> from any app, and saving and sharing through Android's own screens. Download it from <a href="https://unmarked.anonacondacodelab.com/android.html" target="_blank" rel="noopener noreferrer">unmarked.anonacondacodelab.com/android.html</a> (not from Google Play; that page explains why). <b>About → Check for updates</b> tells you when a new version is out.</p>
+<h2>No guarantee</h2>
+<div class="callout"><p>Unmarked is free software, provided <b>as it is, without any warranty</b>. It removes the hidden data it knows about, but no tool can promise to find everything, and new phones and apps keep adding new kinds of data. Check the clean copy before you share anything sensitive. You are responsible for what you share; Anonaconda Code Lab accepts no liability for any loss or harm from using this app. The full terms are in the GNU General Public License v3.</p></div>
+<h2>Support and feedback</h2>
+<p>Questions, problems or ideas: email <b>hello@anonacondacodelab.com</b>. Describe what happened and, if you can, add a screenshot. Please don't send the files you were cleaning; a description is usually enough.</p>
+<p>Unmarked is free and open-source software from Anonaconda Code Lab, released under the GNU General Public License v3. If it is useful to you, you can support its development at <b><a href="https://ko-fi.com/anonacondacodelab" target="_blank" rel="noopener noreferrer">ko-fi.com/anonacondacodelab</a></b>.</p>
+  </article></main>
+  <footer>
+    <nav aria-label="Studio links">
+      <a href="/">All apps</a>
+      <a href="https://ko-fi.com/anonacondacodelab">Support on Ko-fi</a>
+      <a href="https://github.com/Anonaconda-CodeLab">GitHub</a>
+      <a href="https://mastodon.social/@anonacondacodelab" rel="me">Mastodon</a>
+    </nav>
+    <p>No cookies, no analytics, no tracking, on this page or in the apps.</p>
+    <p>© 2026 Anonaconda Code Lab. Apps are free software under the GNU GPL v3. Polar and H10 are trademarks of Polar Electro Oy; Garmin, HRM-Dual and HRM-Pro of Garmin Ltd.; Wahoo and TICKR of Wahoo Fitness; Coospo, Magene and Decathlon of their respective owners. These apps are independent and not affiliated with any of them.</p>
+  </footer>
+</div>
+</body>
+</html>

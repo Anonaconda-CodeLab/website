@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // Builds the app pages, the user-manual pages, sitemap.xml and robots.txt for anonacondacodelab.com.
 // The site itself has no build step: run this after changing a page's content or a manual, then commit the output.
-//   node tools/pages.mjs [still-point/docs/MANUAL.md] [lead-one-ecg/docs/MANUAL.md] [rounds/docs/MANUAL.md]
-// Each manual path defaults to the app's repository cloned next to this one (../still-point, ../lead-one-ecg, ../rounds).
+//   node tools/pages.mjs [still-point/docs/MANUAL.md] [lead-one-ecg/docs/MANUAL.md] [rounds/docs/MANUAL.md] [unmarked/docs/MANUAL.md]
+// Each manual path defaults to the app's repository cloned next to this one (../still-point, ../lead-one-ecg, ../rounds, ../unmarked).
 // A manual that can't be found is skipped and its existing page is left as it is.
 // A default (sibling) manual is only used if that folder is a git clone that is up to date with GitHub, so an old
 // copy can't quietly overwrite a newer live manual. Pass a path explicitly to use a file as it is.
@@ -26,7 +26,7 @@ function stale(f) {
   return behind ? `${behind} commit(s) behind GitHub; pull first` : '';
 }
 const pick = (i, name) => { if (arg[i]) return arg[i]; const f = sib(name), why = stale(f); if (why) { console.warn(`skipped ${name} manual: ../${name} is ${why}`); return ''; } return f; };
-const spManual = pick(0, 'still-point'), loManual = pick(1, 'lead-one-ecg'), rdManual = pick(2, 'rounds');
+const spManual = pick(0, 'still-point'), loManual = pick(1, 'lead-one-ecg'), rdManual = pick(2, 'rounds'), unManual = pick(3, 'unmarked');
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const out = (p, s) => { mkdirSync(dirname(join(root, p)), { recursive: true }); writeFileSync(join(root, p), s); };
 
@@ -168,7 +168,8 @@ function appPage(a) {
   </main>` + FOOT;
 }
 function manualPage(a, mdText) {
-  const body = md(mdText.replace(/^# .*\n/, ''));
+  // [[android]] … [[/android]] markers (Unmarked's manual) wrap Android-only parts: the apps are released, so keep the text
+  const body = md(mdText.replace(/^# .*\n/, '').replace(/^\[\[\/?android\]\]\n/gm, '').replace(/\[\[\/?android\]\]/g, ''));
   return head({ title: `${a.name} user manual`, desc: `How to use ${a.name}: ${a.manualDesc}`, path: a.path + 'manual/', image: a.image }) + `
   <header class="hero">
     <img class="icon" src="${a.icon}" alt="">
@@ -180,6 +181,48 @@ ${body}
   </article></main>` + FOOT;
 }
 
+const UN = {
+  name: 'Unmarked', path: '/unmarked/', appUrl: 'https://unmarked.anonacondacodelab.com', icon: '/icons/unmarked.svg', image: '/social/og-unmarked.jpg',
+  category: 'SecurityApplication', os: 'Android app; any modern browser on Android, iPhone, iPad, Windows, macOS, ChromeOS, Linux',
+  browserReq: 'Any modern browser',
+  title: 'Unmarked: free, private removal of hidden data from photos and PDFs',
+  desc: 'See and remove the hidden data in your photos and PDFs: location, phone model, names, serial numbers, comments and earlier versions. Free, open source, and your files never leave your device.',
+  manualDesc: 'what it finds and removes in photos and PDFs, the options, and what it can’t remove.',
+  lede: 'Photos and documents carry details you can’t see: where a photo was taken, which phone took it, who wrote a document and what was deleted from it. Unmarked shows you what’s there and makes a clean copy without it.',
+  needs: 'Free. Works in any modern browser on a phone, tablet or computer, and offline. No account, no upload: your files never leave your device.',
+  isNew: 'The <a href="https://unmarked.anonacondacodelab.com/android.html">Android app</a>: share photos and PDFs to Unmarked straight from your gallery or any other app. It has no internet access at all.',
+  links: [['https://unmarked.anonacondacodelab.com/android.html', 'Android app'], ['/unmarked/manual/', 'User manual'], ['https://github.com/Anonaconda-CodeLab/unmarked', 'Source code']],
+  shots: [
+    ['/screens/unmarked/1-home.webp', 'Choose photos or PDFs, as many as you like at once', 780, 1688],
+    ['/screens/unmarked/2-found.webp', 'What’s inside, most revealing first: here the location, names and a serial number', 780, 1688],
+    ['/screens/unmarked/3-pdf.webp', 'PDFs: earlier versions, authors and more, with a choice for attachments, scripts and comments', 780, 1688],
+    ['/screens/unmarked/4-clean.webp', 'Clean copies, each checked again, ready to save one by one or as a zip', 780, 1688],
+    ['/screens/unmarked/5-uses.webp', 'Why it matters, and what no tool can remove for you', 780, 1688]
+  ],
+  features: [
+    ['See what’s hidden', 'Each file is checked and its hidden data listed in plain words, most revealing first: location, names, phone or camera, serial numbers, dates, comments and more.'],
+    ['Photos: lossless', 'JPEG, PNG and WebP. The hidden data is cut out and the picture itself is copied unchanged, so there is no loss of quality. Only the rotation and colour profile stay, so the photo still looks right.'],
+    ['Location and more', 'GPS position and place names, owner and author names, phone model and serial numbers, dates and time zone, edit history, and the embedded thumbnail that can still show what you cropped out.'],
+    ['Motion photos', 'The short video clip some phones attach to a photo is removed too.'],
+    ['PDFs', 'Author and app details, earlier saved versions that can hold deleted text, private editing data, page thumbnails and camera data in placed photos. You choose whether attachments, scripts and comments go.'],
+    ['Checked twice', 'Every clean copy is inspected again before it’s offered, and anything left is reported.'],
+    ['Many files at once', 'Clean a whole batch in one go, mixing photos and PDFs, and save each file or all of them in one zip.'],
+    ['Your choice', 'Keep the date taken or a copyright notice if you want them, and give files plain names: a name like IMG_20261024_143512.jpg reveals the date too.'],
+    ['Private by design', 'No account, no server, no analytics. The web app blocks every network connection, and the Android app has no internet permission. Your original files are never changed.']
+  ],
+  need: ['Any modern browser on a phone, tablet or computer: Chrome, Edge, Brave, Firefox or Safari.', 'Or the <a href="https://unmarked.anonacondacodelab.com/android.html"><b>Android app</b></a>, which adds <b>Share → Unmarked</b> from any app.', 'Photos in JPEG, PNG or WebP, or PDF documents. HEIC photos, encrypted PDFs and videos aren’t supported yet.'],
+  faq: [
+    ['Is Unmarked really free?', 'Yes. No subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.'],
+    ['Are my files uploaded anywhere?', 'No. Everything happens on your own device. The web app blocks every network connection, and the Android app has no internet permission, so your files can’t be sent anywhere.'],
+    ['Doesn’t social media remove this anyway?', 'The big social networks usually do. Email, cloud links, “send as file” in chat apps, and many forums and marketplaces pass it on untouched.'],
+    ['Does it change my original file?', 'No. Unmarked always makes a clean copy. Your original, your gallery and your cloud backups keep their data, so share the clean copy.'],
+    ['Will the photo look worse?', 'No. Photos are cleaned without recompressing them: the picture data is copied exactly as it was.'],
+    ['What can’t it remove?', 'Anything you can see: faces, street signs, house numbers, number plates or text on a page. Crop or cover those first. It also can’t change copies already shared.'],
+    ['Why isn’t the Android app on Google Play?', 'Publishing there means registering with Google and handing over government ID, and Google is extending that check to apps installed from elsewhere. We think you should be able to install software you choose on a phone you own, so we support <a href="https://keepandroidopen.org">Keep Android Open</a> and offer the app directly. The <a href="https://unmarked.anonacondacodelab.com/android.html">Android page</a> explains how to install it and check it’s the official build.'],
+    ['Is the code open?', 'Unmarked is free software under the GNU GPL v3. The <a href="https://github.com/Anonaconda-CodeLab/unmarked">source code is on GitHub</a>, and every Android release is built from it automatically, with a checksum to verify the download.']
+  ],
+  disclaimer: 'Unmarked is provided as it is, without any warranty. It removes the hidden data it knows about, but no tool can promise to find everything. Check the clean copy before you share anything sensitive.'
+};
 const SP = {
   name: 'Still Point', path: '/still-point/', appUrl: 'https://stillpoint.anonacondacodelab.com', icon: '/icons/still-point.svg', image: '/social/og-still-point.jpg',
   os: 'Android app; Android (Chrome or Chromium), Windows, macOS, ChromeOS, Linux',
@@ -313,14 +356,15 @@ const LO = {
   disclaimer: 'Lead One ECG is for general wellness and education only and is not a medical device. It cannot diagnose or rule out any condition. If you have chest pain, fainting, severe breathlessness or a racing or very irregular heartbeat, seek medical care immediately.'
 };
 
+out('unmarked/index.html', appPage(UN));
 out('rounds/index.html', appPage(RD));
 out('still-point/index.html', appPage(SP));
 out('lead-one/index.html', appPage(LO));
-for (const [a, f, dir] of [[RD, rdManual, 'rounds'], [SP, spManual, 'still-point'], [LO, loManual, 'lead-one']]) {
+for (const [a, f, dir] of [[UN, unManual, 'unmarked'], [RD, rdManual, 'rounds'], [SP, spManual, 'still-point'], [LO, loManual, 'lead-one']]) {
   if (f && existsSync(f)) out(dir + '/manual/index.html', manualPage(a, readFileSync(f, 'utf8')));
   else if (f) console.warn(`skipped ${dir}/manual: ${f} not found`);
 }
-const urls = ['/', '/rounds/', '/rounds/manual/', '/still-point/', '/still-point/manual/', '/lead-one/', '/lead-one/manual/'];
+const urls = ['/', '/unmarked/', '/unmarked/manual/', '/rounds/', '/rounds/manual/', '/still-point/', '/still-point/manual/', '/lead-one/', '/lead-one/manual/'];
 const today = new Date().toISOString().slice(0, 10);
 out('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${SITE}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n')}\n</urlset>\n`);
 out('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
