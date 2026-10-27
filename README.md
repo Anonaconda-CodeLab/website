@@ -5,7 +5,8 @@ The studio homepage of Anonaconda Code Lab: a single static page listing its app
 - `index.html`: the page. To add an app, copy one `<li class="app">` block (newest at the top) and add its icon to `icons/`.
 - `favicon-192.png`: the studio mark, the snake in code braces (header logo and browser icon; `favicon.ico` and `apple-touch-icon.png` are the same mark). `logo.svg`: the earlier wave mark, kept for reference. `spine.svg`: the snake that winds down the app list. `social/`: profile picture and banners.
 - `_headers`: security headers (strict Content Security Policy; the pages make no outside requests). The site is on
-  Cloudflare Pages, which publishes the repository root as it is (no build command).
+  Netlify, which publishes the repository root as it is (no build command). It stays there because Cloudflare Pages can
+  only serve the bare domain if the whole domain's DNS moves to Cloudflare; the apps' subdomains are on Cloudflare Pages.
 - Font: Instrument Sans, SIL Open Font License 1.1 (`fonts/OFL-InstrumentSans.txt`).
 
 No build step. Deploy the repository root as-is.
