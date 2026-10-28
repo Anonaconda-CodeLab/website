@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Flatbed user manual</title>
+<meta name="description" content="How to use Flatbed: taking good photos, adjusting pages, making the PDF, reading text, and what it keeps private.">
+<link rel="canonical" href="https://anonacondacodelab.com/flatbed/manual/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Anonaconda Code Lab">
+<meta property="og:title" content="Flatbed user manual">
+<meta property="og:description" content="How to use Flatbed: taking good photos, adjusting pages, making the PDF, reading text, and what it keeps private.">
+<meta property="og:url" content="https://anonacondacodelab.com/flatbed/manual/">
+<meta property="og:image" content="https://anonacondacodelab.com/social/og-flatbed.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#22362B">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+@font-face{font-family:"Instrument Sans";font-style:normal;font-display:swap;font-weight:400 700;font-stretch:75% 100%;
+  src:url(/fonts/InstrumentSans-latin-variable.woff2) format("woff2-variations")}
+:root{--paper:#ECEFE7; --new:#B31F39; --new-ink:#FFFFFF;--ink:#22362B;--line:#6E7F3A;--muted:#5E6B61;--rule:#CBD2C4;--head:#8FA048;--card:#F6F8F3;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#141A16; --new:#F07A8D; --new-ink:#141A16;--ink:#E3E8DE;--line:#A9B865;--muted:#94A096;--rule:#2C362F;--head:#B9C97A;--card:#1A221D}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 "Instrument Sans",system-ui,sans-serif}
+a{color:inherit}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--line);outline-offset:3px;border-radius:4px}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.crumbs{display:flex;align-items:center;gap:10px;padding-top:28px;font-size:15px;color:var(--muted)}
+.crumbs a{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
+.crumbs img{width:30px;height:30px}
+header.hero{padding:40px 0 8px}
+.hero .icon{width:64px;height:64px;display:block}
+h1{font-size:clamp(44px,10vw,80px);line-height:.95;font-stretch:75%;font-weight:650;letter-spacing:-.01em;margin:18px 0 0;text-wrap:balance}
+.lede{font-size:clamp(19px,2.6vw,22px);line-height:1.45;max-width:32em;margin:18px 0 0}
+.needs{font-size:15px;color:var(--muted);max-width:40em;margin:10px 0 0}
+.links{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-top:20px}
+.open{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600;padding:11px 20px;border-radius:999px}
+.open:hover{background:var(--line);color:#fff}
+.links a:not(.open){font-weight:500;text-underline-offset:3px}
+.soon{font-size:15px;margin-top:12px}
+.soon span{display:inline-block;font-size:11.5px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;background:var(--line);color:var(--paper);padding:2px 9px;border-radius:999px;margin-right:9px;vertical-align:1px}
+.soon.new{margin-top:14px;padding:11px 14px;border-left:4px solid var(--new);border-radius:10px;background:color-mix(in srgb,var(--new) 9%,transparent);font-weight:550}
+.soon.new span{background:var(--new);color:var(--new-ink);font-size:13px;padding:3px 11px}
+.soon.new a{color:var(--new);font-weight:700}
+.shots{display:flex;gap:14px;overflow-x:auto;padding:28px 2px 18px;margin:20px 0 0;scroll-snap-type:x mandatory}
+.shots figure{margin:0;flex:none;width:210px;scroll-snap-align:start}
+.shots img{width:100%;height:auto;display:block;border-radius:18px;border:1px solid var(--rule);background:var(--card)}
+.shots.wide figure{width:280px}
+.shots figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.35}
+h2{font-size:30px;font-stretch:85%;font-weight:600;line-height:1.1;margin:44px 0 6px;text-wrap:balance}
+h3{font-size:18.5px;font-weight:600;margin:0}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px 28px;margin-top:18px}
+.features p{margin:4px 0 0;font-size:16px}
+.needlist{margin:10px 0 0;padding-left:20px}
+.needlist li{margin:4px 0}
+details{border-top:1px solid var(--rule);padding:14px 0}
+details:last-of-type{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer;font-weight:600;font-size:17.5px}
+details p{margin:8px 0 0;max-width:40em}
+.note{font-size:15px;color:var(--muted);margin-top:26px;max-width:40em}
+.manual{max-width:42em}
+.manual h2{font-size:26px;margin-top:36px}
+.manual h3{margin-top:22px;font-size:18px}
+.manual ul,.manual ol{padding-left:22px}
+.manual li{margin:4px 0}
+.manual code{font-size:14px;background:var(--card);border:1px solid var(--rule);border-radius:5px;padding:0 4px;overflow-wrap:anywhere}
+.manual .callout{border:2px solid var(--head);border-radius:14px;padding:4px 18px;margin:18px 0;background:var(--card)}
+.manual hr{border:0;border-top:1px solid var(--rule);margin:28px 0}
+.manual table{border-collapse:collapse;margin:14px 0;font-size:16px;display:block;overflow-x:auto;max-width:100%}
+.manual th,.manual td{border-bottom:1px solid var(--rule);padding:6px 16px 6px 0;text-align:left;white-space:nowrap}
+.manual th{font-weight:600}
+footer{border-top:1px solid var(--rule);margin-top:48px;padding:26px 0 48px;font-size:15px;color:var(--muted)}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:14px}
+footer nav a{color:var(--ink);font-weight:500;text-underline-offset:3px}
+footer p{margin:6px 0;max-width:40em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumbs"><a href="/"><img src="/favicon-192.png" alt="">Anonaconda Code Lab</a></div>
+  <header class="hero">
+    <img class="icon" src="/icons/flatbed.svg" alt="">
+    <h1>Flatbed user manual</h1>
+    <div class="links"><a class="open" href="https://flatbed.anonacondacodelab.com">Open Flatbed</a><a href="/flatbed/">About Flatbed</a></div>
+  </header>
+  <main><article class="manual">
+<h2>What Flatbed does</h2>
+<p>Flatbed turns photos of documents into clean, flat, readable PDFs. Photograph a letter, a form, a receipt or an ID card, and Flatbed finds the page, corrects the angle, straightens the text, cleans up shadows, reads the text and puts it all in a PDF that you can search and copy from.</p>
+<p>Everything happens <b>on your device</b>. Your pages are never uploaded anywhere, and nothing is kept once you close the app.</p>
+<div class="callout"><p>A scanner sees your most private papers: passports, bank letters, contracts, medical results. Most scanner apps send them to their own servers to read the text. Flatbed can't: it has no way to connect to the internet at all.</p></div>
+<h2>Why scan with Flatbed</h2>
+<ul><li><b>Passport and ID copies.</b> A visa application, a new rental, a school or a job often asks for a copy of your passport or ID card. With Flatbed that copy is made and kept on your phone only, and goes only where you send it.</li><li><b>Money and work.</b> Bank letters, tax forms, payslips and contracts are read and turned into a PDF right here, without an account and without anyone else's server seeing the numbers.</li><li><b>Health.</b> Prescriptions, test results and insurance claims stay between you and whoever you choose to send them to.</li><li><b>Receipts and expense claims.</b> The PDF holds the receipt and nothing else: no phone model, no location, no date and time of the photo.</li><li><b>Documents for strangers.</b> Landlords, employers, agencies and online forms get the pages you meant to send, not details about you or your phone.</li></ul>
+<h2>How to scan</h2>
+<ol><li>Tap <b>Take a photo</b>, or <b>Import photos</b> to use pictures you already have. You can add pages one after another. In the Android app, <b>Take a photo</b> opens your phone's own camera app. Flatbed itself has no camera permission. You can also share photos to Flatbed from your gallery (<b>Share → Flatbed</b>).</li><li>Flatbed looks for the edges of the page in each photo, flattens it as if it had been on a scanner's glass, and levels the lines of text. The pages appear in a list.</li><li>Tap a page to adjust it (see below). Use the arrows under a page to change the order.</li><li>Tap <b>Make PDF</b>, choose the options, and tap <b>Make PDF</b> again.</li><li><b>Save</b> or <b>Share</b> the PDF. You can also copy the recognised text, or save it as a plain text file. In Chrome or Edge on a computer, <b>Save</b> lets you choose the folder and the name. Other browsers save to their Downloads folder, but most can ask each time instead: in Chrome on Android, turn on <b>Ask where to save files</b> in Chrome's settings, under <b>Downloads</b>; in Firefox on a computer, choose <b>Always ask you where to save files</b> in Settings, under <b>Files and Applications</b>. Firefox on Android always uses the Downloads folder; <b>Share</b> sends the PDF straight to another app instead. In the Android app, Save always lets you choose.</li></ol>
+<h3>Taking a good photo</h3>
+<ul><li><b>Light:</b> daylight or a bright room, without the flash. Avoid your own shadow falling across the page.</li><li><b>Background:</b> a page shows up best on a darker surface (a wooden table rather than a white desk).</li><li><b>Angle:</b> hold the phone roughly above the page. Flatbed corrects a fair amount of tilt, but the sharper the text, the better it can be read.</li><li><b>Whole page:</b> keep all four corners in the picture.</li></ul>
+<p>In the web app, the camera view outlines the page in orange when it has found it.</p>
+<p>Photos can be up to 60 MB and 100 megapixels each (a phone camera's usual photos are well under both), and a PDF can have up to 60 pages. If your camera has a special very-high-resolution mode, use its normal mode for scanning.</p>
+<h2>Adjusting a page</h2>
+<p><b>Crop.</b> Drag the four corners to the corners of the page. While you drag, a magnifier shows exactly where the corner is. <b>Find the page</b> looks for the edges again; <b>Use the whole photo</b> keeps everything (useful for a screenshot or a photo that is already cropped).</p>
+<p><b>Adjust.</b> Choose how the page looks:</p>
+<ul><li><b>Original:</b> the colours as photographed.</li><li><b>Enhanced</b> (the default): white paper and clear ink, with shadows and uneven light removed, colours kept. Good for most documents, stamps and coloured forms.</li><li><b>Grey:</b> the same, in shades of grey.</li><li><b>Black &amp; white:</b> pure black text on white. The sharpest and smallest PDF for plain text documents; not for photos.</li></ul>
+<p>The <b>Contrast</b> (or <b>Text darkness</b>) slider makes the result lighter or darker. <b>Turn left</b> and <b>Turn right</b> rotate the page. <b>Straighten text lines</b> levels a page whose lines are slightly tilted; turn it off for a page with no lines of text, such as a drawing.</p>
+<h2>Making the PDF</h2>
+<p><b>Page size.</b> A4, Letter, or <b>Same as the scan</b> (the page keeps the shape of what you photographed, such as a receipt or a card). The default follows your device's region.</p>
+<p><b>Text.</b></p>
+<ul><li><b>Searchable PDF:</b> Flatbed reads the text and adds it to the PDF as an invisible layer behind the picture. You can then search the PDF, and select and copy its text. The reading happens on your device and takes a few seconds per page.</li><li><b>Image-only PDF (no text layer):</b> only the pictures of the pages. Choose this when you'd rather the text couldn't be copied or searched easily, for example for an ID card. (Anyone can still read what they can see.)</li></ul>
+<p><b>Language.</b> Choose the language of the document, up to two at a time: English, French, Spanish, German and Thai are built in. Choosing the right language matters: it is how Flatbed knows which letters and words to expect.</p>
+<p><b>File name.</b> The PDF is called <code>scan.pdf</code> unless you choose another name. Camera file names such as <code>IMG_20261025_091233.jpg</code>, which give away the date and time, are never used.</p>
+<h3>Reading text: what to expect</h3>
+<p>Clear, printed text on a flat, well-lit page is usually read almost perfectly. Results are weaker for small print (some receipts), creased or curved pages, low light, unusual fonts, and tables or several columns. Handwriting isn't read. Check important figures before relying on the recognised text.</p>
+<p>Thai text has no spaces between words, so when you select text in the PDF, a &quot;word&quot; may cover more or less than you expect.</p>
+<h2>Privacy</h2>
+<p>Before you make a PDF, Flatbed shows a <b>Private by default</b> panel listing what it leaves out:</p>
+<ul><li><b>Hidden data in your photos.</b> Photos usually carry where they were taken, when, and which phone took them (see Unmarked, our app for cleaning photos and PDFs). Flatbed lists what your photos carried, and leaves all of it out: each page is redrawn from the picture alone, so nothing from the photo file is copied.</li><li><b>No author, app name or dates.</b> The PDF has no title, author, app name, or creation and change dates.</li><li><b>No document ID.</b> Nothing that could link the PDF to other files, to this app or to your phone.</li><li><b>The surroundings.</b> Only the page is kept; the table, your hands and the room are cut away.</li></ul>
+<p>Every PDF is also put through the same cleaner as Unmarked and <b>checked</b> before you can save it. The result appears as <i>Checked: no hidden data in the PDF</i>.</p>
+<p><b>What Flatbed can't remove:</b> what's on the page itself. Names, numbers, signatures, photos and stamps on the document are in the scan. Cover anything you don't want to send before you take the photo.</p>
+<p><b>Your camera app may keep its own copy.</b> When Flatbed hands over to your phone's camera app to take a photo, some camera apps also save a copy in your gallery, with the place it was taken if your camera records locations. Flatbed can't prevent that: delete the copy from your gallery if you don't want it, or turn off location in your camera app's settings.</p>
+<p><b>No network, nothing stored.</b> The web app blocks every network connection, and the Android app has no internet permission and no camera permission. Opening the web app is an ordinary visit to its website, like any page; once it has loaded, nothing you scan is sent anywhere. Your pages are held in memory only, and are gone when you close the app; the web app asks before you leave a page that still has scans on it. The only things remembered on your device are your choices of page size, text and language, and a count of PDFs made (used only to ask, now and then, whether you would like to support the app).</p>
+<p><b>Translating the page.</b> If you use your browser's <i>Translate</i> button, the browser sends the page's text to its translation service (Google's, in Chrome). Flatbed marks your pages, the recognised text and your file name so the translator leaves them out: only the app's own buttons and labels are translated.</p>
+<h2>The Android app</h2>
+<p>Flatbed is also an Android app: the same app, with <b>Take a photo</b> using your phone's own camera app, <b>Share → Flatbed</b> from your gallery, and saving and sharing through Android's own screens. It has <b>no internet permission and no camera permission</b>. It is not on Google Play; download it from <b>flatbed.anonacondacodelab.com/android.html</b>, which also explains how to install it and how to check that it's the official build. <b>About → Check for updates</b> tells you when a new version is out.</p>
+<h2>No guarantee</h2>
+<p>Flatbed is free software provided as it is, without any warranty. Check the PDF before you send anything important. You are responsible for what you share, and Anonaconda Code Lab accepts no liability for any loss or harm from using this app.</p>
+<h2>Support and feedback</h2>
+<p>Flatbed is free and open source, with no ads or tracking. If it's useful to you, you can support it on Ko-fi: <a href="https://ko-fi.com/anonacondacodelab">ko-fi.com/anonacondacodelab</a>. Questions, problems or a language you'd like added: hello@anonacondacodelab.com. A description or a screenshot of the app is usually enough; please don't send the documents you were scanning.</p>
+  </article></main>
+  <footer>
+    <nav aria-label="Studio links">
+      <a href="/">All apps</a>
+      <a href="https://ko-fi.com/anonacondacodelab">Support on Ko-fi</a>
+      <a href="https://github.com/Anonaconda-CodeLab">GitHub</a>
+      <a href="https://mastodon.social/@anonacondacodelab" rel="me">Mastodon</a>
+    </nav>
+    <p>No cookies, no analytics, no tracking, on this page or in the apps.</p>
+    <p>© 2026 Anonaconda Code Lab. Apps are free software under the GNU GPL v3. Polar and H10 are trademarks of Polar Electro Oy; Garmin, HRM-Dual and HRM-Pro of Garmin Ltd.; Wahoo and TICKR of Wahoo Fitness; Coospo, Magene and Decathlon of their respective owners. These apps are independent and not affiliated with any of them.</p>
+  </footer>
+</div>
+</body>
+</html>

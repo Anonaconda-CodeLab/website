@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // Builds the app pages, the user-manual pages, sitemap.xml and robots.txt for anonacondacodelab.com.
 // The site itself has no build step: run this after changing a page's content or a manual, then commit the output.
-//   node tools/pages.mjs [still-point/docs/MANUAL.md] [lead-one-ecg/docs/MANUAL.md] [rounds/docs/MANUAL.md] [unmarked/docs/MANUAL.md]
-// Each manual path defaults to the app's repository cloned next to this one (../still-point, ../lead-one-ecg, ../rounds, ../unmarked).
+//   node tools/pages.mjs [still-point/docs/MANUAL.md] [lead-one-ecg/docs/MANUAL.md] [rounds/docs/MANUAL.md] [unmarked/docs/MANUAL.md] [flatbed/docs/MANUAL.md]
+// Each manual path defaults to the app's repository cloned next to this one (../still-point, ../lead-one-ecg, ../rounds, ../unmarked, ../flatbed).
 // A manual that can't be found is skipped and its existing page is left as it is.
 // A default (sibling) manual is only used if that folder is a git clone that is up to date with GitHub, so an old
 // copy can't quietly overwrite a newer live manual. Pass a path explicitly to use a file as it is.
@@ -26,7 +26,7 @@ function stale(f) {
   return behind ? `${behind} commit(s) behind GitHub; pull first` : '';
 }
 const pick = (i, name) => { if (arg[i]) return arg[i]; const f = sib(name), why = stale(f); if (why) { console.warn(`skipped ${name} manual: ../${name} is ${why}`); return ''; } return f; };
-const spManual = pick(0, 'still-point'), loManual = pick(1, 'lead-one-ecg'), rdManual = pick(2, 'rounds'), unManual = pick(3, 'unmarked');
+const spManual = pick(0, 'still-point'), loManual = pick(1, 'lead-one-ecg'), rdManual = pick(2, 'rounds'), unManual = pick(3, 'unmarked'), fbManual = pick(4, 'flatbed');
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const out = (p, s) => { mkdirSync(dirname(join(root, p)), { recursive: true }); writeFileSync(join(root, p), s); };
 
@@ -184,6 +184,49 @@ ${body}
   </article></main>` + FOOT;
 }
 
+const FB = {
+  name: 'Flatbed', path: '/flatbed/', appUrl: 'https://flatbed.anonacondacodelab.com', icon: '/icons/flatbed.svg', image: '/social/og-flatbed.jpg',
+  category: 'BusinessApplication', os: 'Android app; any modern browser on Android, iPhone, iPad, Windows, macOS, ChromeOS, Linux',
+  browserReq: 'Any modern browser',
+  title: 'Flatbed: a free, private document scanner that makes searchable PDFs',
+  desc: 'Scan documents with your phone: Flatbed finds the page, flattens and cleans it, reads the text offline and makes a searchable PDF with no hidden details. Free, open source, and nothing leaves your device.',
+  manualDesc: 'taking good photos, adjusting pages, making the PDF, reading text, and what it keeps private.',
+  lede: 'Photograph a letter, form, receipt or ID. Flatbed finds the page, flattens and straightens it, cleans up shadows, reads the text and makes a PDF you can search and copy from, with no hidden details about you or your phone.',
+  needs: 'Free. Works in any modern browser on a phone, tablet or computer. No account, no upload: your pages never leave your device, and even the text is read offline.',
+  isNew: 'Also as an <a href="https://flatbed.anonacondacodelab.com/android.html">Android app</a>, with no internet permission and no camera permission: it uses your phone’s own camera app.',
+  links: [['https://flatbed.anonacondacodelab.com/android.html', 'Android app'], ['/flatbed/manual/', 'User manual'], ['https://github.com/Anonaconda-CodeLab/flatbed', 'Source code']],
+  shots: [
+    ['/screens/flatbed/1-home.webp', 'Take a photo or import one, and see why private scanning matters', 780, 1688],
+    ['/screens/flatbed/2-crop.webp', 'The page is found for you; drag the corners if needed', 780, 1688],
+    ['/screens/flatbed/3-adjust.webp', 'Flattened, straightened and cleaned: shadows and uneven light removed', 780, 1688],
+    ['/screens/flatbed/4-private.webp', 'Private by default: what the PDF leaves out, in plain words', 780, 1688],
+    ['/screens/flatbed/5-ready.webp', 'A searchable PDF, checked: no hidden data inside', 780, 1688]
+  ],
+  features: [
+    ['Camera or import', 'Take a photo with a live view that outlines the page, or import photos from your gallery. In the Android app, Share → Flatbed works from any app.'],
+    ['Finds and flattens the page', 'The corners are found automatically (drag them if needed, with a magnifier), and the page is flattened as if it had been on a scanner’s glass. Slightly tilted lines of text are levelled.'],
+    ['Clean pages', 'Enhanced removes shadows and uneven light and makes the paper white; Grey and Black & white for plain text; a contrast slider and 90° turns.'],
+    ['Searchable PDFs', 'The text is read and added as an invisible layer, so you can search the PDF and copy its text. Copy or save the text on its own, too.'],
+    ['Reads text offline', 'Text recognition runs on your device, with English, French, Spanish, German and Thai built in. Nothing is sent anywhere to be read.'],
+    ['Several pages', 'Add as many pages as you need and put them in order. A4, Letter, or the shape of what you scanned, such as a receipt or a card.'],
+    ['No hidden details', 'Pages are redrawn from the picture alone, so no location, phone model or time from your photos reaches the PDF. The PDF has no author, app name, dates or document ID.'],
+    ['Checked before you save', 'Every PDF goes through the same cleaner as Unmarked and is checked before it’s offered: “Checked: no hidden data in the PDF”.'],
+    ['Image-only option', 'Prefer the text not to be copyable, for example on an ID copy? Make a PDF with no text layer at all.'],
+    ['Private by design', 'No account, no server, no analytics. The web app blocks every network connection; the Android app has no internet permission and no camera permission.']
+  ],
+  need: ['Any modern browser on a phone, tablet or computer: Chrome, Edge, Brave, Firefox or Safari.', 'Or the <a href="https://flatbed.anonacondacodelab.com/android.html"><b>Android app</b></a>, which uses your phone’s own camera app and adds <b>Share → Flatbed</b>.', 'Photos in JPEG, PNG or WebP. HEIC photos need converting to JPEG first.'],
+  faq: [
+    ['Is Flatbed really free?', 'Yes. No subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.'],
+    ['Are my documents uploaded anywhere?', 'No. Everything happens on your own device, including reading the text. The web app blocks every network connection, and the Android app has no internet permission, so your pages can’t be sent anywhere.'],
+    ['How good is the text recognition?', 'Clear, printed text on a flat, well-lit page is usually read almost perfectly. Small print, creased pages, low light, unusual fonts and tables are harder, and handwriting isn’t read. Check important figures.'],
+    ['Which languages can it read?', 'English, French, Spanish, German and Thai, up to two at a time. More may follow.'],
+    ['Why doesn’t the Android app need camera permission?', 'It asks your phone’s own camera app to take the photo and hand it over, so Flatbed never controls the camera itself.'],
+    ['What can’t it remove?', 'What’s on the page itself: names, numbers, signatures and photos on the document. Cover anything you don’t want to send before you take the photo.'],
+    ['Why isn’t the Android app on Google Play?', 'Publishing there means registering with Google and handing over government ID, and Google is extending that check to apps installed from elsewhere. We think you should be able to install software you choose on a phone you own, so we support <a href="https://keepandroidopen.org">Keep Android Open</a> and offer the app directly. The <a href="https://flatbed.anonacondacodelab.com/android.html">Android page</a> explains how to install it and check it’s the official build.'],
+    ['Is the code open?', 'Flatbed is free software under the GNU GPL v3. The <a href="https://github.com/Anonaconda-CodeLab/flatbed">source code is on GitHub</a>, and every Android release is built from it automatically, with a checksum to verify the download.']
+  ],
+  disclaimer: 'Flatbed is provided as it is, without any warranty. Check the PDF, and the recognised text, before you send anything important.'
+};
 const UN = {
   name: 'Unmarked', path: '/unmarked/', appUrl: 'https://unmarked.anonacondacodelab.com', icon: '/icons/unmarked.svg', image: '/social/og-unmarked.jpg',
   category: 'SecurityApplication', os: 'Android app; any modern browser on Android, iPhone, iPad, Windows, macOS, ChromeOS, Linux',
@@ -290,7 +333,7 @@ const RD = {
     ['/screens/rounds/1-home.webp', 'Favourites, your own timers and 16 presets, sorted by goal or hardest first', 780, 1688],
     ['/screens/rounds/2-about.webp', 'Every preset explains what it is, how to do it, why it works and where it comes from', 780, 1688],
     ['/screens/rounds/3-work.webp', 'Work: the whole screen turns orange; with a strap, the ring around it shows your heart-rate zone', 780, 1688],
-    ['/screens/rounds/4-rest.webp', 'Rest: green, with what comes next', 780, 1688],
+    ['/screens/rounds/4-rest.webp', 'Rest: green, with what comes next, and your zone as you recover', 780, 1688],
     ['/screens/rounds/5-editor.webp', 'Build your own: work, rest, rounds, sets, warm-up, cool-down and exercise names', 780, 1688],
     ['/screens/rounds/6-finish.webp', 'Done: work rounds and time, your heart rate and the time you spent in each zone', 780, 1688]
   ],
@@ -359,15 +402,16 @@ const LO = {
   disclaimer: 'Lead One ECG is for general wellness and education only and is not a medical device. It cannot diagnose or rule out any condition. If you have chest pain, fainting, severe breathlessness or a racing or very irregular heartbeat, seek medical care immediately.'
 };
 
+out('flatbed/index.html', appPage(FB));
 out('unmarked/index.html', appPage(UN));
 out('rounds/index.html', appPage(RD));
 out('still-point/index.html', appPage(SP));
 out('lead-one/index.html', appPage(LO));
-for (const [a, f, dir] of [[UN, unManual, 'unmarked'], [RD, rdManual, 'rounds'], [SP, spManual, 'still-point'], [LO, loManual, 'lead-one']]) {
+for (const [a, f, dir] of [[FB, fbManual, 'flatbed'], [UN, unManual, 'unmarked'], [RD, rdManual, 'rounds'], [SP, spManual, 'still-point'], [LO, loManual, 'lead-one']]) {
   if (f && existsSync(f)) out(dir + '/manual/index.html', manualPage(a, readFileSync(f, 'utf8')));
   else if (f) console.warn(`skipped ${dir}/manual: ${f} not found`);
 }
-const urls = ['/', '/unmarked/', '/unmarked/manual/', '/rounds/', '/rounds/manual/', '/still-point/', '/still-point/manual/', '/lead-one/', '/lead-one/manual/'];
+const urls = ['/', '/flatbed/', '/flatbed/manual/', '/unmarked/', '/unmarked/manual/', '/rounds/', '/rounds/manual/', '/still-point/', '/still-point/manual/', '/lead-one/', '/lead-one/manual/'];
 const today = new Date().toISOString().slice(0, 10);
 out('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${SITE}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n')}\n</urlset>\n`);
 out('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
