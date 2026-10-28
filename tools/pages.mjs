@@ -81,6 +81,9 @@ details p{margin:8px 0 0;max-width:40em}
 .manual code{font-size:14px;background:var(--card);border:1px solid var(--rule);border-radius:5px;padding:0 4px;overflow-wrap:anywhere}
 .manual .callout{border:2px solid var(--head);border-radius:14px;padding:4px 18px;margin:18px 0;background:var(--card)}
 .manual hr{border:0;border-top:1px solid var(--rule);margin:28px 0}
+.manual table{border-collapse:collapse;margin:14px 0;font-size:16px;display:block;overflow-x:auto;max-width:100%}
+.manual th,.manual td{border-bottom:1px solid var(--rule);padding:6px 16px 6px 0;text-align:left;white-space:nowrap}
+.manual th{font-weight:600}
 footer{border-top:1px solid var(--rule);margin-top:48px;padding:26px 0 48px;font-size:15px;color:var(--muted)}
 footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:14px}
 footer nav a{color:var(--ink);font-weight:500;text-underline-offset:3px}
@@ -277,8 +280,8 @@ const RD = {
   category: 'SportsApplication', os: 'Android app; any modern browser on Android, iPhone, iPad, Windows, macOS, ChromeOS, Linux',
   browserReq: 'Any modern browser. Optional heart rate needs Web Bluetooth (Chrome or Chromium, or Bluefy on iPhone)',
   title: 'Rounds: a free, loud interval timer for HIIT, Tabata and boxing',
-  desc: 'A loud, clear interval timer with 16 presets (Tabata, EMOM, 4 × 4, boxing rounds and more) or your own timers. Free, no account, no ads, works offline.',
-  manualDesc: 'presets, building your own timers, the beeps, spoken cues, heart rate and backing up your timers.',
+  desc: 'A loud, clear interval timer with 16 presets (Tabata, EMOM, 4 × 4, boxing rounds and more) or your own timers, and optional heart-rate zones. Free, no account, no ads, works offline.',
+  manualDesc: 'presets, building your own timers, the beeps, spoken cues, heart rate and zones, and backing up your timers.',
   lede: 'A loud, clear interval timer. Pick one of 16 presets or build your own, press play, and follow the beeps. The whole screen changes colour with each round, so you can read it from across the room.',
   needs: 'Free. Works in any modern browser on a phone, tablet or computer, and offline once added to your home screen. No account, no ads, no tracking.',
   isNew: 'The <a href="https://rounds.anonacondacodelab.com/android.html">Android app</a>: beeps and voice cues keep going with the screen off, and it has no internet access at all.',
@@ -286,10 +289,10 @@ const RD = {
   shots: [
     ['/screens/rounds/1-home.webp', 'Favourites, your own timers and 16 presets, sorted by goal or hardest first', 780, 1688],
     ['/screens/rounds/2-about.webp', 'Every preset explains what it is, how to do it, why it works and where it comes from', 780, 1688],
-    ['/screens/rounds/3-work.webp', 'Work: the whole screen turns orange, with the exercise name, round and set', 780, 1688],
+    ['/screens/rounds/3-work.webp', 'Work: the whole screen turns orange; with a strap, the ring around it shows your heart-rate zone', 780, 1688],
     ['/screens/rounds/4-rest.webp', 'Rest: green, with what comes next', 780, 1688],
     ['/screens/rounds/5-editor.webp', 'Build your own: work, rest, rounds, sets, warm-up, cool-down and exercise names', 780, 1688],
-    ['/screens/rounds/6-finish.webp', 'Done: work rounds and total time, with your heart rate if a strap was connected', 780, 1688]
+    ['/screens/rounds/6-finish.webp', 'Done: work rounds and time, your heart rate and the time you spent in each zone', 780, 1688]
   ],
   features: [
     ['Beeps you can’t miss', 'Three short beeps count you into and out of every work round, then a long high beep for go and a long low beep for stop. They are scheduled on the audio clock, so they stay on time.'],
@@ -299,7 +302,7 @@ const RD = {
     ['Build your own', 'Work, rest, rounds, sets with a longer break between them, warm-up and cool-down. Custom steps handle patterns like 10-20-30 or a pyramid, and exercise names are shown in each work round.'],
     ['Readable from across the room', 'Big numbers, a ring that empties as the time runs down, and a full-screen colour for each phase: work, rest, set break, warm-up and cool-down.'],
     ['Spoken cues and vibration', 'Optional voice cues (“Work”, “Rest”, “Round 3 of 8” and exercise names), a buzz at each change, and a halfway beep in long work rounds.'],
-    ['Heart rate (optional)', 'Connect any standard Bluetooth heart-rate strap or watch: Polar, Garmin, Wahoo, Coospo and most others. See your heart rate live, then your average and peak in the work rounds. Shown only, never saved or sent.'],
+    ['Heart rate and zones (optional)', 'Connect any standard Bluetooth heart-rate strap or watch: Polar, Garmin, Wahoo, Coospo and most others. See your heart rate live and, with your max heart rate set (or estimated from your age), your training zone in a ring around the timer. Afterwards: your average, peak and time in each zone. Shown only, never saved or sent.'],
     ['Favourites and backup', 'Star the timers you use most to keep them at the top. Save all your timers to a file and import them on another phone or browser.'],
     ['Private and offline', 'No account, no server, no analytics. Your timers stay on your device, and it works without a connection once added to your home screen.']
   ],

@@ -1,4 +1,5 @@
-// Minimal Markdown renderer (same as the apps' build scripts): headings, paragraphs, lists, '> ' callouts, bold, italics, code, https links
+// Minimal Markdown renderer (same as the apps' build scripts): headings, paragraphs, lists, '> ' callouts, bold, italics, code, https links,
+// and simple tables (| a | b | rows, the second row being the |---| separator)
 export function md(text) {
   const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const inline = s => esc(s)
@@ -6,11 +7,15 @@ export function md(text) {
     .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
     .replace(/(^|[^*\w])\*([^*\s][^*]*)\*(?!\w)/g, '$1<i>$2</i>')
     .replace(/(?<!["\/])\bhttps:\/\/[\w.\/-]+[\w\/]/g, u => `<a href="${u}">${u.replace('https://', '')}</a>`);
-  const out = []; let para = [], list = null, quote = null;
+  const out = []; let para = [], list = null, quote = null, table = null;
+  const cells = l => l.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(c => c.trim());
+  const flushT = () => { if (table) { const [head, ...rows] = table.filter(r => !r.every(c => /^:?-{3,}:?$/.test(c))); out.push(`<table><thead><tr>${head.map(c => `<th>${inline(c)}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${r.map(c => `<td>${inline(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`); } table = null; };
   const flushP = () => { if (para.length) out.push(`<p>${inline(para.join(' '))}</p>`); para = []; };
   const flushL = () => { if (list) out.push(`<${list.t}>${list.items.map(i => `<li>${inline(i.text)}${i.sub.length ? `<ul>${i.sub.map(x => `<li>${inline(x)}</li>`).join('')}</ul>` : ''}</li>`).join('')}</${list.t}>`); list = null; };
   const flushQ = () => { if (quote) out.push(`<div class="callout">${md(quote.join('\n'))}</div>`); quote = null; };
   for (const line of text.split('\n')) {
+    if (/^\s*\|.*\|\s*$/.test(line)) { flushP(); flushL(); flushQ(); (table = table || []).push(cells(line)); continue; }
+    flushT();
     if (/^>( |$)/.test(line)) { flushP(); flushL(); (quote = quote || []).push(line.replace(/^> ?/, '')); continue; }
     flushQ();
     const h = line.match(/^(#{1,3}) (.*)/), li = line.match(/^(-|\d+\.) (.*)/), sub = line.match(/^ {2,3}- (.*)/), cont = /^ {2,}\S/.test(line);
@@ -22,5 +27,5 @@ export function md(text) {
     else if (!line.trim()) { flushP(); flushL(); }
     else { flushL(); para.push(line.trim()); }
   }
-  flushP(); flushL(); flushQ(); return out.join('\n');
+  flushP(); flushL(); flushQ(); flushT(); return out.join('\n');
 }

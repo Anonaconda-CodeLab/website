@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Rounds user manual</title>
-<meta name="description" content="How to use Rounds: presets, building your own timers, the beeps, spoken cues, heart rate and backing up your timers.">
+<meta name="description" content="How to use Rounds: presets, building your own timers, the beeps, spoken cues, heart rate and zones, and backing up your timers.">
 <link rel="canonical" href="https://anonacondacodelab.com/rounds/manual/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Anonaconda Code Lab">
 <meta property="og:title" content="Rounds user manual">
-<meta property="og:description" content="How to use Rounds: presets, building your own timers, the beeps, spoken cues, heart rate and backing up your timers.">
+<meta property="og:description" content="How to use Rounds: presets, building your own timers, the beeps, spoken cues, heart rate and zones, and backing up your timers.">
 <meta property="og:url" content="https://anonacondacodelab.com/rounds/manual/">
 <meta property="og:image" content="https://anonacondacodelab.com/social/og-rounds.jpg">
 <meta property="og:image:width" content="1200">
@@ -72,6 +72,9 @@ details p{margin:8px 0 0;max-width:40em}
 .manual code{font-size:14px;background:var(--card);border:1px solid var(--rule);border-radius:5px;padding:0 4px;overflow-wrap:anywhere}
 .manual .callout{border:2px solid var(--head);border-radius:14px;padding:4px 18px;margin:18px 0;background:var(--card)}
 .manual hr{border:0;border-top:1px solid var(--rule);margin:28px 0}
+.manual table{border-collapse:collapse;margin:14px 0;font-size:16px;display:block;overflow-x:auto;max-width:100%}
+.manual th,.manual td{border-bottom:1px solid var(--rule);padding:6px 16px 6px 0;text-align:left;white-space:nowrap}
+.manual th{font-weight:600}
 footer{border-top:1px solid var(--rule);margin-top:48px;padding:26px 0 48px;font-size:15px;color:var(--muted)}
 footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:14px}
 footer nav a{color:var(--ink);font-weight:500;text-underline-offset:3px}
@@ -104,7 +107,7 @@ footer p{margin:6px 0;max-width:40em}
 <ul><li><b>Name</b>: shown at the top while the timer runs.</li><li><b>Work</b> and <b>Rest</b>: the length of each work and rest period. Tap the value to type a time, or use − and +.</li><li><b>Rounds</b>: how many times work and rest repeat. There is no rest after the last round.</li><li><b>Sets</b> and <b>Break between sets</b>: repeat the whole block of rounds, with a longer break in between. The break replaces the last rest of each set.</li><li><b>Warm-up</b> and <b>Cool-down</b>: an easy period before the first round and after the last.</li><li><b>Exercise names</b> (optional): one per line. Each work round shows the next name in order, and spoken cues read it out, which is handy for circuits.</li><li><b>Custom steps</b>: for patterns that aren't a simple work and rest, such as 10-20-30 or a pyramid, tap <i>Use custom steps</i>. Each round is then a list of steps, each with its own length and label. Work steps get the 3-2-1 beeps; rest steps are easy or recovery.</li></ul>
 <p>Tap <b>Save</b> to keep the timer under <i>Your timers</i>, or <b>Start</b> to run it straight away. <b>Delete</b> removes a timer you made.</p>
 <h2>While a timer runs</h2>
-<ul><li>The whole screen changes colour with the phase, so you can see from across the room whether it's work or rest.</li><li>The <b>ring</b> empties as the current period runs down, with the time left in the middle. Above it is the phase and the round (for example <i>Round 3 / 8 · Set 1 / 2</i>); below it, what comes next.</li><li><b>Skip warm-up</b> appears during a warm-up and jumps straight to the first round.</li><li><b>Pause</b> stops the timer and the beeps; tap again to carry on.</li><li><b>Back</b> (⏮) goes back to the start of the current period (or the previous one, if you're in the first two seconds); <b>Skip</b> (⏭) skips to the next period.</li><li><b>End</b> asks you to tap again within three seconds, so a stray tap can't stop your workout.</li><li>The screen stays on while a timer runs.</li></ul>
+<ul><li>The whole screen changes colour with the phase, so you can see from across the room whether it's work or rest.</li><li>The <b>ring</b> empties as the current period runs down, with the time left in the middle. Above it is the phase and the round (for example <i>Round 3 / 8 · Set 1 / 2</i>); below it, what comes next.</li><li><b>Skip warm-up</b> appears during a warm-up and jumps straight to the first round.</li><li><b>Pause</b> stops the timer and the beeps; tap again to carry on.</li><li><b>Back</b> (⏮) goes back to the start of the current period (or the previous one, if you're in the first two seconds); <b>Skip</b> (⏭) skips to the next period.</li><li><b>End</b> asks you to tap again within three seconds, so a stray tap can't stop your workout. Ending a timer early still shows the finish screen, with the work rounds you finished, the time so far and your heart rate and zones up to then.</li><li>The screen stays on while a timer runs.</li></ul>
 <p>When the timer finishes, you see how many work rounds you did and the total time. <b>Again</b> runs the same timer once more; <b>Home</b> goes back to the list.</p>
 <h2>Spoken cues and vibration</h2>
 <p>In <b>Settings</b>:</p>
@@ -113,12 +116,18 @@ footer p{margin:6px 0;max-width:40em}
 <p>Tap <b>♥</b> at the top of the home screen, or beside the dial during a timer, and choose your strap or watch in the list. Any device that shares standard Bluetooth heart rate works: Polar, Garmin HRM-Dual or HRM-Pro, Wahoo TICKR, Coospo and most others, including many watches in &quot;broadcast heart rate&quot; mode.</p>
 <p>Your heart rate is shown during the timer, and the finish screen shows your average and peak heart rate in the work rounds. Readings are only shown, never saved or sent. Tap ♥ twice to disconnect.</p>
 <p>In a browser this needs Chrome or Chromium on Android or a computer, or the free Bluefy browser on iPhone and iPad. If the browser can't use Bluetooth, the ♥ button simply doesn't appear.</p>
+<h3>Heart-rate zones</h3>
+<p>Turn on <b>Settings → Heart-rate zones</b> and enter your <b>max heart rate</b>. If you don't know it, enter your <b>age</b> instead and Rounds estimates it with the Tanaka formula (208 − 0.7 × age). Estimates can be 10 bpm or more out either way, so a max you have measured (for example, the highest reading at the end of a very hard effort) is better. Add your <b>resting heart rate</b> if you like: the zones are then based on your heart-rate reserve (max minus resting), which suits people whose resting heart rate is unusually low or high.</p>
+<table><thead><tr><th>Zone</th><th>Share of max (or of reserve)</th><th>Feels</th></tr></thead><tbody><tr><td>Z1</td><td>50–60%</td><td>Very light</td></tr><tr><td>Z2</td><td>60–70%</td><td>Light</td></tr><tr><td>Z3</td><td>70–80%</td><td>Moderate</td></tr><tr><td>Z4</td><td>80–90%</td><td>Hard</td></tr><tr><td>Z5</td><td>90–100%</td><td>Maximum</td></tr></tbody></table>
+<p>Until you do, a small card on the start screen offers <b>Set up zones</b> (or <b>Not now</b>, which hides it for good; the setting stays in Settings). Settings shows the heart-rate range of each zone for your numbers. You only set this up once: it is stored on this device with your timers, and <i>Save timers to file</i> includes it.</p>
+<p>While a strap is connected, a ring of the five zones appears around the timer, with a marker at your current heart rate and your zone (for example <b>Z4 · 86% MAX</b>, or <b>% HRR</b> with a resting heart rate) at the bottom left of the dial. If readings stop, the ring dims and the zone shows <b>–</b> until they come back. Without a strap, or with zones not set up, the timer looks as it always has. The finish screen shows how long you spent in each zone, also when you end a timer early.</p>
+<p>Zones are a guide for training, not medical advice.</p>
 <h2>Backing up your timers</h2>
 <p>In <b>Settings → Your timers</b>:</p>
 <ul><li><b>Save timers to file</b> saves your own timers, favourites and settings in one file. Keep it as a backup, or use it to move your timers to another phone or browser.</li><li><b>Import timers</b> adds the timers from such a file. Timers you already have are kept; a timer that is already there is replaced by the copy in the file, and favourites are combined.</li></ul>
 <p>Your timers are stored in the browser on this device. Clearing the browser's site data deletes them, so save a backup now and then if you have many.</p>
 <h2>Privacy</h2>
-<p>Rounds has no server, no account and no tracking. Your timers stay on your device, and heart rate is shown only, never saved or sent. Opening the web app is an ordinary visit to its website, like any page; after that, the only thing it ever asks that website for is a newer copy of itself, so updates arrive. The Android app has no internet permission at all.</p>
+<p>Rounds has no server, no account and no tracking. Your timers and heart-rate zone settings stay on your device, and heart rate is shown only, never saved or sent. Opening the web app is an ordinary visit to its website, like any page; after that, the only thing it ever asks that website for is a newer copy of itself, so updates arrive. The Android app has no internet permission at all.</p>
 <p><b>Translating the page.</b> If you use your browser's <i>Translate</i> button, the browser sends the page's text to its translation service (Google's, in Chrome). Rounds marks your timer names and heart rate so the translator leaves them out: only the app's own buttons and labels are translated.</p>
 <h2>The Android app</h2>
 <p>Rounds is also an Android app: the same app, with the timer, beeps and spoken cues keeping going while the screen is off, and <b>no internet permission</b> at all. It is not on Google Play; download it from <b>rounds.anonacondacodelab.com/android.html</b>, which also explains how to install it and how to check that it's the official build. When you start your first timer, it asks to show a notification: that notification is what keeps it running with the screen off.</p>
