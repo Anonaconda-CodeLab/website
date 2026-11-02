@@ -92,6 +92,10 @@ h1{font-size:clamp(40px,10.5vw,86px);line-height:.92;font-stretch:75%;font-weigh
 .next{padding-bottom:6px;color:var(--muted)}
 .next::before{left:-36px;top:5px;width:20px;height:18px;border-radius:50% 50% 50% 50% / 55% 55% 45% 45%;background:var(--head)}
 
+/* campaign banner (Keep Android Open): a slim bar above the header */
+.kao{margin:0;background:var(--new);color:var(--new-ink);font-size:15px;line-height:1.4;text-align:center;padding:10px 20px}
+.kao a{color:inherit;font-weight:650;text-underline-offset:3px}
+
 footer{border-top:1px solid var(--rule);margin-top:40px;padding:26px 0 48px;font-size:15px;color:var(--muted)}
 footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:14px}
 footer nav a{color:var(--ink);font-weight:500;text-underline-offset:3px}
@@ -101,6 +105,7 @@ footer .thanks a{font-weight:500;text-underline-offset:3px}
 </style>
 </head>
 <body>
+<p class="kao" role="note">Android will become a locked-down platform by 2027. <a href="https://keepandroidopen.org">Learn more about Keep Android Open</a>.</p>
 <header>
   <div class="wrap">
     <a class="mark" href="/"><img src="mark.png" alt="">Anonaconda Code Lab</a>
