@@ -77,6 +77,8 @@ h1{font-size:clamp(40px,10.5vw,86px);line-height:.92;font-stretch:75%;font-weigh
 .app h2{display:flex;align-items:center;gap:12px;font-size:30px;line-height:1.1;font-stretch:85%;font-weight:600;margin:6px 0 10px}
 .app h2 img{width:34px;height:34px;flex:none}
 .app h2 a.h2link{text-decoration:none}
+/* a faint outline for a dark icon, so it stands out on the dark page too */
+.app h2 img.ring{border-radius:22%;box-shadow:0 0 0 1px color-mix(in srgb,var(--ink) 22%,transparent)}
 .app h2 a.h2link:hover{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}
 .app p{margin:0 0 6px;max-width:34em}
 .app .needs{font-size:15px;color:var(--muted)}
@@ -136,6 +138,17 @@ footer .thanks a{font-weight:500;text-underline-offset:3px}
   <main>
     <!-- To add an app: copy one <li class="app"> block, newest at the top. -->
     <ol class="apps" reversed aria-label="Apps, newest first">
+      <li class="app">
+        <time datetime="2026-11">Released November 2026</time>
+        <h2><img src="icons/installer.svg" alt="" class="ring"><a href="https://install.anonacondacodelab.com" class="h2link">Installer</a></h2>
+        <p>Install Android apps from your computer with a USB cable, straight from your browser. It checks that each of our apps is exactly the official build, signed with our key, before it installs it, and it can install apps from other publishers you trust too.</p>
+        <p class="needs">Works in Chrome or Edge on a computer, or in Chrome on another Android phone. Nothing to install and nothing uploaded: the file goes straight from your device to the phone.</p>
+        <p class="soon new"><span>New</span>When phones start refusing apps from developers who haven’t registered with Google, installing from a computer still works. <a href="https://keepandroidopen.org">Learn more about Keep Android Open</a>.</p>
+        <div class="links">
+          <a class="open" href="https://install.anonacondacodelab.com">Open the Installer</a>
+          <a href="https://github.com/Anonaconda-CodeLab/installer">Source code</a>
+        </div>
+      </li>
       <li class="app">
         <time datetime="2026-10">Released October 2026</time>
         <h2><img src="icons/flatbed.svg" alt=""><a href="/flatbed/" class="h2link">Flatbed</a></h2>
