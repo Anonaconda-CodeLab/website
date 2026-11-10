@@ -82,6 +82,12 @@ h1{font-size:clamp(40px,10.5vw,86px);line-height:.92;font-stretch:75%;font-weigh
 .app h2 a.h2link:hover{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}
 .app p{margin:0 0 6px;max-width:34em}
 .app .needs{font-size:15px;color:var(--muted)}
+.tool{margin:48px 0 0;padding:22px 24px 24px;border:1px solid var(--rule);border-radius:16px;background:color-mix(in srgb,var(--ink) 4%,var(--paper))}
+.tool::before,.tool::after{display:none}
+.tool .kicker{display:block;font-size:13px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tool .kao-note{margin-top:12px;font-size:15px;color:var(--muted)}
+.tool .kao-note a{color:inherit;font-weight:600}
+.tool + .apps{margin-top:48px}
 .app .soon{font-size:15px;margin-top:10px}
 .app .soon span{display:inline-block;font-size:11.5px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;background:var(--line);color:var(--paper);padding:2px 9px;border-radius:999px;margin-right:9px;vertical-align:1px}
 .app .soon.new{margin-top:14px;padding:11px 14px;border-left:4px solid var(--new);border-radius:10px;background:color-mix(in srgb,var(--new) 9%,transparent);font-weight:550}
@@ -104,6 +110,17 @@ footer nav a{color:var(--ink);font-weight:500;text-underline-offset:3px}
 footer p{margin:6px 0;max-width:40em}
 footer .thanks{color:var(--ink);margin-bottom:16px}
 footer .thanks a{font-weight:500;text-underline-offset:3px}
+.crypto{margin:6px 0 18px}
+.crypto h2{font-size:15px;font-weight:650;color:var(--ink);margin:0 0 8px}
+.crypto .coin{display:flex;gap:14px;align-items:center;margin:0 0 10px}
+.crypto .coin img{flex:none;background:#fff;border-radius:8px;padding:4px;width:96px;height:96px}
+.crypto b{display:block;color:var(--ink);font-weight:600}
+.crypto .coin div b{display:inline}
+.crypto .coin div > b:first-child{display:block}
+.crypto .addr{display:block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;word-break:break-all;user-select:all;-webkit-user-select:all;color:var(--ink);margin-top:3px}
+.crypto .coin div .addr:only-of-type{max-width:36em}
+.crypto .check{font-size:13.5px}
+
 </style>
 </head>
 <body>
@@ -137,16 +154,30 @@ footer .thanks a{font-weight:500;text-underline-offset:3px}
 
   <main>
     <!-- To add an app: copy one <li class="app"> block, newest at the top. -->
+  <section class="app tool" aria-label="Installer">
+      <span class="kicker">Install our Android apps</span>
+      <h2><img src="icons/installer.svg" alt="" class="ring"><a href="https://install.anonacondacodelab.com" class="h2link">Installer</a></h2>
+      <p>Install Android apps from your computer with a USB cable, straight from your browser. It checks that each of our apps is exactly the official build, signed with our key, before it installs it, and it can install apps from other publishers you trust too.</p>
+      <p class="needs">Works in Chrome or Edge on a computer, or in Chrome on another Android phone. Nothing to install and nothing uploaded: the file goes straight from your device to the phone.</p>
+      <p class="soon kao-note">When phones start refusing apps from developers who haven’t registered with Google, installing from a computer still works. <a href="https://keepandroidopen.org">Learn more about Keep Android Open</a>.</p>
+      <div class="links">
+        <a class="open" href="https://install.anonacondacodelab.com">Open the Installer</a>
+        <a href="https://github.com/Anonaconda-CodeLab/installer">Source code</a>
+      </div>
+  </section>
     <ol class="apps" reversed aria-label="Apps, newest first">
       <li class="app">
         <time datetime="2026-11">Released November 2026</time>
-        <h2><img src="icons/installer.svg" alt="" class="ring"><a href="https://install.anonacondacodelab.com" class="h2link">Installer</a></h2>
-        <p>Install Android apps from your computer with a USB cable, straight from your browser. It checks that each of our apps is exactly the official build, signed with our key, before it installs it, and it can install apps from other publishers you trust too.</p>
-        <p class="needs">Works in Chrome or Edge on a computer, or in Chrome on another Android phone. Nothing to install and nothing uploaded: the file goes straight from your device to the phone.</p>
-        <p class="soon new"><span>New</span>When phones start refusing apps from developers who haven’t registered with Google, installing from a computer still works. <a href="https://keepandroidopen.org">Learn more about Keep Android Open</a>.</p>
+        <h2><img src="icons/redact.svg" alt=""><a href="/redact/" class="h2link">Redact</a></h2>
+        <p>Cover what people can see in your photos and screenshots before you share them: faces, card and phone numbers, email addresses, QR codes and other text. You check what Redact found, and the covers replace the pixels themselves, so they can’t be lifted off.</p>
+        <p class="needs">Works in any modern browser on a phone, tablet or computer. Nothing is uploaded: even finding faces and reading text happens on your device.</p>
+        <p class="soon new"><span>New</span>Also as an <a href="https://redact.anonacondacodelab.com/android.html">Android app</a>: share pictures to Redact straight from your gallery, and it has no internet access at all.</p>
         <div class="links">
-          <a class="open" href="https://install.anonacondacodelab.com">Open the Installer</a>
-          <a href="https://github.com/Anonaconda-CodeLab/installer">Source code</a>
+          <a class="open" href="https://redact.anonacondacodelab.com">Open Redact</a>
+          <a href="https://redact.anonacondacodelab.com/android.html">Android app</a>
+          <a href="/redact/">More about Redact</a>
+          <a href="/redact/manual/">User manual</a>
+          <a href="https://github.com/Anonaconda-CodeLab/redact">Source code</a>
         </div>
       </li>
       <li class="app">
@@ -220,7 +251,7 @@ footer .thanks a{font-weight:500;text-underline-offset:3px}
         </div>
       </li>
       <li class="app next">
-        <p>The next app is in the workshop.</p>
+        <p>Next in the workshop: <b>Remark</b>. Add a name or a note to a receipt or screenshot in seconds, with text that stays readable on any background. Point things out with callouts, arrows, circles, boxes and numbered markers, highlight or draw freehand, and cover a stray detail. Remark saves a fresh copy with the location and phone details removed. Works offline: nothing leaves your device.</p>
       </li>
     </ol>
   </main>
@@ -233,6 +264,18 @@ footer .thanks a{font-weight:500;text-underline-offset:3px}
       <!-- add when ready: <a href="https://x.com/HANDLE">X</a> -->
     </nav>
     <p class="thanks">No ads, no tracking. If you find these apps useful, please consider <a href="https://ko-fi.com/anonacondacodelab">making a small donation</a> to help fund development. Thank you!</p>
+    <section class="crypto" aria-labelledby="donate-privately">
+      <h2 id="donate-privately">Donate privately</h2>
+      <div class="coin">
+        <img src="icons/donate-xmr.svg" alt="QR code for the Monero address" width="120" height="120">
+        <div><b>Monero (XMR)</b><code class="addr" translate="no">8B2gEc74H8d7nY1dQAMtCJEGjCfpTYjVc4AJCJLscsTM5MVZKn8jcRmZPh1EhyPTNk7xnfyzhopwLJB1DYnfZJcrQwmfAKW</code></div>
+      </div>
+      <div class="coin">
+        <img src="icons/donate-zano.svg" alt="QR code for the Zano address" width="120" height="120">
+        <div><b>Zano (ZANO)</b><code class="addr" translate="no">ZxDAYC6sFavB4bB17UYksTcvQcKZH9YSCUFf5ENfj1y4hr3sfazMcqAKAz414mxxYtFcMNjhBi6qFfVjuwYw2epy2vxe5md1k</code></div>
+      </div>
+      <p class="check">Tap an address to select it. The same addresses are pinned on our <a href="https://mastodon.social/@anonacondacodelab">Mastodon profile</a>: if they ever differ, don’t send.</p>
+    </section>
     <p>No cookies, no analytics, no tracking, on this page or in the apps.</p>
     <p>© 2026 Anonaconda Code Lab. Apps are free software under the GNU GPL v3. Polar and H10 are trademarks of Polar Electro Oy; Garmin, HRM-Dual and HRM-Pro of Garmin Ltd.; Wahoo and TICKR of Wahoo Fitness; Coospo, Magene and Decathlon of their respective owners. These apps are independent and not affiliated with any of them.</p>
   </footer>

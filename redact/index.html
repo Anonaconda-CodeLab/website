@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Redact: cover faces, numbers and names in photos and screenshots, privately</title>
+<meta name="description" content="Redact finds faces, card and phone numbers, email addresses, QR codes and text in your photos and screenshots, and covers them for real before you share. Free, open source, and nothing leaves your device.">
+<link rel="canonical" href="https://anonacondacodelab.com/redact/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Anonaconda Code Lab">
+<meta property="og:title" content="Redact: cover faces, numbers and names in photos and screenshots, privately">
+<meta property="og:description" content="Redact finds faces, card and phone numbers, email addresses, QR codes and text in your photos and screenshots, and covers them for real before you share. Free, open source, and nothing leaves your device.">
+<meta property="og:url" content="https://anonacondacodelab.com/redact/">
+<meta property="og:image" content="https://anonacondacodelab.com/social/og-redact.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#22362B">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Redact","url":"https://redact.anonacondacodelab.com","description":"Redact finds faces, card and phone numbers, email addresses, QR codes and text in your photos and screenshots, and covers them for real before you share. Free, open source, and nothing leaves your device.","applicationCategory":"MultimediaApplication","operatingSystem":"Android app; any modern browser on Android, iPhone, iPad, Windows, macOS, ChromeOS, Linux","browserRequirements":"Any modern browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"isAccessibleForFree":true,"license":"https://www.gnu.org/licenses/gpl-3.0.html","image":"https://anonacondacodelab.com/social/og-redact.jpg","author":{"@type":"Organization","name":"Anonaconda Code Lab","url":"https://anonacondacodelab.com/"}}</script>
+<style>
+@font-face{font-family:"Instrument Sans";font-style:normal;font-display:swap;font-weight:400 700;font-stretch:75% 100%;
+  src:url(/fonts/InstrumentSans-latin-variable.woff2) format("woff2-variations")}
+:root{--paper:#ECEFE7; --new:#B31F39; --new-ink:#FFFFFF;--ink:#22362B;--line:#6E7F3A;--muted:#5E6B61;--rule:#CBD2C4;--head:#8FA048;--card:#F6F8F3;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#141A16; --new:#F07A8D; --new-ink:#141A16;--ink:#E3E8DE;--line:#A9B865;--muted:#94A096;--rule:#2C362F;--head:#B9C97A;--card:#1A221D}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 "Instrument Sans",system-ui,sans-serif}
+a{color:inherit}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--line);outline-offset:3px;border-radius:4px}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.crumbs{display:flex;align-items:center;gap:10px;padding-top:28px;font-size:15px;color:var(--muted)}
+.crumbs a{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
+.crumbs img{width:30px;height:30px}
+header.hero{padding:40px 0 8px}
+.hero .icon{width:64px;height:64px;display:block}
+h1{font-size:clamp(44px,10vw,80px);line-height:.95;font-stretch:75%;font-weight:650;letter-spacing:-.01em;margin:18px 0 0;text-wrap:balance}
+.lede{font-size:clamp(19px,2.6vw,22px);line-height:1.45;max-width:32em;margin:18px 0 0}
+.needs{font-size:15px;color:var(--muted);max-width:40em;margin:10px 0 0}
+.links{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-top:20px}
+.open{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600;padding:11px 20px;border-radius:999px}
+.open:hover{background:var(--line);color:#fff}
+.links a:not(.open){font-weight:500;text-underline-offset:3px}
+.soon{font-size:15px;margin-top:12px}
+.soon span{display:inline-block;font-size:11.5px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;background:var(--line);color:var(--paper);padding:2px 9px;border-radius:999px;margin-right:9px;vertical-align:1px}
+.soon.new{margin-top:14px;padding:11px 14px;border-left:4px solid var(--new);border-radius:10px;background:color-mix(in srgb,var(--new) 9%,transparent);font-weight:550}
+.soon.new span{background:var(--new);color:var(--new-ink);font-size:13px;padding:3px 11px}
+.soon.new a{color:var(--new);font-weight:700}
+.shots{display:flex;gap:14px;overflow-x:auto;padding:28px 2px 18px;margin:20px 0 0;scroll-snap-type:x mandatory}
+.shots figure{margin:0;flex:none;width:210px;scroll-snap-align:start}
+.shots img{width:100%;height:auto;display:block;border-radius:18px;border:1px solid var(--rule);background:var(--card)}
+.shots.wide figure{width:280px}
+.shots figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.35}
+h2{font-size:30px;font-stretch:85%;font-weight:600;line-height:1.1;margin:44px 0 6px;text-wrap:balance}
+h3{font-size:18.5px;font-weight:600;margin:0}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px 28px;margin-top:18px}
+.features p{margin:4px 0 0;font-size:16px}
+.needlist{margin:10px 0 0;padding-left:20px}
+.needlist li{margin:4px 0}
+details{border-top:1px solid var(--rule);padding:14px 0}
+details:last-of-type{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer;font-weight:600;font-size:17.5px}
+details p{margin:8px 0 0;max-width:40em}
+.note{font-size:15px;color:var(--muted);margin-top:26px;max-width:40em}
+.manual{max-width:42em}
+.manual h2{font-size:26px;margin-top:36px}
+.manual h3{margin-top:22px;font-size:18px}
+.manual ul,.manual ol{padding-left:22px}
+.manual li{margin:4px 0}
+.manual code{font-size:14px;background:var(--card);border:1px solid var(--rule);border-radius:5px;padding:0 4px;overflow-wrap:anywhere}
+.manual .callout{border:2px solid var(--head);border-radius:14px;padding:4px 18px;margin:18px 0;background:var(--card)}
+.manual hr{border:0;border-top:1px solid var(--rule);margin:28px 0}
+.manual table{border-collapse:collapse;margin:14px 0;font-size:16px;display:block;overflow-x:auto;max-width:100%}
+.manual th,.manual td{border-bottom:1px solid var(--rule);padding:6px 16px 6px 0;text-align:left;white-space:nowrap}
+.manual th{font-weight:600}
+footer{border-top:1px solid var(--rule);margin-top:48px;padding:26px 0 48px;font-size:15px;color:var(--muted)}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:14px}
+footer nav a{color:var(--ink);font-weight:500;text-underline-offset:3px}
+footer p{margin:6px 0;max-width:40em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumbs"><a href="/"><img src="/favicon-192.png" alt="">Anonaconda Code Lab</a></div>
+  <header class="hero">
+    <img class="icon" src="/icons/redact.svg" alt="">
+    <h1>Redact</h1>
+    <p class="lede">Before you share a photo or a screenshot, Redact finds the faces, card and phone numbers, email addresses, QR codes and other text in it. You check and add to what it found, and the covers replace the pixels themselves, so they can’t be lifted off.</p>
+    <p class="needs">Free. Works in any modern browser on a phone, tablet or computer. No account, no upload: your pictures never leave your device, and even the detection runs offline.</p>
+    <p class="soon new"><span>New</span>Also as an <a href="https://redact.anonacondacodelab.com/android.html">Android app</a>: share pictures to Redact from your gallery, and it has no internet access at all.</p>
+    
+    <div class="links"><a class="open" href="https://redact.anonacondacodelab.com">Open Redact</a><a href="https://redact.anonacondacodelab.com/android.html">Android app</a><a href="/redact/manual/">User manual</a><a href="https://github.com/Anonaconda-CodeLab/redact">Source code</a></div>
+  </header>
+  <main>
+    <div class="shots" role="list" aria-label="Screenshots">
+      <figure role="listitem"><img src="/screens/redact/1-home.webp" alt="Open photos or screenshots: everything stays on your device" width="780" height="1688" loading="lazy"><figcaption>Open photos or screenshots: everything stays on your device</figcaption></figure>
+      <figure role="listitem"><img src="/screens/redact/2-found.webp" alt="Numbers, emails and codes found and covered; everything else outlined" width="780" height="1688" loading="lazy"><figcaption>Numbers, emails and codes found and covered; everything else outlined</figcaption></figure>
+      <figure role="listitem"><img src="/screens/redact/3-covered.webp" alt="Tap an outline to cover it: here the name and address" width="780" height="1688" loading="lazy"><figcaption>Tap an outline to cover it: here the name and address</figcaption></figure>
+      <figure role="listitem"><img src="/screens/redact/4-ready.webp" alt="Checked pixel by pixel, read again, no hidden data: ready to save" width="780" height="1688" loading="lazy"><figcaption>Checked pixel by pixel, read again, no hidden data: ready to save</figcaption></figure>
+    </div>
+    <h2>What it does</h2>
+    <div class="features">
+      <div><h3>Finds what you might miss</h3><p>Faces, card and bank numbers, ID numbers, email addresses, phone numbers, QR codes and barcodes, web addresses, long numbers, and every other piece of text.</p></div>
+      <div><h3>You stay in charge</h3><p>Choose which kinds are covered straight away; the rest get a dashed outline you cover with a tap. Draw boxes or brush over anything else.</p></div>
+      <div><h3>Find words</h3><p>Names and addresses can’t be recognised as such, so type them once and Redact finds them in every picture, even when a letter is misread.</p></div>
+      <div><h3>Covers for real</h3><p>The covers replace the pixels underneath, and a new picture is made only from what you see. Nothing can be lifted off afterwards.</p></div>
+      <div><h3>Checked before you save</h3><p>The new picture is checked pixel by pixel under every cover, read again for anything new, and checked for hidden data, before Save appears.</p></div>
+      <div><h3>No hidden details</h3><p>No location, phone model or dates go with the picture: it passes through the same cleaner as Unmarked.</p></div>
+      <div><h3>Many pictures at once</h3><p>Up to 20 photos or screenshots at a time. In the Android app, share them to Redact straight from your gallery.</p></div>
+      <div><h3>Private by design</h3><p>No account, no server, no analytics. The detectors run on your device; the web app blocks every network connection and the Android app has no internet permission.</p></div>
+    </div>
+    <h2>What you need</h2>
+    <ul class="needlist"><li>Any modern browser on a phone, tablet or computer: Chrome, Edge, Brave, Firefox or Safari.</li><li>Or the <a href="https://redact.anonacondacodelab.com/android.html"><b>Android app</b></a>, which adds <b>Share → Redact</b>.</li><li>Pictures in JPEG, PNG or WebP. HEIC photos need converting to JPEG first.</li></ul>
+    <h2>Questions</h2>
+    <details><summary>Is Redact really free?</summary><p>Yes. No subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.</p></details>
+    <details><summary>Are my pictures uploaded anywhere?</summary><p>No. Everything happens on your own device, including finding faces and reading text. The web app blocks every network connection, and the Android app has no internet permission.</p></details>
+    <details><summary>Does it find everything?</summary><p>No tool does. Faces that are turned away, cut off or partly hidden, handwriting, reflections and things that give away a place without any text can be missed. Check every picture yourself, and cover anything by hand.</p></details>
+    <details><summary>Why not just draw a black box in any editor?</summary><p>Some editors and file types keep the original underneath, or let a box be moved or removed again. Redact paints the covers into a brand-new picture and checks the result pixel by pixel.</p></details>
+    <details><summary>Can a mosaic be undone?</summary><p>Software can sometimes recognise faces through a mosaic. Solid covers are the default; use them whenever someone must not be recognised.</p></details>
+    <details><summary>Why isn’t the Android app on Google Play?</summary><p>Publishing there means registering with Google and handing over government ID, and Google is extending that check to apps installed from elsewhere. We think you should be able to install software you choose on a phone you own, so we support <a href="https://keepandroidopen.org">Keep Android Open</a> and offer the app directly. The <a href="https://redact.anonacondacodelab.com/android.html">Android page</a> explains how to install it and check it’s the official build.</p></details>
+    <details><summary>Is the code open?</summary><p>Redact is free software under the GNU GPL v3. The <a href="https://github.com/Anonaconda-CodeLab/redact">source code is on GitHub</a>, and every Android release is built from it automatically, with a checksum to verify the download.</p></details>
+    <p class="note">Redact is provided as it is, without any warranty. It finds a lot, but not everything: check every picture before you share it.</p>
+  </main>
+  <footer>
+    <nav aria-label="Studio links">
+      <a href="/">All apps</a>
+      <a href="https://ko-fi.com/anonacondacodelab">Support on Ko-fi</a>
+      <a href="https://github.com/Anonaconda-CodeLab">GitHub</a>
+      <a href="https://mastodon.social/@anonacondacodelab" rel="me">Mastodon</a>
+    </nav>
+    <p>No cookies, no analytics, no tracking, on this page or in the apps.</p>
+    <p>© 2026 Anonaconda Code Lab. Apps are free software under the GNU GPL v3. Polar and H10 are trademarks of Polar Electro Oy; Garmin, HRM-Dual and HRM-Pro of Garmin Ltd.; Wahoo and TICKR of Wahoo Fitness; Coospo, Magene and Decathlon of their respective owners. These apps are independent and not affiliated with any of them.</p>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // Builds the app pages, the user-manual pages, sitemap.xml and robots.txt for anonacondacodelab.com.
 // The site itself has no build step: run this after changing a page's content or a manual, then commit the output.
-//   node tools/pages.mjs [still-point/docs/MANUAL.md] [lead-one-ecg/docs/MANUAL.md] [rounds/docs/MANUAL.md] [unmarked/docs/MANUAL.md] [flatbed/docs/MANUAL.md]
-// Each manual path defaults to the app's repository cloned next to this one (../still-point, ../lead-one-ecg, ../rounds, ../unmarked, ../flatbed).
+//   node tools/pages.mjs [still-point/docs/MANUAL.md] [lead-one-ecg/docs/MANUAL.md] [rounds/docs/MANUAL.md] [unmarked/docs/MANUAL.md] [flatbed/docs/MANUAL.md] [redact/docs/MANUAL.md]
+// Each manual path defaults to the app's repository cloned next to this one (../still-point, ../lead-one-ecg, ../rounds, ../unmarked, ../flatbed, ../redact).
 // A manual that can't be found is skipped and its existing page is left as it is.
 // A default (sibling) manual is only used if that folder is a git clone that is up to date with GitHub, so an old
 // copy can't quietly overwrite a newer live manual. Pass a path explicitly to use a file as it is.
@@ -26,7 +26,7 @@ function stale(f) {
   return behind ? `${behind} commit(s) behind GitHub; pull first` : '';
 }
 const pick = (i, name) => { if (arg[i]) return arg[i]; const f = sib(name), why = stale(f); if (why) { console.warn(`skipped ${name} manual: ../${name} is ${why}`); return ''; } return f; };
-const spManual = pick(0, 'still-point'), loManual = pick(1, 'lead-one-ecg'), rdManual = pick(2, 'rounds'), unManual = pick(3, 'unmarked'), fbManual = pick(4, 'flatbed');
+const spManual = pick(0, 'still-point'), loManual = pick(1, 'lead-one-ecg'), rdManual = pick(2, 'rounds'), unManual = pick(3, 'unmarked'), fbManual = pick(4, 'flatbed'), rxManual = pick(5, 'redact');
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const out = (p, s) => { mkdirSync(dirname(join(root, p)), { recursive: true }); writeFileSync(join(root, p), s); };
 
@@ -184,6 +184,45 @@ ${body}
   </article></main>` + FOOT;
 }
 
+const RX = {
+  name: 'Redact', path: '/redact/', appUrl: 'https://redact.anonacondacodelab.com', icon: '/icons/redact.svg', image: '/social/og-redact.jpg',
+  category: 'MultimediaApplication', os: 'Android app; any modern browser on Android, iPhone, iPad, Windows, macOS, ChromeOS, Linux',
+  browserReq: 'Any modern browser',
+  title: 'Redact: cover faces, numbers and names in photos and screenshots, privately',
+  desc: 'Redact finds faces, card and phone numbers, email addresses, QR codes and text in your photos and screenshots, and covers them for real before you share. Free, open source, and nothing leaves your device.',
+  manualDesc: 'covering a picture, what Redact looks for, the editor, Find words, checking and saving, and what it can’t find for you.',
+  lede: 'Before you share a photo or a screenshot, Redact finds the faces, card and phone numbers, email addresses, QR codes and other text in it. You check and add to what it found, and the covers replace the pixels themselves, so they can’t be lifted off.',
+  needs: 'Free. Works in any modern browser on a phone, tablet or computer. No account, no upload: your pictures never leave your device, and even the detection runs offline.',
+  isNew: 'Also as an <a href="https://redact.anonacondacodelab.com/android.html">Android app</a>: share pictures to Redact from your gallery, and it has no internet access at all.',
+  links: [['https://redact.anonacondacodelab.com/android.html', 'Android app'], ['/redact/manual/', 'User manual'], ['https://github.com/Anonaconda-CodeLab/redact', 'Source code']],
+  shots: [
+    ['/screens/redact/1-home.webp', 'Open photos or screenshots: everything stays on your device', 780, 1688],
+    ['/screens/redact/2-found.webp', 'Numbers, emails and codes found and covered; everything else outlined', 780, 1688],
+    ['/screens/redact/3-covered.webp', 'Tap an outline to cover it: here the name and address', 780, 1688],
+    ['/screens/redact/4-ready.webp', 'Checked pixel by pixel, read again, no hidden data: ready to save', 780, 1688]
+  ],
+  features: [
+    ['Finds what you might miss', 'Faces, card and bank numbers, ID numbers, email addresses, phone numbers, QR codes and barcodes, web addresses, long numbers, and every other piece of text.'],
+    ['You stay in charge', 'Choose which kinds are covered straight away; the rest get a dashed outline you cover with a tap. Draw boxes or brush over anything else.'],
+    ['Find words', 'Names and addresses can’t be recognised as such, so type them once and Redact finds them in every picture, even when a letter is misread.'],
+    ['Covers for real', 'The covers replace the pixels underneath, and a new picture is made only from what you see. Nothing can be lifted off afterwards.'],
+    ['Checked before you save', 'The new picture is checked pixel by pixel under every cover, read again for anything new, and checked for hidden data, before Save appears.'],
+    ['No hidden details', 'No location, phone model or dates go with the picture: it passes through the same cleaner as Unmarked.'],
+    ['Many pictures at once', 'Up to 20 photos or screenshots at a time. In the Android app, share them to Redact straight from your gallery.'],
+    ['Private by design', 'No account, no server, no analytics. The detectors run on your device; the web app blocks every network connection and the Android app has no internet permission.']
+  ],
+  need: ['Any modern browser on a phone, tablet or computer: Chrome, Edge, Brave, Firefox or Safari.', 'Or the <a href="https://redact.anonacondacodelab.com/android.html"><b>Android app</b></a>, which adds <b>Share → Redact</b>.', 'Pictures in JPEG, PNG or WebP. HEIC photos need converting to JPEG first.'],
+  faq: [
+    ['Is Redact really free?', 'Yes. No subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.'],
+    ['Are my pictures uploaded anywhere?', 'No. Everything happens on your own device, including finding faces and reading text. The web app blocks every network connection, and the Android app has no internet permission.'],
+    ['Does it find everything?', 'No tool does. Faces that are turned away, cut off or partly hidden, handwriting, reflections and things that give away a place without any text can be missed. Check every picture yourself, and cover anything by hand.'],
+    ['Why not just draw a black box in any editor?', 'Some editors and file types keep the original underneath, or let a box be moved or removed again. Redact paints the covers into a brand-new picture and checks the result pixel by pixel.'],
+    ['Can a mosaic be undone?', 'Software can sometimes recognise faces through a mosaic. Solid covers are the default; use them whenever someone must not be recognised.'],
+    ['Why isn’t the Android app on Google Play?', 'Publishing there means registering with Google and handing over government ID, and Google is extending that check to apps installed from elsewhere. We think you should be able to install software you choose on a phone you own, so we support <a href="https://keepandroidopen.org">Keep Android Open</a> and offer the app directly. The <a href="https://redact.anonacondacodelab.com/android.html">Android page</a> explains how to install it and check it’s the official build.'],
+    ['Is the code open?', 'Redact is free software under the GNU GPL v3. The <a href="https://github.com/Anonaconda-CodeLab/redact">source code is on GitHub</a>, and every Android release is built from it automatically, with a checksum to verify the download.']
+  ],
+  disclaimer: 'Redact is provided as it is, without any warranty. It finds a lot, but not everything: check every picture before you share it.'
+};
 const FB = {
   name: 'Flatbed', path: '/flatbed/', appUrl: 'https://flatbed.anonacondacodelab.com', icon: '/icons/flatbed.svg', image: '/social/og-flatbed.jpg',
   category: 'BusinessApplication', os: 'Android app; any modern browser on Android, iPhone, iPad, Windows, macOS, ChromeOS, Linux',
@@ -402,16 +441,17 @@ const LO = {
   disclaimer: 'Lead One ECG is for general wellness and education only and is not a medical device. It cannot diagnose or rule out any condition. If you have chest pain, fainting, severe breathlessness or a racing or very irregular heartbeat, seek medical care immediately.'
 };
 
+out('redact/index.html', appPage(RX));
 out('flatbed/index.html', appPage(FB));
 out('unmarked/index.html', appPage(UN));
 out('rounds/index.html', appPage(RD));
 out('still-point/index.html', appPage(SP));
 out('lead-one/index.html', appPage(LO));
-for (const [a, f, dir] of [[FB, fbManual, 'flatbed'], [UN, unManual, 'unmarked'], [RD, rdManual, 'rounds'], [SP, spManual, 'still-point'], [LO, loManual, 'lead-one']]) {
+for (const [a, f, dir] of [[RX, rxManual, 'redact'], [FB, fbManual, 'flatbed'], [UN, unManual, 'unmarked'], [RD, rdManual, 'rounds'], [SP, spManual, 'still-point'], [LO, loManual, 'lead-one']]) {
   if (f && existsSync(f)) out(dir + '/manual/index.html', manualPage(a, readFileSync(f, 'utf8')));
   else if (f) console.warn(`skipped ${dir}/manual: ${f} not found`);
 }
-const urls = ['/', '/flatbed/', '/flatbed/manual/', '/unmarked/', '/unmarked/manual/', '/rounds/', '/rounds/manual/', '/still-point/', '/still-point/manual/', '/lead-one/', '/lead-one/manual/'];
+const urls = ['/', '/redact/', '/redact/manual/', '/flatbed/', '/flatbed/manual/', '/unmarked/', '/unmarked/manual/', '/rounds/', '/rounds/manual/', '/still-point/', '/still-point/manual/', '/lead-one/', '/lead-one/manual/'];
 const today = new Date().toISOString().slice(0, 10);
 out('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${SITE}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n')}\n</urlset>\n`);
 out('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);

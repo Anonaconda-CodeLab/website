@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Redact user manual</title>
+<meta name="description" content="How to use Redact: covering a picture, what Redact looks for, the editor, Find words, checking and saving, and what it can’t find for you.">
+<link rel="canonical" href="https://anonacondacodelab.com/redact/manual/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Anonaconda Code Lab">
+<meta property="og:title" content="Redact user manual">
+<meta property="og:description" content="How to use Redact: covering a picture, what Redact looks for, the editor, Find words, checking and saving, and what it can’t find for you.">
+<meta property="og:url" content="https://anonacondacodelab.com/redact/manual/">
+<meta property="og:image" content="https://anonacondacodelab.com/social/og-redact.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#22362B">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+@font-face{font-family:"Instrument Sans";font-style:normal;font-display:swap;font-weight:400 700;font-stretch:75% 100%;
+  src:url(/fonts/InstrumentSans-latin-variable.woff2) format("woff2-variations")}
+:root{--paper:#ECEFE7; --new:#B31F39; --new-ink:#FFFFFF;--ink:#22362B;--line:#6E7F3A;--muted:#5E6B61;--rule:#CBD2C4;--head:#8FA048;--card:#F6F8F3;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#141A16; --new:#F07A8D; --new-ink:#141A16;--ink:#E3E8DE;--line:#A9B865;--muted:#94A096;--rule:#2C362F;--head:#B9C97A;--card:#1A221D}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 "Instrument Sans",system-ui,sans-serif}
+a{color:inherit}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--line);outline-offset:3px;border-radius:4px}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.crumbs{display:flex;align-items:center;gap:10px;padding-top:28px;font-size:15px;color:var(--muted)}
+.crumbs a{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
+.crumbs img{width:30px;height:30px}
+header.hero{padding:40px 0 8px}
+.hero .icon{width:64px;height:64px;display:block}
+h1{font-size:clamp(44px,10vw,80px);line-height:.95;font-stretch:75%;font-weight:650;letter-spacing:-.01em;margin:18px 0 0;text-wrap:balance}
+.lede{font-size:clamp(19px,2.6vw,22px);line-height:1.45;max-width:32em;margin:18px 0 0}
+.needs{font-size:15px;color:var(--muted);max-width:40em;margin:10px 0 0}
+.links{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-top:20px}
+.open{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600;padding:11px 20px;border-radius:999px}
+.open:hover{background:var(--line);color:#fff}
+.links a:not(.open){font-weight:500;text-underline-offset:3px}
+.soon{font-size:15px;margin-top:12px}
+.soon span{display:inline-block;font-size:11.5px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;background:var(--line);color:var(--paper);padding:2px 9px;border-radius:999px;margin-right:9px;vertical-align:1px}
+.soon.new{margin-top:14px;padding:11px 14px;border-left:4px solid var(--new);border-radius:10px;background:color-mix(in srgb,var(--new) 9%,transparent);font-weight:550}
+.soon.new span{background:var(--new);color:var(--new-ink);font-size:13px;padding:3px 11px}
+.soon.new a{color:var(--new);font-weight:700}
+.shots{display:flex;gap:14px;overflow-x:auto;padding:28px 2px 18px;margin:20px 0 0;scroll-snap-type:x mandatory}
+.shots figure{margin:0;flex:none;width:210px;scroll-snap-align:start}
+.shots img{width:100%;height:auto;display:block;border-radius:18px;border:1px solid var(--rule);background:var(--card)}
+.shots.wide figure{width:280px}
+.shots figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.35}
+h2{font-size:30px;font-stretch:85%;font-weight:600;line-height:1.1;margin:44px 0 6px;text-wrap:balance}
+h3{font-size:18.5px;font-weight:600;margin:0}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px 28px;margin-top:18px}
+.features p{margin:4px 0 0;font-size:16px}
+.needlist{margin:10px 0 0;padding-left:20px}
+.needlist li{margin:4px 0}
+details{border-top:1px solid var(--rule);padding:14px 0}
+details:last-of-type{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer;font-weight:600;font-size:17.5px}
+details p{margin:8px 0 0;max-width:40em}
+.note{font-size:15px;color:var(--muted);margin-top:26px;max-width:40em}
+.manual{max-width:42em}
+.manual h2{font-size:26px;margin-top:36px}
+.manual h3{margin-top:22px;font-size:18px}
+.manual ul,.manual ol{padding-left:22px}
+.manual li{margin:4px 0}
+.manual code{font-size:14px;background:var(--card);border:1px solid var(--rule);border-radius:5px;padding:0 4px;overflow-wrap:anywhere}
+.manual .callout{border:2px solid var(--head);border-radius:14px;padding:4px 18px;margin:18px 0;background:var(--card)}
+.manual hr{border:0;border-top:1px solid var(--rule);margin:28px 0}
+.manual table{border-collapse:collapse;margin:14px 0;font-size:16px;display:block;overflow-x:auto;max-width:100%}
+.manual th,.manual td{border-bottom:1px solid var(--rule);padding:6px 16px 6px 0;text-align:left;white-space:nowrap}
+.manual th{font-weight:600}
+footer{border-top:1px solid var(--rule);margin-top:48px;padding:26px 0 48px;font-size:15px;color:var(--muted)}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:14px}
+footer nav a{color:var(--ink);font-weight:500;text-underline-offset:3px}
+footer p{margin:6px 0;max-width:40em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumbs"><a href="/"><img src="/favicon-192.png" alt="">Anonaconda Code Lab</a></div>
+  <header class="hero">
+    <img class="icon" src="/icons/redact.svg" alt="">
+    <h1>Redact user manual</h1>
+    <div class="links"><a class="open" href="https://redact.anonacondacodelab.com">Open Redact</a><a href="/redact/">About Redact</a></div>
+  </header>
+  <main><article class="manual">
+<h2>What Redact does</h2>
+<p>Redact covers what people can see in your photos and screenshots before you share them: faces, number plates, house numbers, names and addresses, card and account numbers, email addresses and phone numbers, QR codes and barcodes.</p>
+<p>The covers become part of the picture. Many editors draw a box on top that can be removed again; Redact replaces the pixels underneath and saves a new picture made only from what you see, with no hidden details about you or your phone.</p>
+<div class="callout"><p><b>Check every picture yourself before you share it.</b> Redact finds a lot, but not everything. You decide what is covered, and you can cover anything by hand.</p></div>
+<h2>Covering a picture</h2>
+<ol><li>Tap <b>Open photos</b> (your gallery) or <b>Browse files</b> (any folder: Downloads, a USB stick, a cloud drive on your phone). Several pictures at once is fine, up to 20. On a computer you can also drop pictures onto the page. In the Android app you can also share pictures to Redact from your gallery or another app.</li><li>The first time, choose <b>what Redact should cover</b> straight away (see below). Tick <b>Remember my choice</b> to skip this next time.</li><li>Redact looks at each picture: faces, text, codes. It takes a few seconds a picture.</li><li>Tap a picture to check it. What is covered shows as it will be saved; what was found but not covered has a dashed outline in its category's colour.</li><li>Change what you need (see <i>The editor</i>), then tap <b>Check and save</b>.</li><li>Redact makes the new picture, checks it (see <i>Check and save</i>) and shows it. Tap <b>Save</b> or <b>Share</b>.</li></ol>
+<h2>What Redact looks for</h2>
+<ul><li><b>Faces</b>: People, also small ones in the background.</li><li><b>Card and bank numbers</b>: Card numbers (only when the card checksum fits) and IBANs (checked).</li><li><b>ID numbers</b>: Thai ID card numbers (checked) and the machine-readable lines of passports and ID cards.</li><li><b>Email addresses</b>: Also when a letter is misread.</li><li><b>Phone numbers</b>: International (+66 …) and national (08…, (02) …) numbers.</li><li><b>QR codes and barcodes</b>: And the text printed next to them, which usually says the same thing. What a code holds is never shown or kept.</li><li><b>Web addresses</b>: Links and website names.</li><li><b>Long numbers</b>: Account, order and booking numbers of 8 digits or more (not dates or amounts).</li><li><b>Other text</b>: Every other piece of text: signs, number plates, house numbers, names, each line of a screenshot.</li><li><b>Possible text</b>: Shapes the detector took for text but that read as nothing, such as railings or patterns.</li><li><b>Your words</b>: Everything you typed in <b>Find words</b>.</li><li><b>By hand</b>: Boxes and brush strokes you drew.</li></ul>
+<p>Ticked categories are covered straight away; the others are marked so you can cover them with a tap. You can change the choice at any time in <b>Settings</b> (the sliders icon), and for each picture in the editor.</p>
+<p>Names and addresses can't be recognised as such. Type them in <b>Find words</b> and Redact finds them in every picture.</p>
+<h2>The editor</h2>
+<ul><li><b>The category bar</b> above the picture shows what was found. Tap a category to cover all of it, tap again to uncover all of it.</li><li><b>Tap</b> (the first tool): tap a cover to remove it, or a dashed outline to cover it. A cover you tap gets corner handles: drag them to make it larger or smaller.</li><li><b>Box</b>: drag across anything to cover it.</li><li><b>Brush</b>: paint over anything, such as a face turned away or a name at an angle. The slider sets the brush size.</li><li><b>Zoom</b> with two fingers (or the mouse wheel), and move the picture with two fingers (or by dragging with Tap).</li><li><b>Undo</b> and <b>Redo</b> (the arrows) take back any change.</li><li><b>‹ ›</b> go to the previous and next picture.</li></ul>
+<h3>Cover colour and faces</h3>
+<ul><li><b>Black</b>, <b>White</b>, or <b>Colour from around</b>: the colour of what surrounds each cover (the paper, the screen's background). Colour from around makes a screenshot look as if the details were never there.</li><li><b>Faces: Mosaic</b> covers faces with large blocks of colour instead. It hides the face but still shows hair, skin tone and outline, and software can sometimes recognise a face through a mosaic: for anyone who must not be recognised, use <b>Solid</b>. Text is always covered solid, because blurred or pixelated text can be read back.</li></ul>
+<h3>Find words</h3>
+<p>Open <b>Find words</b>, type a name, a street, a number plate or any other word, and tap <b>Add</b>. Redact finds it in every open picture, allowing for small reading errors, and covers it. Tap × to take a word off the list.</p>
+<p>The list is kept only until you close Redact. <b>Save list</b> saves it to a small text file of your own (one entry per line), and <b>Import list</b> loads such a file, so you can keep a list of your name, address and number plate and use it every time. Redact itself never stores the list.</p>
+<h2>Check and save</h2>
+<p>When you tap <b>Check and save</b>, Redact:</p>
+<ol><li>paints the covers into the full-size picture and saves a new file from those pixels alone;</li><li>opens the new file again and checks, pixel by pixel, that every cover came out (if one didn't, the picture can't be saved);</li><li>looks at the new picture again as if for the first time, and lists anything of the kinds you chose to cover that can still be found, and any of your words;</li><li>checks that the new file carries no hidden data, and lists what the original carried (where the photo was taken, the phone, the date and time).</li></ol>
+<p>Then look at the picture yourself, and tap <b>Save</b> or <b>Share</b>. Screenshots and other PNG pictures are saved as PNG (sharp text), photos as JPEG; <b>Settings</b> can change this. The new file gets a plain name such as <code>redacted-1.jpg</code>: a file's name goes with it, and camera names say when a photo was taken. <b>Settings</b> can keep the original name instead (with <code>-redacted</code> added). In the Android app, the save screen opens in the original's folder.</p>
+<p><b>Your original stays as it was</b>: the uncovered picture is still in your gallery, and in any cloud backup. Delete it there if no one should ever see it.</p>
+<h2>What Redact can't find for you</h2>
+<ul><li>Faces mostly hidden, turned away or seen from above; very small, blurred or dark faces.</li><li>Handwriting; text at a steep angle, in fancy lettering, very small, or under glare. A clearer photo helps.</li><li>Reflections (in windows, glasses, a phone screen), screens and photos inside the picture, tattoos.</li><li>Things that give away a place or a person without any text: a view, a building, clothes, a car.</li></ul>
+<p>Cover these by hand with <b>Box</b> or <b>Brush</b>.</p>
+<h2>Settings</h2>
+<ul><li><b>Covered straight away</b>: the categories covered as soon as a picture is opened.</li><li><b>Languages of the text to read</b>: English, French, Spanish, German and Thai. Numbers, emails and web addresses are found in any of them; names in your words need the right language. Each extra language makes reading slower.</li><li><b>Save as</b>: the same kind as the original, PNG or JPEG.</li><li><b>Names of saved pictures</b>: plain (<code>redacted-1.jpg</code>, the default) or the original name with <code>-redacted</code> added.</li><li><b>Remember these settings on this device</b>: without it, settings last until you close Redact.</li></ul>
+<h2>Privacy</h2>
+<ul><li><b>Nothing leaves your device.</b> The page's security policy blocks every connection, so it can't send anything anywhere, and the Android app has no internet permission.</li><li>Opening the web app is an ordinary website visit: the server sees your connection, as for any website. The pictures you open are never sent.</li><li>Everything Redact needs (the detectors, the text reader and its languages) is built into the page: nothing is downloaded while you use it.</li><li>Pictures exist only while Redact is open. The only things kept on your device are your settings, if you ask, and a count of pictures saved (for an occasional donation request).</li><li>Pictures, their text and your words are kept from your browser's translator, so translation never sends them anywhere.</li></ul>
+<h2>Questions</h2>
+<p>Write to hello@anonacondacodelab.com. A description or a screenshot of the app is usually enough; please don't send the pictures you were covering.</p>
+  </article></main>
+  <footer>
+    <nav aria-label="Studio links">
+      <a href="/">All apps</a>
+      <a href="https://ko-fi.com/anonacondacodelab">Support on Ko-fi</a>
+      <a href="https://github.com/Anonaconda-CodeLab">GitHub</a>
+      <a href="https://mastodon.social/@anonacondacodelab" rel="me">Mastodon</a>
+    </nav>
+    <p>No cookies, no analytics, no tracking, on this page or in the apps.</p>
+    <p>© 2026 Anonaconda Code Lab. Apps are free software under the GNU GPL v3. Polar and H10 are trademarks of Polar Electro Oy; Garmin, HRM-Dual and HRM-Pro of Garmin Ltd.; Wahoo and TICKR of Wahoo Fitness; Coospo, Magene and Decathlon of their respective owners. These apps are independent and not affiliated with any of them.</p>
+  </footer>
+</div>
+</body>
+</html>
