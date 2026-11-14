@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Remark user manual</title>
+<meta name="description" content="How to use Remark: marking up a picture, the tools, text that reads anywhere, covers, saving and the settings.">
+<link rel="canonical" href="https://anonacondacodelab.com/remark/manual/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Anonaconda Code Lab">
+<meta property="og:title" content="Remark user manual">
+<meta property="og:description" content="How to use Remark: marking up a picture, the tools, text that reads anywhere, covers, saving and the settings.">
+<meta property="og:url" content="https://anonacondacodelab.com/remark/manual/">
+<meta property="og:image" content="https://anonacondacodelab.com/social/og-remark.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#22362B">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+@font-face{font-family:"Instrument Sans";font-style:normal;font-display:swap;font-weight:400 700;font-stretch:75% 100%;
+  src:url(/fonts/InstrumentSans-latin-variable.woff2) format("woff2-variations")}
+:root{--paper:#ECEFE7; --new:#B31F39; --new-ink:#FFFFFF;--ink:#22362B;--line:#6E7F3A;--muted:#5E6B61;--rule:#CBD2C4;--head:#8FA048;--card:#F6F8F3;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#141A16; --new:#F07A8D; --new-ink:#141A16;--ink:#E3E8DE;--line:#A9B865;--muted:#94A096;--rule:#2C362F;--head:#B9C97A;--card:#1A221D}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 "Instrument Sans",system-ui,sans-serif}
+a{color:inherit}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--line);outline-offset:3px;border-radius:4px}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.crumbs{display:flex;align-items:center;gap:10px;padding-top:28px;font-size:15px;color:var(--muted)}
+.crumbs a{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
+.crumbs img{width:30px;height:30px}
+header.hero{padding:40px 0 8px}
+.hero .icon{width:64px;height:64px;display:block}
+h1{font-size:clamp(44px,10vw,80px);line-height:.95;font-stretch:75%;font-weight:650;letter-spacing:-.01em;margin:18px 0 0;text-wrap:balance}
+.lede{font-size:clamp(19px,2.6vw,22px);line-height:1.45;max-width:32em;margin:18px 0 0}
+.needs{font-size:15px;color:var(--muted);max-width:40em;margin:10px 0 0}
+.links{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-top:20px}
+.open{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600;padding:11px 20px;border-radius:999px}
+.open:hover{background:var(--line);color:#fff}
+.links a:not(.open){font-weight:500;text-underline-offset:3px}
+.soon{font-size:15px;margin-top:12px}
+.soon span{display:inline-block;font-size:11.5px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;background:var(--line);color:var(--paper);padding:2px 9px;border-radius:999px;margin-right:9px;vertical-align:1px}
+.soon.new{margin-top:14px;padding:11px 14px;border-left:4px solid var(--new);border-radius:10px;background:color-mix(in srgb,var(--new) 9%,transparent);font-weight:550}
+.soon.new span{background:var(--new);color:var(--new-ink);font-size:13px;padding:3px 11px}
+.soon.new a{color:var(--new);font-weight:700}
+.shots{display:flex;gap:14px;overflow-x:auto;padding:28px 2px 18px;margin:20px 0 0;scroll-snap-type:x mandatory}
+.shots figure{margin:0;flex:none;width:210px;scroll-snap-align:start}
+.shots img{width:100%;height:auto;display:block;border-radius:18px;border:1px solid var(--rule);background:var(--card)}
+.shots.wide figure{width:280px}
+.shots figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.35}
+h2{font-size:30px;font-stretch:85%;font-weight:600;line-height:1.1;margin:44px 0 6px;text-wrap:balance}
+h3{font-size:18.5px;font-weight:600;margin:0}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px 28px;margin-top:18px}
+.features p{margin:4px 0 0;font-size:16px}
+.needlist{margin:10px 0 0;padding-left:20px}
+.needlist li{margin:4px 0}
+details{border-top:1px solid var(--rule);padding:14px 0}
+details:last-of-type{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer;font-weight:600;font-size:17.5px}
+details p{margin:8px 0 0;max-width:40em}
+.note{font-size:15px;color:var(--muted);margin-top:26px;max-width:40em}
+.manual{max-width:42em}
+.manual h2{font-size:26px;margin-top:36px}
+.manual h3{margin-top:22px;font-size:18px}
+.manual ul,.manual ol{padding-left:22px}
+.manual li{margin:4px 0}
+.manual code{font-size:14px;background:var(--card);border:1px solid var(--rule);border-radius:5px;padding:0 4px;overflow-wrap:anywhere}
+.manual .callout{border:2px solid var(--head);border-radius:14px;padding:4px 18px;margin:18px 0;background:var(--card)}
+.manual hr{border:0;border-top:1px solid var(--rule);margin:28px 0}
+.manual table{border-collapse:collapse;margin:14px 0;font-size:16px;display:block;overflow-x:auto;max-width:100%}
+.manual th,.manual td{border-bottom:1px solid var(--rule);padding:6px 16px 6px 0;text-align:left;white-space:nowrap}
+.manual th{font-weight:600}
+footer{border-top:1px solid var(--rule);margin-top:48px;padding:26px 0 48px;font-size:15px;color:var(--muted)}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:14px}
+footer nav a{color:var(--ink);font-weight:500;text-underline-offset:3px}
+footer p{margin:6px 0;max-width:40em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumbs"><a href="/"><img src="/favicon-192.png" alt="">Anonaconda Code Lab</a></div>
+  <header class="hero">
+    <img class="icon" src="/icons/remark.svg" alt="">
+    <h1>Remark user manual</h1>
+    <div class="links"><a class="open" href="https://remark.anonacondacodelab.com">Open Remark</a><a href="/remark/">About Remark</a></div>
+  </header>
+  <main><article class="manual">
+<h2>What Remark does</h2>
+<p>Remark lets you write and draw on a photo or a screenshot, then save or share a clean copy: a name or a note on a receipt, an arrow to a button in a screenshot, numbered points on a photo.</p>
+<p>The marks become part of a brand-new picture. Remark draws them into new pixels and saves a new file made only from what you see: there are no layers that someone could peel off, and none of the hidden details about you or your phone (such as where a photo was taken) come along.</p>
+<h2>Marking up a picture</h2>
+<ol><li>Tap <b>Open photos</b> (your gallery) or <b>Browse files</b> (any folder: Downloads, a USB stick, a cloud drive on your phone). Several pictures at once is fine, up to 20. On a computer you can also drop pictures onto the page, or paste a screenshot with <b>Ctrl+V</b>. In the Android app you can also share pictures to Remark from your gallery or another app.</li><li>One picture opens straight away; with several, tap the one to mark up.</li><li><b>Text</b> is ready: tap where the words go, type, and tap <b>Done</b> (or press Enter).</li><li>Add anything else with the other tools (see <i>The tools</i>), then tap <b>Done</b> at the top. To place things exactly, <b>pinch to zoom in</b> (scroll on a computer) and move the picture with two fingers.</li><li>Remark makes the new picture, checks it (see <i>Saving</i>) and shows it. Tap <b>Save</b> or <b>Share</b>, or <b>Copy picture</b> on a computer to paste it straight into a chat or an email.</li></ol>
+<h2>The tools</h2>
+<ul><li><b>Text</b>: tap where the words go and type. The words appear on the picture as you type. Shift+Enter starts a new line. The last few things you typed are offered above the text box, so a name you write on every receipt is one tap.</li><li><b>Callout</b>: a text label with a pointer, like a speech bubble. Tap where the words go and type, then drag the round handle at the pointer's tip to what it's about.</li><li><b>Arrow</b>: drag from where the arrow starts to what it points at.</li><li><b>Line</b>: a straight line, for underlining or crossing out.</li><li><b>Circle</b>: drag across what you want to circle. It is an oval, so it fits around anything.</li><li><b>Box</b>: drag across what you want to box.</li><li><b>Number</b>: tap to place 1, 2, 3… in filled circles. Delete one and the others count again from 1.</li><li><b>Highlight</b>: drag over text like a highlighter pen. The text underneath stays readable.</li><li><b>Pen</b>: draw freehand: a tick, an underline, a signature.</li><li><b>Cover</b>: drag across something to hide it (see below).</li><li><b>Crop</b>: drag the corners to keep only part of the picture. <b>Whole picture</b> undoes the crop; <b>Crop done</b> goes back to Text.</li></ul>
+<h3>Text that reads well anywhere</h3>
+<p>Text and callouts come in three styles:</p>
+<ul><li><b>Label</b> (the usual one): the words on a solid rounded box in your colour, with black or white letters, whichever reads better. Readable on a busy photo, a white receipt or a dark screen.</li><li><b>Outline</b>: coloured letters with a contrasting edge.</li><li><b>Plain</b>: just the coloured letters.</li></ul>
+<p>Text is sized for the picture: the first tap gives readable text on a large photo and on a phone screenshot alike. <b>S</b>, <b>M</b> and <b>L</b> make it smaller or larger. English and Thai text use the app's own typefaces, so they look the same everywhere; other writing uses your device's fonts.</p>
+<h3>Colours and sizes</h3>
+<p>Six colours (red, yellow, green, blue, black and white) and three sizes (S, M, L) apply to the next mark, or to the selected one. Lines, arrows and shapes get a faint edge in black or white, so red still shows on a red background. The highlighter has its own colour (yellow at first).</p>
+<h3>Changing a mark</h3>
+<ul><li><b>Tap a mark</b> to select it (a dashed outline appears). <b>Drag</b> it to move it.</li><li>Drag its <b>round handles</b> to change it: both ends of an arrow or a line, the tip of a callout's pointer, the corners of a circle, a box or a cover.</li><li>Change its <b>colour</b>, <b>size</b> or <b>style</b> with the buttons under the tools.</li><li><b>Edit text</b> (or tap a selected text again) changes its words; <b>Delete</b> removes the mark.</li><li>Tap empty space to deselect.</li><li><b>Undo</b> and <b>Redo</b> (the arrows at the top) take back any change.</li><li><b>Pinch to zoom</b> (or scroll with the mouse wheel), and move the picture with two fingers.</li><li><b>‹ ›</b> go to the previous and next picture.</li></ul>
+<p>On a computer, <b>Delete</b> removes the selected mark, and <b>Ctrl+Z</b> and <b>Ctrl+Y</b> undo and redo.</p>
+<h3>Covers</h3>
+<p>A <b>cover</b> hides a stray detail: an account number on a statement, a name in a screenshot, a face in the background. It can be <b>Black</b>, <b>White</b>, or <b>Colour from around</b>: the colour of what surrounds it (the paper, the screen's background), so a cover on a receipt barely shows.</p>
+<div class="callout"><p><b>Only a cover hides anything.</b> A highlighter, a box, a line or a label over something still shows it, or lets it show through. A cover replaces the pixels underneath, and it is always drawn on top of every other mark.</p></div>
+<p>To find faces, number plates, card numbers and more automatically, use the studio's <b>Redact</b> app.</p>
+<h2>Saving</h2>
+<p>When you tap <b>Done</b>, Remark:</p>
+<ol><li>opens the original again at full size and keeps the cropped part, if you cropped;</li><li>draws your marks into it, then paints the covers, and saves a new file from those pixels alone;</li><li>opens the new file again and checks, pixel by pixel, that every cover came out (if one didn't, the picture can't be saved);</li><li>checks that the new file carries no hidden data, and lists what the original carried (where the photo was taken, the phone, the date and time).</li></ol>
+<p>Then look at the picture, and tap <b>Save</b>, <b>Share</b> or <b>Copy picture</b>. Screenshots and other PNG pictures are saved as PNG (sharp text), photos as JPEG; <b>Settings</b> can change this. The new file gets a plain name such as <code>remark-1.jpg</code>: a file's name goes with it, and camera names say when a photo was taken. <b>Settings</b> can keep the original name instead (with <code>-remark</code> added). In the Android app, the save screen opens in the original's folder.</p>
+<p><b>Copy picture</b> (computers) puts the picture on your computer's clipboard. If your system syncs the clipboard to other devices (Windows clipboard sync, Apple's Universal Clipboard), it goes there too; use <b>Save</b> if that matters.</p>
+<p><b>Your original stays as it was</b>: it is still in your gallery, and in any cloud backup.</p>
+<h2>Settings</h2>
+<ul><li><b>Save as</b>: the same kind as the original, PNG or JPEG.</li><li><b>Names of saved pictures</b>: plain (<code>remark-1.jpg</code>, the default) or the original name with <code>-remark</code> added.</li><li><b>Remember these settings on this device</b>: the format, the names, and your last colour and text style. Without it, settings last until you close Remark.</li><li><b>Also remember recent texts</b>: keeps the last few things you typed on this device. Without it, they are forgotten when you close Remark. <b>Forget recent texts</b> clears them.</li></ul>
+<h2>Privacy</h2>
+<ul><li><b>Nothing leaves your device.</b> The page's security policy blocks every connection, so it can't send anything anywhere, and the Android app has no internet permission.</li><li>Opening the web app is an ordinary website visit: the server sees your connection, as for any website. The pictures you open are never sent.</li><li>Everything Remark needs, its typefaces included, is built into the page: nothing is downloaded while you use it.</li><li>Pictures exist only while Remark is open. The only things kept on your device are your settings and recent texts, if you ask, and a count of pictures saved (for an occasional donation request).</li><li>Pictures, the text you type and file names are kept from your browser's translator, so translation never sends them anywhere.</li></ul>
+<h2>Questions</h2>
+<p>Write to hello@anonacondacodelab.com. A description or a screenshot of the app is usually enough; please don't send the pictures you were marking up.</p>
+  </article></main>
+  <footer>
+    <nav aria-label="Studio links">
+      <a href="/">All apps</a>
+      <a href="/why/">Why not Google Play?</a>
+      <a href="https://ko-fi.com/anonacondacodelab">Support on Ko-fi</a>
+      <a href="https://github.com/Anonaconda-CodeLab">GitHub</a>
+      <a href="https://mastodon.social/@anonacondacodelab" rel="me">Mastodon</a>
+    </nav>
+    <p>No cookies, no analytics, no tracking, on this page or in the apps.</p>
+    <p>© 2026 Anonaconda Code Lab. Apps are free software under the GNU GPL v3. Polar and H10 are trademarks of Polar Electro Oy; Garmin, HRM-Dual and HRM-Pro of Garmin Ltd.; Wahoo and TICKR of Wahoo Fitness; Coospo, Magene and Decathlon of their respective owners. These apps are independent and not affiliated with any of them.</p>
+  </footer>
+</div>
+</body>
+</html>

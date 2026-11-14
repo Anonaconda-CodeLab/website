@@ -26,7 +26,7 @@ function stale(f) {
   return behind ? `${behind} commit(s) behind GitHub; pull first` : '';
 }
 const pick = (i, name) => { if (arg[i]) return arg[i]; const f = sib(name), why = stale(f); if (why) { console.warn(`skipped ${name} manual: ../${name} is ${why}`); return ''; } return f; };
-const spManual = pick(0, 'still-point'), loManual = pick(1, 'lead-one-ecg'), rdManual = pick(2, 'rounds'), unManual = pick(3, 'unmarked'), fbManual = pick(4, 'flatbed'), rxManual = pick(5, 'redact');
+const spManual = pick(0, 'still-point'), loManual = pick(1, 'lead-one-ecg'), rdManual = pick(2, 'rounds'), unManual = pick(3, 'unmarked'), fbManual = pick(4, 'flatbed'), rxManual = pick(5, 'redact'), rmManual = pick(6, 'remark');
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const out = (p, s) => { mkdirSync(dirname(join(root, p)), { recursive: true }); writeFileSync(join(root, p), s); };
 
@@ -185,6 +185,44 @@ ${body}
   </article></main>` + FOOT;
 }
 
+const RM = {
+  name: 'Remark', path: '/remark/', appUrl: 'https://remark.anonacondacodelab.com', icon: '/icons/remark.svg', image: '/social/og-remark.jpg',
+  category: 'MultimediaApplication', os: 'Android app; any modern browser on Android, iPhone, iPad, Windows, macOS, ChromeOS, Linux',
+  browserReq: 'Any modern browser',
+  title: 'Remark: add notes, arrows and shapes to photos and screenshots, privately',
+  desc: 'Remark lets you write and draw on a photo or a screenshot, then save or share a clean copy: text that reads on any background, arrows, circles, numbers, highlights and covers. Free, open source, and nothing leaves your device.',
+  manualDesc: 'marking up a picture, the tools, text that reads anywhere, covers, saving and the settings.',
+  lede: 'Add a name or a note to a receipt or a screenshot in seconds, with text that stays readable on any background. Point things out with callouts, arrows, circles, boxes and numbered markers, highlight or draw freehand, and cover a stray detail. Remark saves a fresh copy with the location and phone details removed.',
+  needs: 'Free. Works in any modern browser on a phone, tablet or computer. No account, no upload: your pictures never leave your device.',
+  isNew: 'Also as an <a href="https://remark.anonacondacodelab.com/android.html">Android app</a>: share pictures to Remark from your gallery or a chat, and it has no internet access at all.',
+  links: [['https://remark.anonacondacodelab.com/android.html', 'Android app'], ['/remark/manual/', 'User manual'], ['https://github.com/Anonaconda-CodeLab/remark', 'Source code']],
+  shots: [
+    ['/screens/remark/1-home.webp', 'Open photos or screenshots: everything stays on your device', 780, 1688],
+    ['/screens/remark/2-text.webp', 'Tap where the words go and type: text sits on a label that reads anywhere', 780, 1688],
+    ['/screens/remark/3-marked.webp', 'Highlight, circle, an arrow and a cover over the card number', 780, 1688],
+    ['/screens/remark/4-ready.webp', 'A brand-new picture, checked and cleaned: ready to save or share', 780, 1688]
+  ],
+  features: [
+    ['Text that reads anywhere', 'Words sit on a label in your colour, with black or white letters, whichever reads better: on a busy photo, a white receipt or a dark screen. English and Thai text look the same on every device.'],
+    ['Point things out', 'Callouts, arrows, lines, circles, boxes and numbered markers 1, 2, 3. Delete one and the others count again.'],
+    ['Highlight and draw', 'A highlighter that keeps the text underneath readable, and a pen for a tick, an underline or a signature.'],
+    ['Cover a stray detail', 'Black, white or the colour around it, so a cover on a receipt barely shows. A cover replaces the pixels underneath and is drawn on top of everything. For faces and card numbers found for you, use Redact.'],
+    ['Quick for repeat notes', 'The last few things you typed are offered above the text box, so a name you write on every receipt is one tap. Crop to keep only what matters.'],
+    ['A clean copy', 'Your marks are drawn into a brand-new picture, checked pixel by pixel, and cleaned of where the photo was taken and which phone took it. No layers anyone could peel off.'],
+    ['Many pictures at once', 'Up to 20 photos or screenshots. In the Android app, share them to Remark from your gallery or a chat; on a computer, paste a screenshot with Ctrl+V.'],
+    ['Private by design', 'No account, no server, no analytics. The web app blocks every network connection and the Android app has no internet permission.']
+  ],
+  need: ['Any modern browser on a phone, tablet or computer: Chrome, Edge, Brave, Firefox or Safari.', 'Or the <a href="https://remark.anonacondacodelab.com/android.html"><b>Android app</b></a>, which adds <b>Share → Remark</b>.', 'Pictures in JPEG, PNG or WebP. HEIC photos need converting to JPEG first.'],
+  faq: [
+    ['Is Remark really free?', 'Yes. No subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.'],
+    ['Are my pictures uploaded anywhere?', 'No. Everything happens on your own device. The web app blocks every network connection, and the Android app has no internet permission.'],
+    ['Does a highlight or a box hide what’s under it?', 'No: only a cover hides anything. A highlighter, a box, a line or a label still lets things show through. A cover replaces the pixels underneath.'],
+    ['I opened Remark from a link in LINE and can’t save', 'LINE’s built-in browser can’t save or share files. Remark shows a banner with <b>Open in your browser</b>: tap it, and everything works.'],
+    ['Why isn’t the Android app on Google Play?', 'Publishing there means registering with Google and handing over government ID, and Google is extending that check to apps installed from elsewhere. We think you should be able to install software you choose on a phone you own, so we support <a href="https://keepandroidopen.org">Keep Android Open</a> and offer the app directly (<a href="/why/">more on why</a>). The <a href="https://remark.anonacondacodelab.com/android.html">Android page</a> explains how to install it and check it’s the official build.'],
+    ['Is the code open?', 'Remark is free software under the GNU GPL v3. The <a href="https://github.com/Anonaconda-CodeLab/remark">source code is on GitHub</a>, and every Android release is built from it automatically, with a checksum to verify the download.']
+  ],
+  disclaimer: 'Remark is provided as it is, without any warranty. Check every picture before you share it.'
+};
 const RX = {
   name: 'Redact', path: '/redact/', appUrl: 'https://redact.anonacondacodelab.com', icon: '/icons/redact.svg', image: '/social/og-redact.jpg',
   category: 'MultimediaApplication', os: 'Android app; any modern browser on Android, iPhone, iPad, Windows, macOS, ChromeOS, Linux',
@@ -442,17 +480,18 @@ const LO = {
   disclaimer: 'Lead One ECG is for general wellness and education only and is not a medical device. It cannot diagnose or rule out any condition. If you have chest pain, fainting, severe breathlessness or a racing or very irregular heartbeat, seek medical care immediately.'
 };
 
+out('remark/index.html', appPage(RM));
 out('redact/index.html', appPage(RX));
 out('flatbed/index.html', appPage(FB));
 out('unmarked/index.html', appPage(UN));
 out('rounds/index.html', appPage(RD));
 out('still-point/index.html', appPage(SP));
 out('lead-one/index.html', appPage(LO));
-for (const [a, f, dir] of [[RX, rxManual, 'redact'], [FB, fbManual, 'flatbed'], [UN, unManual, 'unmarked'], [RD, rdManual, 'rounds'], [SP, spManual, 'still-point'], [LO, loManual, 'lead-one']]) {
+for (const [a, f, dir] of [[RM, rmManual, 'remark'], [RX, rxManual, 'redact'], [FB, fbManual, 'flatbed'], [UN, unManual, 'unmarked'], [RD, rdManual, 'rounds'], [SP, spManual, 'still-point'], [LO, loManual, 'lead-one']]) {
   if (f && existsSync(f)) out(dir + '/manual/index.html', manualPage(a, readFileSync(f, 'utf8')));
   else if (f) console.warn(`skipped ${dir}/manual: ${f} not found`);
 }
-const urls = ['/', '/why/', '/redact/', '/redact/manual/', '/flatbed/', '/flatbed/manual/', '/unmarked/', '/unmarked/manual/', '/rounds/', '/rounds/manual/', '/still-point/', '/still-point/manual/', '/lead-one/', '/lead-one/manual/'];
+const urls = ['/', '/why/', '/remark/', '/remark/manual/', '/redact/', '/redact/manual/', '/flatbed/', '/flatbed/manual/', '/unmarked/', '/unmarked/manual/', '/rounds/', '/rounds/manual/', '/still-point/', '/still-point/manual/', '/lead-one/', '/lead-one/manual/'];
 const today = new Date().toISOString().slice(0, 10);
 out('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${SITE}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n')}\n</urlset>\n`);
 out('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);

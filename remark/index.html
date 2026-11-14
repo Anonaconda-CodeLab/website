@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Remark: add notes, arrows and shapes to photos and screenshots, privately</title>
+<meta name="description" content="Remark lets you write and draw on a photo or a screenshot, then save or share a clean copy: text that reads on any background, arrows, circles, numbers, highlights and covers. Free, open source, and nothing leaves your device.">
+<link rel="canonical" href="https://anonacondacodelab.com/remark/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Anonaconda Code Lab">
+<meta property="og:title" content="Remark: add notes, arrows and shapes to photos and screenshots, privately">
+<meta property="og:description" content="Remark lets you write and draw on a photo or a screenshot, then save or share a clean copy: text that reads on any background, arrows, circles, numbers, highlights and covers. Free, open source, and nothing leaves your device.">
+<meta property="og:url" content="https://anonacondacodelab.com/remark/">
+<meta property="og:image" content="https://anonacondacodelab.com/social/og-remark.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#22362B">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Remark","url":"https://remark.anonacondacodelab.com","description":"Remark lets you write and draw on a photo or a screenshot, then save or share a clean copy: text that reads on any background, arrows, circles, numbers, highlights and covers. Free, open source, and nothing leaves your device.","applicationCategory":"MultimediaApplication","operatingSystem":"Android app; any modern browser on Android, iPhone, iPad, Windows, macOS, ChromeOS, Linux","browserRequirements":"Any modern browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"isAccessibleForFree":true,"license":"https://www.gnu.org/licenses/gpl-3.0.html","image":"https://anonacondacodelab.com/social/og-remark.jpg","author":{"@type":"Organization","name":"Anonaconda Code Lab","url":"https://anonacondacodelab.com/"}}</script>
+<style>
+@font-face{font-family:"Instrument Sans";font-style:normal;font-display:swap;font-weight:400 700;font-stretch:75% 100%;
+  src:url(/fonts/InstrumentSans-latin-variable.woff2) format("woff2-variations")}
+:root{--paper:#ECEFE7; --new:#B31F39; --new-ink:#FFFFFF;--ink:#22362B;--line:#6E7F3A;--muted:#5E6B61;--rule:#CBD2C4;--head:#8FA048;--card:#F6F8F3;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#141A16; --new:#F07A8D; --new-ink:#141A16;--ink:#E3E8DE;--line:#A9B865;--muted:#94A096;--rule:#2C362F;--head:#B9C97A;--card:#1A221D}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 "Instrument Sans",system-ui,sans-serif}
+a{color:inherit}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--line);outline-offset:3px;border-radius:4px}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.crumbs{display:flex;align-items:center;gap:10px;padding-top:28px;font-size:15px;color:var(--muted)}
+.crumbs a{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
+.crumbs img{width:30px;height:30px}
+header.hero{padding:40px 0 8px}
+.hero .icon{width:64px;height:64px;display:block}
+h1{font-size:clamp(44px,10vw,80px);line-height:.95;font-stretch:75%;font-weight:650;letter-spacing:-.01em;margin:18px 0 0;text-wrap:balance}
+.lede{font-size:clamp(19px,2.6vw,22px);line-height:1.45;max-width:32em;margin:18px 0 0}
+.needs{font-size:15px;color:var(--muted);max-width:40em;margin:10px 0 0}
+.links{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-top:20px}
+.open{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600;padding:11px 20px;border-radius:999px}
+.open:hover{background:var(--line);color:#fff}
+.links a:not(.open){font-weight:500;text-underline-offset:3px}
+.soon{font-size:15px;margin-top:12px}
+.soon span{display:inline-block;font-size:11.5px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;background:var(--line);color:var(--paper);padding:2px 9px;border-radius:999px;margin-right:9px;vertical-align:1px}
+.soon.new{margin-top:14px;padding:11px 14px;border-left:4px solid var(--new);border-radius:10px;background:color-mix(in srgb,var(--new) 9%,transparent);font-weight:550}
+.soon.new span{background:var(--new);color:var(--new-ink);font-size:13px;padding:3px 11px}
+.soon.new a{color:var(--new);font-weight:700}
+.shots{display:flex;gap:14px;overflow-x:auto;padding:28px 2px 18px;margin:20px 0 0;scroll-snap-type:x mandatory}
+.shots figure{margin:0;flex:none;width:210px;scroll-snap-align:start}
+.shots img{width:100%;height:auto;display:block;border-radius:18px;border:1px solid var(--rule);background:var(--card)}
+.shots.wide figure{width:280px}
+.shots figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.35}
+h2{font-size:30px;font-stretch:85%;font-weight:600;line-height:1.1;margin:44px 0 6px;text-wrap:balance}
+h3{font-size:18.5px;font-weight:600;margin:0}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px 28px;margin-top:18px}
+.features p{margin:4px 0 0;font-size:16px}
+.needlist{margin:10px 0 0;padding-left:20px}
+.needlist li{margin:4px 0}
+details{border-top:1px solid var(--rule);padding:14px 0}
+details:last-of-type{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer;font-weight:600;font-size:17.5px}
+details p{margin:8px 0 0;max-width:40em}
+.note{font-size:15px;color:var(--muted);margin-top:26px;max-width:40em}
+.manual{max-width:42em}
+.manual h2{font-size:26px;margin-top:36px}
+.manual h3{margin-top:22px;font-size:18px}
+.manual ul,.manual ol{padding-left:22px}
+.manual li{margin:4px 0}
+.manual code{font-size:14px;background:var(--card);border:1px solid var(--rule);border-radius:5px;padding:0 4px;overflow-wrap:anywhere}
+.manual .callout{border:2px solid var(--head);border-radius:14px;padding:4px 18px;margin:18px 0;background:var(--card)}
+.manual hr{border:0;border-top:1px solid var(--rule);margin:28px 0}
+.manual table{border-collapse:collapse;margin:14px 0;font-size:16px;display:block;overflow-x:auto;max-width:100%}
+.manual th,.manual td{border-bottom:1px solid var(--rule);padding:6px 16px 6px 0;text-align:left;white-space:nowrap}
+.manual th{font-weight:600}
+footer{border-top:1px solid var(--rule);margin-top:48px;padding:26px 0 48px;font-size:15px;color:var(--muted)}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:14px}
+footer nav a{color:var(--ink);font-weight:500;text-underline-offset:3px}
+footer p{margin:6px 0;max-width:40em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumbs"><a href="/"><img src="/favicon-192.png" alt="">Anonaconda Code Lab</a></div>
+  <header class="hero">
+    <img class="icon" src="/icons/remark.svg" alt="">
+    <h1>Remark</h1>
+    <p class="lede">Add a name or a note to a receipt or a screenshot in seconds, with text that stays readable on any background. Point things out with callouts, arrows, circles, boxes and numbered markers, highlight or draw freehand, and cover a stray detail. Remark saves a fresh copy with the location and phone details removed.</p>
+    <p class="needs">Free. Works in any modern browser on a phone, tablet or computer. No account, no upload: your pictures never leave your device.</p>
+    <p class="soon new"><span>New</span>Also as an <a href="https://remark.anonacondacodelab.com/android.html">Android app</a>: share pictures to Remark from your gallery or a chat, and it has no internet access at all.</p>
+    
+    <div class="links"><a class="open" href="https://remark.anonacondacodelab.com">Open Remark</a><a href="https://remark.anonacondacodelab.com/android.html">Android app</a><a href="/remark/manual/">User manual</a><a href="https://github.com/Anonaconda-CodeLab/remark">Source code</a></div>
+  </header>
+  <main>
+    <div class="shots" role="list" aria-label="Screenshots">
+      <figure role="listitem"><img src="/screens/remark/1-home.webp" alt="Open photos or screenshots: everything stays on your device" width="780" height="1688" loading="lazy"><figcaption>Open photos or screenshots: everything stays on your device</figcaption></figure>
+      <figure role="listitem"><img src="/screens/remark/2-text.webp" alt="Tap where the words go and type: text sits on a label that reads anywhere" width="780" height="1688" loading="lazy"><figcaption>Tap where the words go and type: text sits on a label that reads anywhere</figcaption></figure>
+      <figure role="listitem"><img src="/screens/remark/3-marked.webp" alt="Highlight, circle, an arrow and a cover over the card number" width="780" height="1688" loading="lazy"><figcaption>Highlight, circle, an arrow and a cover over the card number</figcaption></figure>
+      <figure role="listitem"><img src="/screens/remark/4-ready.webp" alt="A brand-new picture, checked and cleaned: ready to save or share" width="780" height="1688" loading="lazy"><figcaption>A brand-new picture, checked and cleaned: ready to save or share</figcaption></figure>
+    </div>
+    <h2>What it does</h2>
+    <div class="features">
+      <div><h3>Text that reads anywhere</h3><p>Words sit on a label in your colour, with black or white letters, whichever reads better: on a busy photo, a white receipt or a dark screen. English and Thai text look the same on every device.</p></div>
+      <div><h3>Point things out</h3><p>Callouts, arrows, lines, circles, boxes and numbered markers 1, 2, 3. Delete one and the others count again.</p></div>
+      <div><h3>Highlight and draw</h3><p>A highlighter that keeps the text underneath readable, and a pen for a tick, an underline or a signature.</p></div>
+      <div><h3>Cover a stray detail</h3><p>Black, white or the colour around it, so a cover on a receipt barely shows. A cover replaces the pixels underneath and is drawn on top of everything. For faces and card numbers found for you, use Redact.</p></div>
+      <div><h3>Quick for repeat notes</h3><p>The last few things you typed are offered above the text box, so a name you write on every receipt is one tap. Crop to keep only what matters.</p></div>
+      <div><h3>A clean copy</h3><p>Your marks are drawn into a brand-new picture, checked pixel by pixel, and cleaned of where the photo was taken and which phone took it. No layers anyone could peel off.</p></div>
+      <div><h3>Many pictures at once</h3><p>Up to 20 photos or screenshots. In the Android app, share them to Remark from your gallery or a chat; on a computer, paste a screenshot with Ctrl+V.</p></div>
+      <div><h3>Private by design</h3><p>No account, no server, no analytics. The web app blocks every network connection and the Android app has no internet permission.</p></div>
+    </div>
+    <h2>What you need</h2>
+    <ul class="needlist"><li>Any modern browser on a phone, tablet or computer: Chrome, Edge, Brave, Firefox or Safari.</li><li>Or the <a href="https://remark.anonacondacodelab.com/android.html"><b>Android app</b></a>, which adds <b>Share → Remark</b>.</li><li>Pictures in JPEG, PNG or WebP. HEIC photos need converting to JPEG first.</li></ul>
+    <h2>Questions</h2>
+    <details><summary>Is Remark really free?</summary><p>Yes. No subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.</p></details>
+    <details><summary>Are my pictures uploaded anywhere?</summary><p>No. Everything happens on your own device. The web app blocks every network connection, and the Android app has no internet permission.</p></details>
+    <details><summary>Does a highlight or a box hide what’s under it?</summary><p>No: only a cover hides anything. A highlighter, a box, a line or a label still lets things show through. A cover replaces the pixels underneath.</p></details>
+    <details><summary>I opened Remark from a link in LINE and can’t save</summary><p>LINE’s built-in browser can’t save or share files. Remark shows a banner with <b>Open in your browser</b>: tap it, and everything works.</p></details>
+    <details><summary>Why isn’t the Android app on Google Play?</summary><p>Publishing there means registering with Google and handing over government ID, and Google is extending that check to apps installed from elsewhere. We think you should be able to install software you choose on a phone you own, so we support <a href="https://keepandroidopen.org">Keep Android Open</a> and offer the app directly (<a href="/why/">more on why</a>). The <a href="https://remark.anonacondacodelab.com/android.html">Android page</a> explains how to install it and check it’s the official build.</p></details>
+    <details><summary>Is the code open?</summary><p>Remark is free software under the GNU GPL v3. The <a href="https://github.com/Anonaconda-CodeLab/remark">source code is on GitHub</a>, and every Android release is built from it automatically, with a checksum to verify the download.</p></details>
+    <p class="note">Remark is provided as it is, without any warranty. Check every picture before you share it.</p>
+  </main>
+  <footer>
+    <nav aria-label="Studio links">
+      <a href="/">All apps</a>
+      <a href="/why/">Why not Google Play?</a>
+      <a href="https://ko-fi.com/anonacondacodelab">Support on Ko-fi</a>
+      <a href="https://github.com/Anonaconda-CodeLab">GitHub</a>
+      <a href="https://mastodon.social/@anonacondacodelab" rel="me">Mastodon</a>
+    </nav>
+    <p>No cookies, no analytics, no tracking, on this page or in the apps.</p>
+    <p>© 2026 Anonaconda Code Lab. Apps are free software under the GNU GPL v3. Polar and H10 are trademarks of Polar Electro Oy; Garmin, HRM-Dual and HRM-Pro of Garmin Ltd.; Wahoo and TICKR of Wahoo Fitness; Coospo, Magene and Decathlon of their respective owners. These apps are independent and not affiliated with any of them.</p>
+  </footer>
+</div>
+</body>
+</html>
