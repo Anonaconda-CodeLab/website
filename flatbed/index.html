@@ -60,6 +60,7 @@ h3{font-size:18.5px;font-weight:600;margin:0}
 .features p{margin:4px 0 0;font-size:16px}
 .needlist{margin:10px 0 0;padding-left:20px}
 .needlist li{margin:4px 0}
+.ph{font-size:17px;margin:18px 0 0}
 details{border-top:1px solid var(--rule);padding:14px 0}
 details:last-of-type{border-bottom:1px solid var(--rule)}
 summary{cursor:pointer;font-weight:600;font-size:17.5px}
@@ -117,6 +118,8 @@ footer p{margin:6px 0;max-width:40em}
     </div>
     <h2>What you need</h2>
     <ul class="needlist"><li>Any modern browser on a phone, tablet or computer: Chrome, Edge, Brave, Firefox or Safari.</li><li>Or the <a href="https://flatbed.anonacondacodelab.com/android.html"><b>Android app</b></a>, which uses your phone’s own camera app and adds <b>Share → Flatbed</b>.</li><li>Photos in JPEG, PNG or WebP. HEIC photos need converting to JPEG first.</li></ul>
+    <h2>What the Android app is allowed to do</h2>
+    <p><b>Nothing.</b> The Flatbed Android app asks for no permissions at all: no internet, no camera, no storage, no contacts, no location. To take a photo it asks your phone’s own camera app and gets back only the picture, so it needs no camera permission. Photos you choose come through Android’s own picker, which gives the app that one picture and nothing else.</p><p class="needs">To see what you’ve allowed: Settings → Apps → Flatbed → Permissions. The full list is in the app’s <code translate="no">AndroidManifest.xml</code> on GitHub. Tools that list an APK’s permissions also show one entry ending in <code translate="no">DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION</code>. It isn’t access to anything on your phone: Android’s support library adds it as an internal lock, so that no other app can send this one messages.</p>
     <h2>Questions</h2>
     <details><summary>Is Flatbed really free?</summary><p>Yes. No subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.</p></details>
     <details><summary>Are my documents uploaded anywhere?</summary><p>No. Everything happens on your own device, including reading the text. The web app blocks every network connection, and the Android app has no internet permission, so your pages can’t be sent anywhere.</p></details>

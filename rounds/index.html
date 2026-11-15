@@ -60,6 +60,7 @@ h3{font-size:18.5px;font-weight:600;margin:0}
 .features p{margin:4px 0 0;font-size:16px}
 .needlist{margin:10px 0 0;padding-left:20px}
 .needlist li{margin:4px 0}
+.ph{font-size:17px;margin:18px 0 0}
 details{border-top:1px solid var(--rule);padding:14px 0}
 details:last-of-type{border-bottom:1px solid var(--rule)}
 summary{cursor:pointer;font-weight:600;font-size:17.5px}
@@ -118,6 +119,8 @@ footer p{margin:6px 0;max-width:40em}
     </div>
     <h2>What you need</h2>
     <ul class="needlist"><li>Any modern browser on a phone, tablet or computer, or the <a href="https://rounds.anonacondacodelab.com/android.html"><b>Android app</b></a>.</li><li>For heart rate (optional): a Bluetooth heart-rate strap or watch, and <b>Chrome or Chromium on Android</b> or a computer, or the free <b>Bluefy</b> browser on iPhone and iPad.</li></ul>
+    <h2>What the Android app is allowed to do</h2>
+    <p>Rounds needs a few permissions to talk to your strap and to keep going with the screen off. Android asks you before allowing the ones in the first list; the rest it grants on its own.</p><h3 class="ph">Asked the first time it’s needed</h3><ul class="needlist"><li><b>Nearby devices (Bluetooth):</b> To find and connect to your heart-rate strap. It’s declared as “never for location”, so Android doesn’t let the app use Bluetooth to work out where you are.</li><li><b>Notifications (Android 13 and newer):</b> Android requires a visible notification while a workout keeps going with the screen off; this permission lets the app show it. It’s used for nothing else.</li><li><b>Location (Android 11 and older only):</b> Older Android versions let an app scan for Bluetooth devices only if it has location permission. Rounds never reads your location, and on Android 12 and newer it doesn’t ask for it at all.</li></ul><h3 class="ph">Granted by Android without asking</h3><ul class="needlist"><li><b>Run in the foreground and keep the phone awake:</b> So a workout doesn’t stop when the screen turns off.</li><li><b>Vibrate:</b> For the buzz at each change of interval, if you turn it on.</li><li><b>Bluetooth (Android 11 and older only):</b> The older name for the Bluetooth access above.</li></ul><h3 class="ph">Not allowed</h3><p>No internet: it’s removed from the app on purpose, and every release is checked for it. No camera, microphone, contacts, storage or phone access.</p><p class="needs">To see what you’ve allowed: Settings → Apps → Rounds → Permissions. The full list is in the app’s <code translate="no">AndroidManifest.xml</code> on GitHub. Tools that list an APK’s permissions also show one entry ending in <code translate="no">DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION</code>. It isn’t access to anything on your phone: Android’s support library adds it as an internal lock, so that no other app can send this one messages.</p>
     <h2>Questions</h2>
     <details><summary>Is Rounds really free?</summary><p>Yes. No subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.</p></details>
     <details><summary>Why can’t I hear the beeps?</summary><p>Turn up the phone’s <i>media</i> volume (not the ringer), and check the phone isn’t muting media. <i>Test the beeps</i> in Settings plays them all.</p></details>

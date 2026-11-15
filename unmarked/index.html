@@ -60,6 +60,7 @@ h3{font-size:18.5px;font-weight:600;margin:0}
 .features p{margin:4px 0 0;font-size:16px}
 .needlist{margin:10px 0 0;padding-left:20px}
 .needlist li{margin:4px 0}
+.ph{font-size:17px;margin:18px 0 0}
 details{border-top:1px solid var(--rule);padding:14px 0}
 details:last-of-type{border-bottom:1px solid var(--rule)}
 summary{cursor:pointer;font-weight:600;font-size:17.5px}
@@ -116,6 +117,8 @@ footer p{margin:6px 0;max-width:40em}
     </div>
     <h2>What you need</h2>
     <ul class="needlist"><li>Any modern browser on a phone, tablet or computer: Chrome, Edge, Brave, Firefox or Safari.</li><li>Or the <a href="https://unmarked.anonacondacodelab.com/android.html"><b>Android app</b></a>, which adds <b>Share → Unmarked</b> from any app.</li><li>Photos in JPEG, PNG or WebP, or PDF documents. HEIC photos, encrypted PDFs and videos aren’t supported yet.</li></ul>
+    <h2>What the Android app is allowed to do</h2>
+    <p><b>Nothing.</b> The Unmarked Android app asks for no permissions at all: no internet, no camera, no storage, no contacts, no location. Files reach it only when you choose them in Android’s own picker or share them to it, which gives the app that one file and nothing else.</p><p class="needs">To see what you’ve allowed: Settings → Apps → Unmarked → Permissions. The full list is in the app’s <code translate="no">AndroidManifest.xml</code> on GitHub. Tools that list an APK’s permissions also show one entry ending in <code translate="no">DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION</code>. It isn’t access to anything on your phone: Android’s support library adds it as an internal lock, so that no other app can send this one messages.</p>
     <h2>Questions</h2>
     <details><summary>Is Unmarked really free?</summary><p>Yes. No subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.</p></details>
     <details><summary>Are my files uploaded anywhere?</summary><p>No. Everything happens on your own device. The web app blocks every network connection, and the Android app has no internet permission, so your files can’t be sent anywhere.</p></details>

@@ -68,6 +68,7 @@ h3{font-size:18.5px;font-weight:600;margin:0}
 .features p{margin:4px 0 0;font-size:16px}
 .needlist{margin:10px 0 0;padding-left:20px}
 .needlist li{margin:4px 0}
+.ph{font-size:17px;margin:18px 0 0}
 details{border-top:1px solid var(--rule);padding:14px 0}
 details:last-of-type{border-bottom:1px solid var(--rule)}
 summary{cursor:pointer;font-weight:600;font-size:17.5px}
@@ -167,6 +168,8 @@ function appPage(a) {
     </div>
     <h2>What you need</h2>
     <ul class="needlist">${a.need.map(x => `<li>${x}</li>`).join('')}</ul>
+    <h2>What the Android app is allowed to do</h2>
+    ${permsHtml(a)}
     <h2>Questions</h2>
     ${a.faq.map(([q, ans]) => `<details><summary>${esc(q)}</summary><p>${ans}</p></details>`).join('\n    ')}
     <p class="note">${a.disclaimer}</p>
@@ -186,6 +189,35 @@ ${body}
   </article></main>` + FOOT;
 }
 
+// "What the Android app is allowed to do": checked against each released APK's manifest (15 Nov 2026).
+// Update it whenever an app's AndroidManifest.xml (or a plugin) adds or drops a permission.
+const RECEIVER_NOTE = 'Tools that list an APK’s permissions also show one entry ending in <code translate="no">DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION</code>. It isn’t access to anything on your phone: Android’s support library adds it as an internal lock, so that no other app can send this one messages.';
+const CHECK_NOTE = n => `To see what you’ve allowed: Settings → Apps → ${n} → Permissions. The full list is in the app’s <code translate="no">AndroidManifest.xml</code> on GitHub.`;
+const noPerms = (n, how, extra = '') => ({
+  intro: `<b>Nothing.</b> The ${n} Android app asks for no permissions at all: no internet, no camera, no storage, no contacts, no location${extra}. ${how}`,
+});
+const strapPerms = (n, during, vib) => ({
+  intro: `${n} needs a few permissions to talk to your strap and to keep going with the screen off. Android asks you before allowing the ones in the first list; the rest it grants on its own.`,
+  ask: [
+    ['Nearby devices (Bluetooth)', `To find and connect to your heart-rate strap. It’s declared as “never for location”, so Android doesn’t let the app use Bluetooth to work out where you are.`],
+    ['Notifications (Android 13 and newer)', `Android requires a visible notification while ${during} keeps going with the screen off; this permission lets the app show it. It’s used for nothing else.`],
+    ['Location (Android 11 and older only)', `Older Android versions let an app scan for Bluetooth devices only if it has location permission. ${n} never reads your location, and on Android 12 and newer it doesn’t ask for it at all.`],
+  ],
+  silent: [
+    ['Run in the foreground and keep the phone awake', `So ${during} doesn’t stop when the screen turns off.`],
+    ['Vibrate', vib],
+    ['Bluetooth (Android 11 and older only)', 'The older name for the Bluetooth access above.'],
+  ],
+  not: `No internet: it’s removed from the app on purpose, and every release is checked for it. No camera, microphone, contacts, storage or phone access.`,
+});
+function permsHtml(a) {
+  const P = a.perms, li = l => `<ul class="needlist">${l.map(([h, t]) => `<li><b>${h}:</b> ${t}</li>`).join('')}</ul>`;
+  return `<p>${P.intro}</p>`
+    + (P.ask ? `<h3 class="ph">Asked the first time it’s needed</h3>${li(P.ask)}` : '')
+    + (P.silent ? `<h3 class="ph">Granted by Android without asking</h3>${li(P.silent)}` : '')
+    + (P.not ? `<h3 class="ph">Not allowed</h3><p>${P.not}</p>` : '')
+    + `<p class="needs">${CHECK_NOTE(esc(a.name))} ${RECEIVER_NOTE}</p>`;
+}
 const RM = {
   name: 'Remark', path: '/remark/', appUrl: 'https://remark.anonacondacodelab.com', icon: '/icons/remark.svg', image: '/social/og-remark.jpg',
   category: 'MultimediaApplication', os: 'Android app; any modern browser on Android, iPhone, iPad, Windows, macOS, ChromeOS, Linux',
@@ -214,6 +246,7 @@ const RM = {
     ['Private by design', 'No account, no server, no analytics. The web app blocks every network connection and the Android app has no internet permission.']
   ],
   need: ['Any modern browser on a phone, tablet or computer: Chrome, Edge, Brave, Firefox or Safari.', 'Or the <a href="https://remark.anonacondacodelab.com/android.html"><b>Android app</b></a>, which adds <b>Share → Remark</b>.', 'Pictures in JPEG, PNG or WebP. HEIC photos need converting to JPEG first.'],
+  perms: noPerms('Remark', 'Pictures reach it only when you choose them in Android’s own picker or share them to it, which gives the app that one picture and nothing else.'),
   faq: [
     ['Is Remark really free?', 'Yes. No subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.'],
     ['Are my pictures uploaded anywhere?', 'No. Everything happens on your own device. The web app blocks every network connection, and the Android app has no internet permission.'],
@@ -252,6 +285,7 @@ const RX = {
     ['Private by design', 'No account, no server, no analytics. The detectors run on your device; the web app blocks every network connection and the Android app has no internet permission.']
   ],
   need: ['Any modern browser on a phone, tablet or computer: Chrome, Edge, Brave, Firefox or Safari.', 'Or the <a href="https://redact.anonacondacodelab.com/android.html"><b>Android app</b></a>, which adds <b>Share → Redact</b>.', 'Pictures in JPEG, PNG or WebP. HEIC photos need converting to JPEG first.'],
+  perms: noPerms('Redact', 'Pictures reach it only when you choose them in Android’s own picker or share them to it, which gives the app that one picture and nothing else. The face and text detectors are built into the app and run offline.'),
   faq: [
     ['Is Redact really free?', 'Yes. No subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.'],
     ['Are my pictures uploaded anywhere?', 'No. Everything happens on your own device, including finding faces and reading text. The web app blocks every network connection, and the Android app has no internet permission.'],
@@ -294,6 +328,7 @@ const FB = {
     ['Private by design', 'No account, no server, no analytics. The web app blocks every network connection; the Android app has no internet permission and no camera permission.']
   ],
   need: ['Any modern browser on a phone, tablet or computer: Chrome, Edge, Brave, Firefox or Safari.', 'Or the <a href="https://flatbed.anonacondacodelab.com/android.html"><b>Android app</b></a>, which uses your phone’s own camera app and adds <b>Share → Flatbed</b>.', 'Photos in JPEG, PNG or WebP. HEIC photos need converting to JPEG first.'],
+  perms: noPerms('Flatbed', 'To take a photo it asks your phone’s own camera app and gets back only the picture, so it needs no camera permission. Photos you choose come through Android’s own picker, which gives the app that one picture and nothing else.'),
   faq: [
     ['Is Flatbed really free?', 'Yes. No subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.'],
     ['Are my documents uploaded anywhere?', 'No. Everything happens on your own device, including reading the text. The web app blocks every network connection, and the Android app has no internet permission, so your pages can’t be sent anywhere.'],
@@ -336,6 +371,7 @@ const UN = {
     ['Private by design', 'No account, no server, no analytics. The web app blocks every network connection, and the Android app has no internet permission. Your original files are never changed.']
   ],
   need: ['Any modern browser on a phone, tablet or computer: Chrome, Edge, Brave, Firefox or Safari.', 'Or the <a href="https://unmarked.anonacondacodelab.com/android.html"><b>Android app</b></a>, which adds <b>Share → Unmarked</b> from any app.', 'Photos in JPEG, PNG or WebP, or PDF documents. HEIC photos, encrypted PDFs and videos aren’t supported yet.'],
+  perms: noPerms('Unmarked', 'Files reach it only when you choose them in Android’s own picker or share them to it, which gives the app that one file and nothing else.'),
   faq: [
     ['Is Unmarked really free?', 'Yes. No subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.'],
     ['Are my files uploaded anywhere?', 'No. Everything happens on your own device. The web app blocks every network connection, and the Android app has no internet permission, so your files can’t be sent anywhere.'],
@@ -383,6 +419,7 @@ const SP = {
     ['Try it without a strap', 'A simulated strap lets you explore every screen before you buy a strap.']
   ],
   need: ['A <b>Polar H10</b> or <b>any standard Bluetooth chest strap</b> that sends beat-to-beat intervals, such as a Garmin HRM-Dual or HRM-Pro, Wahoo TICKR, Coospo, Magene or Decathlon strap (a Polar H9 also works).', '<b>Google Chrome or Chromium on Android</b>, or Chrome or Edge on Windows, macOS, ChromeOS or Linux.', 'Or the <a href="https://stillpoint.anonacondacodelab.com/android.html"><b>Android app</b></a>, which needs no browser at all.', 'iPhone and iPad aren’t supported: Apple doesn’t allow websites to use Bluetooth.'],
+  perms: strapPerms('Still Point', 'a reading, breathing session or meditation', 'For the optional gentle buzz with each breath, and the cue to stand up in the standing test.'),
   faq: [
     ['Which heart-rate straps work?', 'The Polar H10, and any chest strap that sends the standard Bluetooth heart-rate signal with beat-to-beat intervals: for example Garmin HRM-Dual and HRM-Pro, Wahoo TICKR, and straps from Coospo, Magene and Decathlon. Many watches that broadcast heart rate send heart rate only, without the beat-to-beat data HRV needs; Still Point tells you if a device can’t be used for readings.'],
     ['Is Still Point really free?', 'Yes. There is no subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.'],
@@ -429,6 +466,7 @@ const RD = {
     ['Private and offline', 'No account, no server, no analytics. Your timers stay on your device, and it works without a connection once added to your home screen.']
   ],
   need: ['Any modern browser on a phone, tablet or computer, or the <a href="https://rounds.anonacondacodelab.com/android.html"><b>Android app</b></a>.', 'For heart rate (optional): a Bluetooth heart-rate strap or watch, and <b>Chrome or Chromium on Android</b> or a computer, or the free <b>Bluefy</b> browser on iPhone and iPad.'],
+  perms: strapPerms('Rounds', 'a workout', 'For the buzz at each change of interval, if you turn it on.'),
   faq: [
     ['Is Rounds really free?', 'Yes. No subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.'],
     ['Why can’t I hear the beeps?', 'Turn up the phone’s <i>media</i> volume (not the ringer), and check the phone isn’t muting media. <i>Test the beeps</i> in Settings plays them all.'],
@@ -468,6 +506,7 @@ const LO = {
     ['Sample reports', 'Open synthetic sample reports to see exactly what you’ll get before you record.']
   ],
   need: ['A <b>Polar H10</b> chest strap.', '<b>Google Chrome or Chromium on Android</b>, or Chrome or Edge on Windows, macOS, ChromeOS or Linux.', 'On <b>iPhone and iPad</b>, the free <b>Bluefy</b> browser from the App Store (Safari can’t use Bluetooth).', 'Or the <a href="https://leadone.anonacondacodelab.com/android.html"><b>Android app</b></a>, which needs no browser at all.'],
+  perms: strapPerms('Lead One', 'a recording', 'For the buzzes that guide the timed tests, such as the stand-up test and the ramp test.'),
   faq: [
     ['Is Lead One ECG free?', 'Yes. No subscription, no account and no ads. If you find it useful, you can support it on <a href="https://ko-fi.com/anonacondacodelab">Ko-fi</a>.'],
     ['How long can I record?', 'From one minute up to 8 hours, so overnight recordings work. Keep the phone on charge with the page open.'],
