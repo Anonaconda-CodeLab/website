@@ -1,0 +1,6 @@
+# Anonaconda Code Lab: how to report a security problem in our website or apps.
+# Please write in plain text; we read everything sent to this address.
+Contact: mailto:hello@anonacondacodelab.com
+Expires: 2027-11-16T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://anonacondacodelab.com/.well-known/security.txt
