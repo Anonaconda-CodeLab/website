@@ -126,6 +126,7 @@ const FOOT = `
   <footer>
     <nav aria-label="Studio links">
       <a href="/">All apps</a>
+      <a href="/blog/">Blog</a>
       <a href="/why/">Why not Google Play?</a>
       <a href="https://ko-fi.com/anonacondacodelab">Support on Ko-fi</a>
       <a href="https://github.com/Anonaconda-CodeLab">GitHub</a>
@@ -531,7 +532,7 @@ for (const [a, f, dir] of [[RM, rmManual, 'remark'], [RX, rxManual, 'redact'], [
   if (f && existsSync(f)) out(dir + '/manual/index.html', manualPage(a, readFileSync(f, 'utf8')));
   else if (f) console.warn(`skipped ${dir}/manual: ${f} not found`);
 }
-const urls = ['/', '/why/', '/remark/', '/remark/manual/', '/redact/', '/redact/manual/', '/flatbed/', '/flatbed/manual/', '/unmarked/', '/unmarked/manual/', '/rounds/', '/rounds/manual/', '/still-point/', '/still-point/manual/', '/lead-one/', '/lead-one/manual/'];
+const urls = ['/', '/why/', '/blog/', '/blog/how-our-apps-are-made/', '/remark/', '/remark/manual/', '/redact/', '/redact/manual/', '/flatbed/', '/flatbed/manual/', '/unmarked/', '/unmarked/manual/', '/rounds/', '/rounds/manual/', '/still-point/', '/still-point/manual/', '/lead-one/', '/lead-one/manual/'];
 const today = new Date().toISOString().slice(0, 10);
 out('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${SITE}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n')}\n</urlset>\n`);
 out('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);

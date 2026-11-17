@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>How our apps are made, and why we tell you · Anonaconda Code Lab</title>
+<meta name="description" content="One person, an AI that writes the code, and every step that checks it. How our privacy apps are made, what they can and can't do on your phone, and why we tell you.">
+<link rel="canonical" href="https://anonacondacodelab.com/blog/how-our-apps-are-made/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Anonaconda Code Lab">
+<meta property="og:title" content="How our apps are made, and why we tell you">
+<meta property="og:description" content="One person, an AI that writes the code, and every step that checks it. How our privacy apps are made, what they can and can't do on your phone, and why we tell you.">
+<meta property="og:url" content="https://anonacondacodelab.com/blog/how-our-apps-are-made/">
+<meta property="og:image" content="https://anonacondacodelab.com/social/og-blog-made.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#22362B">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+@font-face{font-family:"Instrument Sans";font-style:normal;font-display:swap;font-weight:400 700;font-stretch:75% 100%;
+  src:url(/fonts/InstrumentSans-latin-variable.woff2) format("woff2-variations")}
+:root{--paper:#ECEFE7; --new:#B31F39; --new-ink:#FFFFFF;--ink:#22362B;--line:#6E7F3A;--muted:#5E6B61;--rule:#CBD2C4;--head:#8FA048;--card:#F6F8F3;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--paper:#141A16; --new:#F07A8D; --new-ink:#141A16;--ink:#E3E8DE;--line:#A9B865;--muted:#94A096;--rule:#2C362F;--head:#B9C97A;--card:#1A221D}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 "Instrument Sans",system-ui,sans-serif}
+a{color:inherit}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--line);outline-offset:3px;border-radius:4px}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.crumbs{display:flex;align-items:center;gap:10px;padding-top:28px;font-size:15px;color:var(--muted)}
+.crumbs a{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
+.crumbs img{width:30px;height:30px}
+header.hero{padding:40px 0 8px}
+.hero .icon{width:64px;height:64px;display:block}
+h1{font-size:clamp(44px,10vw,80px);line-height:.95;font-stretch:75%;font-weight:650;letter-spacing:-.01em;margin:18px 0 0;text-wrap:balance}
+.lede{font-size:clamp(19px,2.6vw,22px);line-height:1.45;max-width:32em;margin:18px 0 0}
+.needs{font-size:15px;color:var(--muted);max-width:40em;margin:10px 0 0}
+.links{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-top:20px}
+.open{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:600;padding:11px 20px;border-radius:999px}
+.open:hover{background:var(--line);color:#fff}
+.links a:not(.open){font-weight:500;text-underline-offset:3px}
+.soon{font-size:15px;margin-top:12px}
+.soon span{display:inline-block;font-size:11.5px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;background:var(--line);color:var(--paper);padding:2px 9px;border-radius:999px;margin-right:9px;vertical-align:1px}
+.soon.new{margin-top:14px;padding:11px 14px;border-left:4px solid var(--new);border-radius:10px;background:color-mix(in srgb,var(--new) 9%,transparent);font-weight:550}
+.soon.new span{background:var(--new);color:var(--new-ink);font-size:13px;padding:3px 11px}
+.soon.new a{color:var(--new);font-weight:700}
+.shots{display:flex;gap:14px;overflow-x:auto;padding:28px 2px 18px;margin:20px 0 0;scroll-snap-type:x mandatory}
+.shots figure{margin:0;flex:none;width:210px;scroll-snap-align:start}
+.shots img{width:100%;height:auto;display:block;border-radius:18px;border:1px solid var(--rule);background:var(--card)}
+.shots.wide figure{width:280px}
+.shots figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.35}
+h2{font-size:30px;font-stretch:85%;font-weight:600;line-height:1.1;margin:44px 0 6px;text-wrap:balance}
+h3{font-size:18.5px;font-weight:600;margin:0}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px 28px;margin-top:18px}
+.features p{margin:4px 0 0;font-size:16px}
+.needlist{margin:10px 0 0;padding-left:20px}
+.needlist li{margin:4px 0}
+details{border-top:1px solid var(--rule);padding:14px 0}
+details:last-of-type{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer;font-weight:600;font-size:17.5px}
+details p{margin:8px 0 0;max-width:40em}
+.note{font-size:15px;color:var(--muted);margin-top:26px;max-width:40em}
+.manual{max-width:42em}
+.manual h2{font-size:26px;margin-top:36px}
+.manual h3{margin-top:22px;font-size:18px}
+.manual ul,.manual ol{padding-left:22px}
+.manual li{margin:4px 0}
+.manual code{font-size:14px;background:var(--card);border:1px solid var(--rule);border-radius:5px;padding:0 4px;overflow-wrap:anywhere}
+.manual .callout{border:2px solid var(--head);border-radius:14px;padding:4px 18px;margin:18px 0;background:var(--card)}
+.manual hr{border:0;border-top:1px solid var(--rule);margin:28px 0}
+.manual table{border-collapse:collapse;margin:14px 0;font-size:16px;display:block;overflow-x:auto;max-width:100%}
+.manual th,.manual td{border-bottom:1px solid var(--rule);padding:6px 16px 6px 0;text-align:left;white-space:nowrap}
+.manual th{font-weight:600}
+footer{border-top:1px solid var(--rule);margin-top:48px;padding:26px 0 48px;font-size:15px;color:var(--muted)}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:14px}
+footer nav a{color:var(--ink);font-weight:500;text-underline-offset:3px}
+footer p{margin:6px 0;max-width:40em}
+
+.post-date{font-size:15px;color:var(--muted);margin:14px 0 0}
+.prose .table{overflow-x:auto;margin:16px 0}
+.prose table{border-collapse:collapse;font-size:16px;min-width:560px}
+.prose th,.prose td{border-bottom:1px solid var(--rule);padding:10px 14px 10px 0;text-align:left;vertical-align:top}
+.prose th{font-weight:600}
+.prose td:first-child{font-weight:600}
+@media (max-width:640px){.prose table{min-width:0}.prose thead{display:none}.prose tr{display:block;border:1px solid var(--rule);border-radius:14px;background:var(--card);padding:12px 16px;margin:0 0 12px}.prose td{display:block;border:0;padding:4px 0}.prose td:first-child{font-size:17.5px;padding-bottom:6px}.prose td[data-label]::before{content:attr(data-label);display:block;font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}}
+.manifesto{border-left:4px solid var(--line);padding:2px 0 2px 16px;margin:18px 0}
+.sign{font-style:italic;font-size:18px;margin-top:28px}
+.posts{list-style:none;padding:0;margin:18px 0 0}
+.posts li{border-top:1px solid var(--rule);padding:18px 0}
+.posts li:last-child{border-bottom:1px solid var(--rule)}
+.posts a{display:block;line-height:1.15;margin-top:4px;font-size:22px;font-weight:600;font-stretch:85%;text-decoration:none}
+.posts a:hover{text-decoration:underline;text-underline-offset:3px}
+.posts p{margin:6px 0 0;max-width:40em}
+.posts time{font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumbs"><a href="/"><img src="/favicon-192.png" alt="">Anonaconda Code Lab</a><span aria-hidden="true">/</span><a href="/blog/" style="font-weight:500">Blog</a></div>
+  <header class="hero">
+    <h1>How our apps are made, and why we tell&nbsp;you</h1>
+    <p class="post-date"><time datetime="2026-11-17">17 November 2026</time></p>
+    <p class="lede">Anonaconda Code Lab is one person making small, free Android and web apps that keep everything on your phone. This post explains exactly how those apps are made, including the part some people won’t like: the code is written by an AI.</p>
+  </header>
+  <main class="prose">
+    <p>We think you deserve to know who, and what, made the software you trust with your photos, documents and heart data. So here it is, all in one place.</p>
+
+    <h2>Why these apps</h2>
+    <p>Every app here exists because I needed it myself, and I use at least one or two of them every day. That’s why the list looks a little odd: heart-rate and breathing apps next to tools for receipts and photos. They’re simply tools my daily life requires.</p>
+    <ul>
+      <li>I use <a href="/rounds/">Rounds</a> on every cardio day, which is four days a week. I like to mix it up a bit, which is why I added so many training modes to the app. My mornings always start with <a href="/still-point/">Still Point</a> to check my HRV prior to training, though I admit, being a cycling addict, I don’t always abide by its recommendations!</li>
+      <li>I’ve always been interested in heart health and one thing I really longed for was an app that didn’t just show my ECG data from my Polar H10, but also provided an easy-to-understand summary of what each metric means in plain language. I also wanted to see how each session compares with previous sessions of the same type. It’s for these reasons that <a href="/lead-one/">Lead One ECG</a> was born.</li>
+      <li>The privacy apps came from everyday moments. The first time I saw how much a single photo gave away, I realised every picture I’d ever shared carried the exact spot where it was taken; now nothing I post goes anywhere without passing through <a href="/unmarked/">Unmarked</a> first. I made <a href="/redact/">Redact</a> because blacking things out in a normal photo editor doesn’t always hide them, and I wanted to be sure. I use <a href="/remark/">Remark</a> most often to mark up receipts, and photos before I send them to friends. And when I’m out and about with only my mobile, I scan with <a href="/flatbed/">Flatbed</a>, because I don’t want sensitive documents sitting on someone else’s server.</li>
+      <li>They also work as a team. A screenshot for a friend might go through Redact to cover my account number, then Remark to add the arrows. A photo of a receipt goes into Remark to note who paid for what, while the paper copy I need to keep becomes a clean PDF in Flatbed. And whichever app I finish in, the copy I share has had its hidden data removed by the same cleaner that powers Unmarked.</li>
+    </ul>
+    <p class="manifesto">More generally, I’m deeply concerned about invasions of privacy by corporations for <b>profit and manipulation</b>, and by governments for <b>surveillance and control</b>. Unlike any other period in history, <b>your pocket holds the story of your life.</b> Every search, every message, every heart-rate spike, and every late-night thought is a piece of who you are. For years, the tech industry told us that for apps to be smart, useful, and fast, this data had to travel to distant servers in the cloud. That simply isn’t true: every app here does all its work on your phone. It is time to demand a new standard. <b>What happens on your phone must stay on your phone.</b></p>
+
+    <h2>How the apps are made</h2>
+    <p>I decide what every app does, and Claude, Anthropic’s AI, writes the code. Every version then goes through the same steps before you see it:</p>
+    <ol>
+      <li><b>I design it.</b> What the app is for, what goes in, and, just as important, what stays out: no account, no internet access, no ads.</li>
+      <li><b>Claude writes the code.</b> Since October 2026, every change in the public history names Claude as its author.</li>
+      <li><b>Automated tests run on every change.</b> Each app has its own tests, such as “does a cover really replace the pixels”, and every Android release is checked to make sure it has no internet permission.</li>
+      <li><b>A security review before launch.</b> Every app is reviewed for anything that could leak data before it goes public.</li>
+      <li><b>CodeRabbit reviews every update.</b> It’s an independent AI code reviewer from a different company. Every comment it makes is answered in public, fixed or explained.</li>
+      <li><b>I test it on real phones:</b> a Pixel 7a with GrapheneOS, a Pixel 6 Pro with stock Android, and a Poco X3 Pro with Evolution X. Nothing is released until it works on all three.</li>
+      <li><b>Only I can approve the signed release.</b> The key that signs the Android apps sits behind a step that needs my approval, every time.</li>
+    </ol>
+    <p>Although I’ve dabbled in coding, I’m not a professional programmer, and I won’t pretend to be. But the decisions, the testing and the responsibility are mine. If an app breaks, I’m usually the first to notice, because I use it.</p>
+
+    <h2>Why we say so openly</h2>
+    <p>Because hiding it would be worse, and because you’d find out anyway: it’s in every commit.</p>
+    <p>AI-written code worries people, and some of the worries are fair:</p>
+    <ul>
+      <li><b>Quality.</b> Much AI code is rushed, untested and abandoned. That’s why every step above exists, and why all of it happens in public.</li>
+      <li><b>Where it came from.</b> AI models learned from open-source code written by people. We give back the only way we can: every app is free and open source under the GPL, so anyone can read, change and build on it.</li>
+      <li><b>Developers’ work.</b> Some developers feel AI is cheapening a craft they spent years mastering, and I don’t dismiss that. I’ve wanted to make apps for as long as I can remember, but writing code never came easily to me. AI hasn’t replaced a developer here: without it, these apps simply wouldn’t exist. And because they’re free and open source, every line is there for any developer to read, question, improve or reuse.</li>
+    </ul>
+    <p>Some places won’t list AI-written apps at all, and some people will skip ours for that reason. That’s their right. We’d rather lose a download than earn one by hiding how the app was made.</p>
+
+    <h2>What the apps can and can’t do on your phone</h2>
+    <p>Nothing you put into our apps ever leaves your device. No uploads, no accounts, no analytics, no ads.</p>
+    <div class="table"><table>
+      <thead><tr><th>App</th><th>Android asks you for</th><th>Never allowed</th></tr></thead>
+      <tbody>
+        <tr><td>Unmarked, Flatbed, Redact, Remark</td><td data-label="Android asks you for">Nothing at all</td><td data-label="Never allowed">Internet, camera, storage, contacts, location</td></tr>
+        <tr><td>Lead One ECG, Rounds, Still Point</td><td data-label="Android asks you for">Nearby devices (to find your heart-rate strap) and Notifications (to keep running with the screen off). Location only on Android 11 and older, which needs it for Bluetooth; it’s never read.</td><td data-label="Never allowed">Internet, camera, microphone, contacts, storage</td></tr>
+      </tbody>
+    </table></div>
+    <p>The web versions block every network connection in the page itself, so even a mistake in our code couldn’t send anything out. Each app’s page on our website lists every permission and why, and you can check it yourself in Settings → Apps → the app → Permissions.</p>
+
+    <h2>What we can’t promise</h2>
+    <p>Being open means being honest about the limits too:</p>
+    <ul>
+      <li><b>No app is perfect.</b> Reviews and tests catch a lot, not everything. Redact can miss a face turned away; Unmarked can’t remove what you can see in a picture. Each app’s page says what it can’t do.</li>
+      <li><b>One person, not a company.</b> There’s no support team, and updates come when I can make them. Every app keeps working offline, so nothing breaks if I’m away for a while.</li>
+      <li><b>The law around AI-written code is unsettled.</b> Courts haven’t decided how copyright applies to it. Whatever they decide, the apps stay free for you to use and keep.</li>
+      <li><b>Health apps are for wellness, not medicine.</b> Lead One ECG and Still Point show what your heart is doing; they don’t diagnose anything. Talk to a doctor about anything that worries you.</li>
+      <li><b>Not on Google Play.</b> We publish directly instead, because we support Keep Android Open. It means installing takes an extra step or two. Our <a href="/why/">Why page</a> explains why, and how.</li>
+    </ul>
+
+    <h2>Check us yourself</h2>
+    <p>Don’t take our word for any of this. Everything is out in the open:</p>
+    <ul>
+      <li><b>The code and its history:</b> <a href="https://github.com/Anonaconda-CodeLab">github.com/Anonaconda-CodeLab</a>. Every change, every CodeRabbit review and every answer.</li>
+      <li><b>What each app may do:</b> the “What the Android app is allowed to do” section on each app’s page at <a href="/">anonacondacodelab.com</a>.</li>
+      <li><b>That your copy is genuine:</b> each Android release lists its checksum and our signing certificate, and our <a href="https://install.anonacondacodelab.com">Installer</a> checks both for you.</li>
+    </ul>
+    <p>Found something wrong, or have an idea for a privacy app you wish existed? Write to <a href="mailto:hello@anonacondacodelab.com">hello@anonacondacodelab.com</a> or find us on <a href="https://mastodon.social/@anonacondacodelab">Mastodon at @anonacondacodelab@mastodon.social</a>. Every message is read.</p>
+    <p class="sign">Apps that mind their own business.</p>
+  </main>
+  <footer>
+    <nav aria-label="Studio links">
+      <a href="/">All apps</a>
+      <a href="/blog/">Blog</a>
+      <a href="/why/">Why not Google Play?</a>
+      <a href="https://ko-fi.com/anonacondacodelab">Support on Ko-fi</a>
+      <a href="https://github.com/Anonaconda-CodeLab">GitHub</a>
+      <a href="https://mastodon.social/@anonacondacodelab" rel="me">Mastodon</a>
+    </nav>
+    <p>No cookies, no analytics, no tracking, on this page or in the apps.</p>
+    <p class="made">Each app is designed and tested by one person, on real phones. The code is written with Claude, Anthropic’s AI, checked by CodeRabbit, an independent AI code reviewer, and all of it is open on <a href="https://github.com/Anonaconda-CodeLab">GitHub</a>.</p>
+    <p>© 2026 Anonaconda Code Lab. Apps are free software under the GNU GPL v3. Polar and H10 are trademarks of Polar Electro Oy; Garmin, HRM-Dual and HRM-Pro of Garmin Ltd.; Wahoo and TICKR of Wahoo Fitness; Coospo, Magene and Decathlon of their respective owners. These apps are independent and not affiliated with any of them.</p>
+  </footer>
+</div>
+</body>
+</html>
