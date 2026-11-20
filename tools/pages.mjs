@@ -134,7 +134,7 @@ const FOOT = `
     </nav>
     <p>No cookies, no analytics, no tracking, on this page or in the apps.</p>
     <p class="made">Each app is designed and tested by one person, on real phones. The code is written with Claude, Anthropic’s AI, checked by CodeRabbit, an independent AI code reviewer, and all of it is open on <a href="https://github.com/Anonaconda-CodeLab">GitHub</a>.</p>
-    <p>© 2026 Anonaconda Code Lab. Apps are free software under the GNU GPL v3. Polar and H10 are trademarks of Polar Electro Oy; Garmin, HRM-Dual and HRM-Pro of Garmin Ltd.; Wahoo and TICKR of Wahoo Fitness; Coospo, Magene and Decathlon of their respective owners. These apps are independent and not affiliated with any of them.</p>
+    <p>© 2026 Anonaconda Code Lab. Apps are free software under the GNU GPL v3. Polar and H10 are trademarks of Polar Electro Oy; Garmin, HRM-Dual and HRM-Pro of Garmin Ltd.; Wahoo and TICKR of Wahoo Fitness; Coospo, Magene and Decathlon of their respective owners. These apps are independent and not affiliated with any of them. The site’s font is Instrument Sans, under the <a href="/fonts/OFL-InstrumentSans.txt">SIL Open Font License</a>.</p>
   </footer>
 </div>
 </body>
@@ -326,6 +326,7 @@ const FB = {
     ['No hidden details', 'Pages are redrawn from the picture alone, so no location, phone model or time from your photos reaches the PDF. The PDF has no author, app name, dates or document ID.'],
     ['Checked before you save', 'Every PDF goes through the same cleaner as Unmarked and is checked before it’s offered: “Checked: no hidden data in the PDF”.'],
     ['Image-only option', 'Prefer the text not to be copyable, for example on an ID copy? Make a PDF with no text layer at all.'],
+    ['Password protection', 'Protect a PDF with a password to open it (AES-256, which every modern PDF reader understands). The password is never stored, so keep it safe: without it nobody can open the PDF, including you.'],
     ['Private by design', 'No account, no server, no analytics. The web app blocks every network connection; the Android app has no internet permission and no camera permission.']
   ],
   need: ['Any modern browser on a phone, tablet or computer: Chrome, Edge, Brave, Firefox or Safari.', 'Or the <a href="https://flatbed.anonacondacodelab.com/android.html"><b>Android app</b></a>, which uses your phone’s own camera app and adds <b>Share → Flatbed</b>.', 'Photos in JPEG, PNG or WebP. HEIC photos need converting to JPEG first.'],
@@ -501,6 +502,7 @@ const LO = {
     ['A report people can read', 'A printable A4 report with a plain-language page, four-level grading against age-, sex- and position-specific norms, detail pages for clinicians and ECG strips on standard paper.'],
     ['Many measurements', 'Heart rate and rhythm, ectopic beats and pauses, RMSSD, SDNN, pNN50, SD1/SD2, LF/HF, breathing rate from chest movement, QRS width, QT/QTc, T-wave shape and heart-rate recovery.'],
     ['Context-aware', 'Tag each recording as a morning baseline, training, evening, meditation, sleep or rest, with a body position and notes; reference ranges and interpretation adapt.'],
+    ['Interval timer', 'Plan your work rounds and rests, then Start intervals: a 3-2-1 count, beeps and vibrations for every round and rest, and recovery starts by itself. The report shows exactly where each round fell.'],
     ['Training tests', 'Maximum heart rate from your own data, a Max HR ramp test and an LTHR test with step cues, training zones, and heart-rate recovery after exercise.'],
     ['Your own baseline', 'After five readings of the same kind, each new one is compared with your usual range, with trend charts and commentary.'],
     ['Private by design', 'No account, no server, no analytics. Recordings live in your browser; export them for backups or to move to another device.'],
